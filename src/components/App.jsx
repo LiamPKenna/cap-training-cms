@@ -1,4 +1,5 @@
 import React from 'react';
+import Lesson from './Lesson'
 
 function App() {
   return (
@@ -6,6 +7,7 @@ function App() {
       <header className="App-header">
        HELLO!
       </header>
+      <Lesson />
     </div>
   );
 }
