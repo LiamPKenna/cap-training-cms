@@ -1,11 +1,7 @@
-import React from 'react';
+import React from "react";
 
-const LessonHeading = (params) => {
-  return (
-    <h3>
-      {params.content}
-    </h3>
-  );
-}
+const LessonHeading = params => {
+  return <h2>{params.content}</h2>;
+};
 
 export default LessonHeading;

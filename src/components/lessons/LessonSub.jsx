@@ -1,11 +1,7 @@
-import React from 'react';
+import React from "react";
 
-const LessonSub = (params) => {
-  return (
-    <h5>
-      {params.content}
-    </h5>
-  );
-}
+const LessonSub = params => {
+  return <h4>{params.content}</h4>;
+};
 
 export default LessonSub;
