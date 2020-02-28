@@ -7,19 +7,31 @@ import LessonText from './lessons/LessonText';
 const testLesson = [
   {
     type: "title",
-    content: "This is a title"
+    content: "This is a title",
+    format: {
+      align: "left"
+    }
   },
   {
     type: "heading",
-    content: "This is a heading"
+    content: "This is a heading",
+    format: {
+      align: "left"
+    }
   },
   {
     type: "subHeading",
-    content: "This is a sub heading"
+    content: "This is a sub heading",
+    format: {
+      align: "left"
+    }
   },
   {
     type: "text",
-    content: "This is normal text"
+    content: "This is normal text",
+    format: {
+      align: "left"
+    }
   },
 ];
 
