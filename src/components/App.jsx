@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <NavBar />
+        <NavBar admin={true} />
       </header>
       <Lesson />
     </div>

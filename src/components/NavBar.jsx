@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
+import AdminNav from "./nav/AdminNav";
+import StudentNav from "./nav/StudentNav";
 
-const NavBar = () => {
-  return (
-    <div>NavBar</div>
-  );
-}
+const NavBar = props => {
+  return <div>{props.admin ? <AdminNav /> : <StudentNav />}</div>;
+};
 
 export default NavBar;
