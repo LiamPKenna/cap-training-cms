@@ -3,6 +3,7 @@ import LessonTitle from "./LessonTitle";
 import LessonHeading from "./LessonHeading";
 import LessonSub from "./LessonSub";
 import LessonText from "./LessonText";
+import LessonCode from "./LessonCode";
 
 const makeElement = (element, index) => {
   switch (element.type) {
@@ -33,6 +34,14 @@ const makeElement = (element, index) => {
     case "text":
       return (
         <LessonText
+          key={index}
+          content={element.content}
+          format={element.format}
+        />
+      );
+    case "code":
+      return (
+        <LessonCode
           key={index}
           content={element.content}
           format={element.format}

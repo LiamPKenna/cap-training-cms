@@ -1,11 +1,7 @@
-import React from 'react';
+import React from "react";
 
-const LessonText = (params) => {
-  return (
-    <p>
-      {params.content}
-    </p>
-  );
-}
+const LessonText = params => {
+  return <div>{params.content}</div>;
+};
 
 export default LessonText;

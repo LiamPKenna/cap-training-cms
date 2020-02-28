@@ -27,6 +27,15 @@ const testLesson = [
       format: {
         align: "left"
       }
+    },
+    {
+      type: 'code',
+      content: `const codeStyle = (text) => {
+  return "good style";
+}`,
+      format: {
+        align: "left"
+      }
     }
   ]
 ];
