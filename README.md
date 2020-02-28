@@ -4,6 +4,8 @@
 8:00 - 8:30
 * _Begin Firebase Tutorial: https://www.fullstackfirebase.com/introduction/overview-and-structure_
 
+9:00 - 9:30
+* _Watch Google I/O video on Firebase: https://www.youtube.com/watch?v=7CWi_Olz0xw_
 
 
 
