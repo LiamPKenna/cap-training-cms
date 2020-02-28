@@ -36,7 +36,31 @@ const testLesson = [
       format: {
         align: "left"
       }
-    }
+    },
+    {
+      type: "text",
+      content: "This is normal text talking about code",
+      format: {
+        align: "left"
+      }
+    },
+    {
+      type: 'break'
+    },
+    {
+      type: "heading",
+      content: "This is another heading",
+      format: {
+        align: "left"
+      }
+    },
+    {
+      type: "text",
+      content: "This is more normal text",
+      format: {
+        align: "left"
+      }
+    },
   ]
 ];
 
