@@ -1,3 +1,22 @@
+7:30 - 8:00
+* _Create Trello Board for project._
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
