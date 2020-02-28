@@ -1,12 +1,12 @@
-import React from 'react';
-import Lesson from './Lesson';
-import NavBar from './NavBar'
+import React from "react";
+import Lesson from "./Lesson";
+import NavBar from "./NavBar";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-       <NavBar />
+        <NavBar />
       </header>
       <Lesson />
     </div>
