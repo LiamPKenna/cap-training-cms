@@ -1,6 +1,9 @@
 7:30 - 8:00
 * _Create Trello Board for project._
 
+8:00 - 8:30
+* _Begin Firebase Tutorial: https://www.fullstackfirebase.com/introduction/overview-and-structure_
+
 
 
 
