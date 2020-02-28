@@ -4,6 +4,7 @@ import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import MenuIcon from "@material-ui/icons/Menu";
 
 const AdminNav = props => {
   const [drawer, setDrawer] = useState(false);
@@ -59,7 +60,9 @@ const AdminNav = props => {
     <div>
       <div style={navStyle}>
         {makeHero()}
-        <Button onClick={toggleDrawer("right", true)}>=</Button>
+        <Button onClick={toggleDrawer("right", true)}>
+          <MenuIcon />
+        </Button>
       </div>
       <Drawer
         style={drawerStyle}
