@@ -4,6 +4,7 @@ import LessonHeading from "./LessonHeading";
 import LessonSub from "./LessonSub";
 import LessonText from "./LessonText";
 import LessonCode from "./LessonCode";
+import PictureBox from "./PictureBox";
 
 const makeElement = (element, index) => {
   switch (element.type) {
@@ -45,6 +46,14 @@ const makeElement = (element, index) => {
           key={index}
           content={element.content}
           format={element.format}
+        />
+      );
+    case "picture":
+      return (
+        <PictureBox
+          key={index}
+          mode={element.mode}
+          pictures={element.pictures}
         />
       );
     case "break":
