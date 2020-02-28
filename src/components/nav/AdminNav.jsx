@@ -22,8 +22,13 @@ const AdminNav = props => {
     left: "auto",
     width: "150px",
     boxSizing: "inherit",
-    background: "#545454",
+    background: "rgba(0,0,0,0)",
     display: "block"
+  };
+  const drawerListStyle = {
+    background: "#545454",
+    color: "white",
+    height: "100vh"
   };
   const imgStyle = {
     height: "50px",
@@ -62,12 +67,14 @@ const AdminNav = props => {
         open={drawer}
         onClose={() => setDrawer(false)}
       >
-        <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map(text => (
-            <ListItem button key={text}>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+        <List style={drawerListStyle}>
+          {["Home", "All Courses", "This is a test for a long thing"].map(
+            text => (
+              <ListItem button key={text}>
+                <ListItemText primary={text} />
+              </ListItem>
+            )
+          )}
         </List>
       </Drawer>
     </div>
