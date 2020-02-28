@@ -11,7 +11,7 @@ const makeElement = (element, index) => {
         <LessonTitle
           key={index}
           content={element.content}
-          format={element.content}
+          format={element.format}
         />
       );
     case "heading":
@@ -19,7 +19,7 @@ const makeElement = (element, index) => {
         <LessonHeading
           key={index}
           content={element.content}
-          format={element.content}
+          format={element.format}
         />
       );
     case "subHeading":
@@ -27,7 +27,7 @@ const makeElement = (element, index) => {
         <LessonSub
           key={index}
           content={element.content}
-          format={element.content}
+          format={element.format}
         />
       );
     case "text":
@@ -35,7 +35,7 @@ const makeElement = (element, index) => {
         <LessonText
           key={index}
           content={element.content}
-          format={element.content}
+          format={element.format}
         />
       );
     default:
