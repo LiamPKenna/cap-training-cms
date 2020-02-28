@@ -2,11 +2,16 @@ import React from "react";
 
 const PictureBox = props => {
   const pictureBoxStyles = {
-    display: "flex",
-    width: "100%",
-    flexBasis: "0",
-    flex: "0 0 50%",
-    flex: "1 0 50%"
+    1: {
+      width: "100%"
+    },
+    2: {
+      display: "flex",
+      width: "100%",
+      overflow: "hidden",
+      flexWrap: "wrap",
+      justifyContent: "center"
+    }
   };
   const imgStyles = {
     1: {
@@ -14,8 +19,10 @@ const PictureBox = props => {
       width: "100%"
     },
     2: {
-      minWidth: "300px",
-      maxWidth: "100%"
+      margin: "15px auto",
+      minWidth: "200px",
+      maxWidth: "100%",
+      alignSelf: "center"
     }
   };
   const makePics = pics => {
@@ -28,7 +35,9 @@ const PictureBox = props => {
       />
     ));
   };
-  return <div style={pictureBoxStyles}>{makePics(props.pictures)}</div>;
+  return (
+    <div style={pictureBoxStyles[props.mode]}>{makePics(props.pictures)}</div>
+  );
 };
 
 export default PictureBox;
