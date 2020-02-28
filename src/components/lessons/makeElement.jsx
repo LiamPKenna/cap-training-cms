@@ -47,6 +47,14 @@ const makeElement = (element, index) => {
           format={element.format}
         />
       );
+    case "break":
+      return (
+        <div key={index}>
+          <br />
+          <hr />
+          <br />
+        </div>
+      );
     default:
       return "";
   }
