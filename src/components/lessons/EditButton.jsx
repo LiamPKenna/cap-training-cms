@@ -8,7 +8,21 @@ const EditButton = props => {
     left: "0"
   };
   return (
-    <Button style={buttonStyle} onClick={props.handleClick}>
+    <Button
+      variant="contained"
+      color="primary"
+      style={buttonStyle}
+      className="edit-button"
+      onClick={props.handleClick}
+    >
+      <style>{`
+          .edit-button {
+            opacity: 0
+          }
+          .edit-button:hover {
+            opacity: 1
+          }
+      `}</style>
       <EditIcon />
     </Button>
   );

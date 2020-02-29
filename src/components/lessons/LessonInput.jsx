@@ -39,8 +39,8 @@ const LessonInput = props => {
     <div style={inputStyle}>
       <Paper component="form">
         <div style={mainGridStyle}>
-          <Button onClick={handleSubmit}>
-            <CheckCircleIcon color="primary" />
+          <Button onClick={handleSubmit} color="primary">
+            <CheckCircleIcon />
           </Button>
           <div>
             <h6 style={labelStyle}>{props.element.toUpperCase()}</h6>
@@ -71,8 +71,8 @@ const LessonInput = props => {
               </Button>
             </div>
           </div>
-          <Button>
-            <CancelIcon color="primary" />
+          <Button color="primary">
+            <CancelIcon />
           </Button>
           <Button>
             <DeleteForeverIcon color="error" />

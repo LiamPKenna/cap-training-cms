@@ -18,10 +18,6 @@ const LessonTextElement = props => {
     setText(content);
   };
 
-  const elementStyle = {
-    paddingLeft: admin && !editMode ? "70px" : "0"
-  };
-
   const checkEdit = () => {
     return editMode ? (
       <LessonInput
@@ -55,7 +51,7 @@ const LessonTextElement = props => {
     }
   };
 
-  return <div style={elementStyle}>{checkEdit()}</div>;
+  return <div>{checkEdit()}</div>;
 };
 
 export default LessonTextElement;
