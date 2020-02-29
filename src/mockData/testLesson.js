@@ -79,6 +79,13 @@ const testLesson = [
         }, {
           alt: "test image2",
           src: "https://www.dropbox.com/s/4d0djqw36lrga11/bank-assignment-wireframe.png?raw=1"
+        },
+        {
+          alt: "test image2",
+          src: "http://dl.dropboxusercontent.com/s/lkuljqmmu8bjw9o/create-new-repo.png"
+        }, {
+          alt: "test image2",
+          src: "https://www.dropbox.com/s/4d0djqw36lrga11/bank-assignment-wireframe.png?raw=1"
         }
       ]
     }
