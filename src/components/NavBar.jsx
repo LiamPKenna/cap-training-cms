@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 
 import MenuIcon from "@material-ui/icons/Menu";
 import NavDrawer from "./NavDrawer";
+import { Link } from "react-router-dom";
 
 const NavBar = props => {
   const [drawer, setDrawer] = useState(false);
@@ -44,7 +45,7 @@ const NavBar = props => {
   return (
     <div>
       <div style={navStyle}>
-        {makeHero()}
+        <Link to="/">{makeHero()}</Link>
         <Button onClick={toggleDrawer("right", true)}>
           <MenuIcon />
         </Button>

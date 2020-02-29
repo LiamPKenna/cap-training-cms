@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Course = props => {
   const { courseId } = useParams();
@@ -11,9 +12,9 @@ const Course = props => {
 
     return Object.keys(lessons).map(lessonId => (
       <li key={lessonId}>
-        <a href={`/lessons/${courseId}/${segmentId}/${lessonId}`}>
+        <Link to={`/lessons/${courseId}/${segmentId}/${lessonId}`}>
           {lessons[lessonId].title}
-        </a>
+        </Link>
       </li>
     ));
   };
