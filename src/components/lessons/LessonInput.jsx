@@ -3,19 +3,32 @@ import { connect } from "react-redux";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import CancelIcon from "@material-ui/icons/Cancel";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
+import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
+import FormatAlignLeftIcon from "@material-ui/icons/FormatAlignLeft";
+import FormatAlignRightIcon from "@material-ui/icons/FormatAlignRight";
+import FormatAlignCenterIcon from "@material-ui/icons/FormatAlignCenter";
 import Button from "@material-ui/core/Button";
-import InputBase from "@material-ui/core/InputBase";
+import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 
 const LessonInput = props => {
-  const divStyle = {
+  const mainGridStyle = {
     display: "grid",
-    gridTemplateColumns: "70px 1fr 60px 60px"
+    gridTemplateColumns: "70px 1fr 60px 60px",
+    backgroundColor: "#f5f5f5"
+  };
+  const upDownGridStyle = {
+    display: "grid",
+    gridTemplateColumns: "1fr 60px 60px 60px 60px 60px"
   };
   const labelStyle = {
     textAlign: "center",
     margin: "0",
-    padding: "10px 0 2px 0"
+    padding: "10px 0 10px 0"
+  };
+  const inputStyle = {
+    margin: "20px 0"
   };
 
   const handleSubmit = () => {
@@ -23,21 +36,40 @@ const LessonInput = props => {
   };
 
   return (
-    <div>
+    <div style={inputStyle}>
       <Paper component="form">
-        <div style={divStyle}>
+        <div style={mainGridStyle}>
           <Button onClick={handleSubmit}>
             <CheckCircleIcon color="primary" />
           </Button>
           <div>
             <h6 style={labelStyle}>{props.element.toUpperCase()}</h6>
 
-            <InputBase
+            <TextField
               multiline
               value={props.value}
               onChange={props.handleChange}
               fullWidth
+              variant="filled"
             />
+            <div style={upDownGridStyle}>
+              <div></div>
+              <Button>
+                <ArrowUpwardIcon />
+              </Button>
+              <Button>
+                <ArrowDownwardIcon />
+              </Button>
+              <Button>
+                <FormatAlignLeftIcon />
+              </Button>
+              <Button>
+                <FormatAlignRightIcon />
+              </Button>
+              <Button>
+                <FormatAlignCenterIcon />
+              </Button>
+            </div>
           </div>
           <Button>
             <CancelIcon color="primary" />
