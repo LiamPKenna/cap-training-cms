@@ -3,6 +3,7 @@ import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import { Link } from "react-router-dom";
 
 const NavDrawer = props => {
   const drawerStyle = {
@@ -19,6 +20,10 @@ const NavDrawer = props => {
     color: "white",
     height: "100vh"
   };
+  const linkStyle = {
+    textDecoration: "none",
+    color: "white"
+  };
 
   return (
     <div>
@@ -29,13 +34,13 @@ const NavDrawer = props => {
         onClose={() => props.setDrawer(false)}
       >
         <List style={drawerListStyle}>
-          {["Home", "All Courses", "This is a test for a long link"].map(
-            text => (
-              <ListItem button key={text}>
-                <ListItemText primary={text} />
-              </ListItem>
-            )
-          )}
+          {props.links.map((link, index) => (
+            <ListItem button key={index}>
+              <Link to={link.path} style={linkStyle}>
+                <ListItemText primary={link.text} />
+              </Link>
+            </ListItem>
+          ))}
         </List>
       </Drawer>
     </div>

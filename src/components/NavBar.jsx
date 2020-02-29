@@ -49,7 +49,7 @@ const NavBar = props => {
           <MenuIcon />
         </Button>
       </div>
-      <NavDrawer drawer={drawer} setDrawer={setDrawer} />
+      <NavDrawer drawer={drawer} setDrawer={setDrawer} links={props.links} />
     </div>
   );
 };
@@ -57,7 +57,8 @@ const NavBar = props => {
 const mapStateToProps = state => {
   return {
     brand: state.brand,
-    logo: state.logo
+    logo: state.logo,
+    links: state.links
   };
 };
 
