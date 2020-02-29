@@ -3,6 +3,7 @@ import Lesson from "./lessons/Lesson";
 import Courses from "./courses/Courses";
 import Course from "./courses/Course";
 import NavBar from "./NavBar";
+import Home from "./Home";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -14,7 +15,9 @@ function App(props) {
           <NavBar admin={true} />
         </header>
         <Switch>
-          <Route exact path="/"></Route>
+          <Route exact path="/">
+            <Home />
+          </Route>
           <Route exact path="/courses">
             <Courses />
           </Route>
