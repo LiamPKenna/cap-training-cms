@@ -2,8 +2,17 @@ import mockState from '../mockData/mockState';
 
 const initialState = mockState;
 const reducer = (state = initialState, action) => {
-  console.log(action);
-  console.log(state);
+  const { type } = action;
+  switch (type) {
+    case 'UPDATE':
+      console.log(action);
+
+
+      break;
+
+    default:
+      break;
+  }
 
   return state;
 }

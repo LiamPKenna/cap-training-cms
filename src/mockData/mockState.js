@@ -9,9 +9,7 @@ const mockState = {
       segments: {
         1: {
           title: 'Mock Segment',
-          lessons: {
-            1: testLesson
-          }
+          lessons: { 1: { title: "This Lesson", content: testLesson } }
         }
       }
     }

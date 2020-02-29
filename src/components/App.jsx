@@ -1,5 +1,7 @@
 import React from "react";
-import Lesson from "./Lesson";
+import Lesson from "./lessons/Lesson";
+import Courses from "./courses/Courses";
+import Course from "./courses/Course";
 import NavBar from "./NavBar";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -11,7 +13,18 @@ function App(props) {
         <header className="App-header">
           <NavBar admin={true} />
         </header>
-        <Lesson lesson={props.lesson} />
+        <Switch>
+          <Route exact path="/"></Route>
+          <Route exact path="/courses">
+            <Courses />
+          </Route>
+          <Route path="/courses/:courseId">
+            <Course />
+          </Route>
+          <Route path="/lessons/:courseId/:segmentId/:lessonId">
+            <Lesson />
+          </Route>
+        </Switch>
       </Router>
     </div>
   );
@@ -19,7 +32,7 @@ function App(props) {
 
 const mapStateProps = state => {
   return {
-    lesson: state.courses[1].segments[1].lessons[1]
+    courses: state.courses
   };
 };
 
