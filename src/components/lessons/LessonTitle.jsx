@@ -1,11 +1,11 @@
 import React from "react";
 
 const LessonTitle = params => {
-  const { align } = params.format;
+  const { format, content } = params;
   const titleStyle = {
-    textAlign: align
+    textAlign: format.align
   };
-  return <h1 style={titleStyle}>{params.content}</h1>;
+  return <h1 style={titleStyle}>{content}</h1>;
 };
 
 export default LessonTitle;
