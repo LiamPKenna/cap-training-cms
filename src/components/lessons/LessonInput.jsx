@@ -60,14 +60,14 @@ const LessonInput = props => {
               <Button>
                 <ArrowDownwardIcon />
               </Button>
-              <Button>
+              <Button disabled={props.align === "left"}>
                 <FormatAlignLeftIcon />
               </Button>
-              <Button>
-                <FormatAlignRightIcon />
-              </Button>
-              <Button>
+              <Button disabled={props.align === "center"}>
                 <FormatAlignCenterIcon />
+              </Button>
+              <Button disabled={props.align === "right"}>
+                <FormatAlignRightIcon />
               </Button>
             </div>
           </div>

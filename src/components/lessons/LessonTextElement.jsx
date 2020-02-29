@@ -11,6 +11,7 @@ const LessonTextElement = props => {
   const admin = true;
   const { format, content } = props;
   const [text, setText] = useState(content);
+  const [align, setAlign] = useState(format.align);
   const [editMode, setEditMode] = useState(false);
 
   const toggleEdit = () => {
@@ -25,6 +26,8 @@ const LessonTextElement = props => {
         handleChange={e => setText(e.target.value)}
         toggleEdit={toggleEdit}
         element={props.type}
+        align={align}
+        changeAlign={setAlign}
       />
     ) : (
       <div>
