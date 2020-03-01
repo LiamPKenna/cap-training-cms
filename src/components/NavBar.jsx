@@ -25,10 +25,14 @@ const NavBar = props => {
     margin: "25px 10px"
   };
   const makeHero = () => {
-    return props.logo ? (
-      <img style={imgStyle} src={props.logo} alt={`${props.brand} logo`} />
+    return props.brand.logo ? (
+      <img
+        style={imgStyle}
+        src={props.brand.logo}
+        alt={`${props.brand.name} logo`}
+      />
     ) : (
-      <h2 style={h2Style}>{props.brand}</h2>
+      <h2 style={h2Style}>{props.brand.name}</h2>
     );
   };
 
@@ -58,7 +62,6 @@ const NavBar = props => {
 const mapStateToProps = state => {
   return {
     brand: state.brand,
-    logo: state.logo,
     links: state.links
   };
 };
