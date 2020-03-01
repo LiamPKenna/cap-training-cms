@@ -10,11 +10,9 @@ const Course = props => {
   const makeLessons = (lessons, segmentId) => {
     console.log(lessons);
 
-    return Object.keys(lessons).map(lessonId => (
-      <li key={lessonId}>
-        <Link to={`/lessons/${courseId}/${segmentId}/${lessonId}`}>
-          {lessons[lessonId].title}
-        </Link>
+    return lessons.map(lesson => (
+      <li key={lesson.lessonId}>
+        <Link to={`/lessons/${lesson.lessonId}`}>{lesson.title}</Link>
       </li>
     ));
   };

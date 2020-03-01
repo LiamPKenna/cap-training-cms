@@ -7,14 +7,14 @@ import Container from "@material-ui/core/Container";
 const makePage = lesson => lesson.map((l, i) => makeSection(l, i));
 
 const Lesson = props => {
-  const { courseId, segmentId, lessonId } = useParams();
-  const lesson = props.courses[courseId].segments[segmentId].lessons[lessonId];
+  const { lessonId } = useParams();
+  const lesson = props.lessons[lessonId];
   return <Container>{makePage(lesson.content)}</Container>;
 };
 
 const mapStateToProps = state => {
   return {
-    courses: state.courses
+    lessons: state.lessons
   };
 };
 

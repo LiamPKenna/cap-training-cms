@@ -1,12 +1,10 @@
-import testLesson from './testLesson';
-
 const mockCourses = {
   1: {
     title: "Intro to programming",
     segments: {
       1: {
         title: 'Mock Segment',
-        lessons: { 1: { title: "This Lesson", content: testLesson } }
+        lessons: [{ lessonId: 1, title: "TestLesson" }]
       }
     }
   }

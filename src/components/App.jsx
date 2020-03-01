@@ -4,10 +4,9 @@ import Courses from "./courses/Courses";
 import Course from "./courses/Course";
 import NavBar from "./NavBar";
 import Home from "./Home";
-import { connect } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import constants from "./../constants";
-const { c } = constants;
+// import constants from "./../constants";
+// const { c } = constants;
 
 function App(props) {
   return (
@@ -21,12 +20,12 @@ function App(props) {
             <Home />
           </Route>
           <Route exact path="/courses">
-            <Courses />
+            <Courses courses={props.courses} />
           </Route>
           <Route path="/courses/:courseId">
             <Course />
           </Route>
-          <Route path="/lessons/:courseId/:segmentId/:lessonId">
+          <Route path="/lessons/:lessonId">
             <Lesson />
           </Route>
         </Switch>
@@ -35,10 +34,4 @@ function App(props) {
   );
 }
 
-const mapStateProps = state => {
-  return {
-    courses: state.courses
-  };
-};
-
-export default connect(mapStateProps)(App);
+export default App;
