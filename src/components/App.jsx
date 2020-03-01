@@ -6,6 +6,8 @@ import NavBar from "./NavBar";
 import Home from "./Home";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import constants from "./../constants";
+const { c } = constants;
 
 function App(props) {
   return (
