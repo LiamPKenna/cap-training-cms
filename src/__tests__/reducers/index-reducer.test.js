@@ -12,11 +12,13 @@ describe("rootReducer", () => {
     expect(rootReducer({
       brand: {},
       links: {},
-      courses: {}
+      courses: {},
+      lessons: {}
     }, { type: null })).toEqual({
       brand: {},
       links: {},
-      courses: {}
+      courses: {},
+      lessons: {}
     });
   });
 
