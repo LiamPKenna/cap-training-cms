@@ -2,7 +2,7 @@ import React from "react";
 import LessonTextElement from "./LessonTextElement";
 import PictureBox from "./PictureBox";
 
-const makeElement = (element, index) => {
+const makeElement = (element, index, lessonId) => {
   switch (element.type) {
     case "picture":
       return (
@@ -24,6 +24,8 @@ const makeElement = (element, index) => {
       return (
         <LessonTextElement
           key={index}
+          sectionIndex={index}
+          lessonId={lessonId}
           content={element.content}
           format={element.format}
           type={element.type}

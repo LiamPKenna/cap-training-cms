@@ -32,6 +32,13 @@ const LessonInput = props => {
   };
 
   const handleSubmit = () => {
+    props.dispatch({
+      type: "UPDATE_TEXT",
+      sectionIndex: props.sectionIndex,
+      content: props.value,
+      lessonId: props.lessonId
+    });
+
     props.toggleEdit();
   };
 

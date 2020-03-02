@@ -28,6 +28,8 @@ const LessonTextElement = props => {
         element={props.type}
         align={align}
         changeAlign={setAlign}
+        sectionIndex={props.sectionIndex}
+        lessonId={props.lessonId}
       />
     ) : (
       <div>

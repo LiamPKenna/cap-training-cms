@@ -1,13 +1,16 @@
 import React from "react";
 import makeElement from "./makeElement";
 
-const makeSection = (section, index) => {
+const makeSection = (section, index, lessonId) => {
+  console.log(lessonId);
+  console.log(index);
+
   const sectionStyle = {
     padding: "20px"
   };
   return (
     <div style={sectionStyle} key={index}>
-      {section.map((l, i) => makeElement(l, i))}
+      {section.map((l, i) => makeElement(l, i, lessonId))}
     </div>
   );
 };
