@@ -8,8 +8,6 @@ const Course = props => {
   const course = props.courses[courseId];
 
   const makeLessons = (lessons, segmentId) => {
-    console.log(lessons);
-
     return lessons.map(lesson => (
       <li key={lesson.lessonId}>
         <Link to={`/lessons/${lesson.lessonId}`}>{lesson.title}</Link>
