@@ -1,5 +1,7 @@
 import mockLessons from '../mockData/mockLessons';
+import constants from '../constants';
 
+const c = constants.c;
 const initialState = mockLessons;
 const lessonsReducer = (state = initialState, action) => {
   const { type } = action;
@@ -16,7 +18,11 @@ const lessonsReducer = (state = initialState, action) => {
       newState = Object.assign({}, state);
       newState[lessonId] = newLesson;
       return newState;
+    case c.GET_ALL_LESSONS:
+      console.log(action);
 
+      newState = action.lessons;
+      return newState;
     default:
       return state;
   }

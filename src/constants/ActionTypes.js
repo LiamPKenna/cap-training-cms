@@ -7,4 +7,5 @@ export const REMOVE_COURSE = 'REMOVE_COURSE';
 export const SHIFT_ELEMENT = 'SHIFT_ELEMENT';
 export const UPDATE_ELEMENT = 'UPDATE_ELEMENT';
 export const UPDATE_COURSE = 'UPDATE_COURSE';
+export const GET_ALL_LESSONS = 'GET_ALL_LESSONS';
 
