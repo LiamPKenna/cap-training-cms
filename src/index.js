@@ -6,14 +6,12 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import reducer from './reducers';
-// import db from './firebase';
+// import { db } from './actions';
+// import links from './mockData/mockLinks';
 
-// console.log(db);
+// db.ref('/brand').once('value').then(snap => console.log(snap.val()));
 
-// db.ref('/').set({
-//   name: "Epicodus",
-//   logo: "https://static1.squarespace.com/static/5524448ee4b0d6f6b83ab9e2/t/57cf3de246c3c4d2933aa57c/1529949737992/?format=1500w"
-// });
+// db.ref('/links').set(links);
 
 const store = createStore(reducer);
 
