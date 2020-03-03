@@ -4,16 +4,17 @@ import './index.css';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import reducer from './reducers';
+import thunkMiddleware from 'redux-thunk';
 // import { db } from './actions';
+
+// db.ref('/lessons').once('value').then(snap => console.log(snap.val()));
+
 // import links from './mockData/mockLinks';
-
-// db.ref('/brand').once('value').then(snap => console.log(snap.val()));
-
 // db.ref('/links').set(links);
 
-const store = createStore(reducer);
+const store = createStore(reducer, applyMiddleware(thunkMiddleware));
 
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
