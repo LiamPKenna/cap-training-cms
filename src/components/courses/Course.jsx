@@ -23,14 +23,18 @@ const Course = props => {
       </li>
     ));
   };
-  return (
-    <div>
-      <h1>{course.title}</h1>
+  if (!course) {
+    return <h1>Loading...</h1>;
+  } else {
+    return (
       <div>
-        <ul>{makeSegments(course.segments)}</ul>
+        <h1>{course.title}</h1>
+        <div>
+          <ul>{makeSegments(course.segments)}</ul>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 const mapPropsToState = state => {

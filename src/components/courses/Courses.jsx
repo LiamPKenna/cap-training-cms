@@ -4,13 +4,17 @@ import { Link } from "react-router-dom";
 
 const Courses = props => {
   const makeCourses = () => {
-    return Object.keys(props.courses).map(courseId => (
-      <li key={courseId}>
-        <Link to={`/courses/${courseId}`}>
-          <h2>{props.courses[courseId].title}</h2>
-        </Link>
-      </li>
-    ));
+    if (!props.courses) {
+      return <h1>Loading...</h1>;
+    } else {
+      return Object.keys(props.courses).map(courseId => (
+        <li key={courseId}>
+          <Link to={`/courses/${courseId}`}>
+            <h2>{props.courses[courseId].title}</h2>
+          </Link>
+        </li>
+      ));
+    }
   };
   return (
     <div>
