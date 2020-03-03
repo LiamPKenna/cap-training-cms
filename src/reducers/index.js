@@ -2,7 +2,8 @@ import coursesReducer from './coursesReducer';
 import lessonsReducer from './lessonsReducer';
 import brandReducer from './brandReducer';
 import linksReducer from './linksReducer';
-import { combineReducers } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import thunkMiddleware from 'redux-thunk';
 
 const rootReducer = combineReducers({
   brand: brandReducer,
@@ -11,4 +12,4 @@ const rootReducer = combineReducers({
   lessons: lessonsReducer
 });
 
-export default rootReducer;
+export default createStore(rootReducer, applyMiddleware(thunkMiddleware));
