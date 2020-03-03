@@ -4,6 +4,7 @@ import Courses from "./courses/Courses";
 import Course from "./courses/Course";
 import NavBar from "./NavBar";
 import Home from "./Home";
+import Container from "@material-ui/core/Container";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import constants from "./../constants";
 // const { c } = constants;
@@ -15,20 +16,22 @@ function App(props) {
         <header className="App-header">
           <NavBar admin={true} />
         </header>
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route exact path="/courses">
-            <Courses courses={props.courses} />
-          </Route>
-          <Route path="/courses/:courseId">
-            <Course />
-          </Route>
-          <Route path="/lessons/:lessonId">
-            <Lesson />
-          </Route>
-        </Switch>
+        <Container>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route exact path="/courses">
+              <Courses courses={props.courses} />
+            </Route>
+            <Route path="/courses/:courseId">
+              <Course />
+            </Route>
+            <Route path="/lessons/:lessonId">
+              <Lesson />
+            </Route>
+          </Switch>
+        </Container>
       </Router>
     </div>
   );
