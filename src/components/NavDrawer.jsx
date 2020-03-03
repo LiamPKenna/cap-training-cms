@@ -32,6 +32,7 @@ const NavDrawer = props => {
         anchor="right"
         open={props.drawer}
         onClose={() => props.setDrawer(false)}
+        onClick={() => props.setDrawer(false)}
       >
         <List style={drawerListStyle}>
           {props.links.map((link, index) => (
