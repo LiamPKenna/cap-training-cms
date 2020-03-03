@@ -1,13 +1,13 @@
-import mockLessons from '../mockData/mockLessons';
+// import mockLessons from '../mockData/mockLessons';
 import constants from '../constants';
 
 const c = constants.c;
-const initialState = mockLessons;
+const initialState = {}//mockLessons;
 const lessonsReducer = (state = initialState, action) => {
   const { type } = action;
   let newState;
   switch (type) {
-    case 'UPDATE_TEXT':
+    case c.UPDATE_TEXT:
       const { lessonId, sectionIndex, content } = action;
       const newLesson = Object.assign({}, state[lessonId]);
       const newContent = [...state[lessonId].content];
@@ -18,10 +18,10 @@ const lessonsReducer = (state = initialState, action) => {
       newState = Object.assign({}, state);
       newState[lessonId] = newLesson;
       return newState;
-    case c.GET_ALL_LESSONS:
-      console.log(action);
-
-      newState = action.lessons;
+    case c.RECEIVE_LESSON:
+      newState = Object.assign({}, state);
+      newState[1] = action.lesson;
+      console.log(newState);
       return newState;
     default:
       return state;
