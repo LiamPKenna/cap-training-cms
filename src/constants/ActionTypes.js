@@ -1,6 +1,7 @@
 export const ADD_ELEMENT = 'ADD_ELEMENT';
 export const ADD_COURSE = 'ADD_COURSE';
 export const ADD_LESSON = 'ADD_LESSON';
+export const ADD_SEGMENT = 'ADD_SEGMENT';
 export const REMOVE_ELEMENT = 'REMOVE_ELEMENT';
 export const REMOVE_LESSON = 'REMOVE_LESSON';
 export const RECEIVE_LESSON = 'RECEIVE_LESSON';
