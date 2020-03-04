@@ -34,7 +34,8 @@ const LessonInput = props => {
     margin: "20px 0"
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = e => {
+    e.preventDefault();
     updateText({
       sectionIndex: props.sectionIndex,
       content: props.value,

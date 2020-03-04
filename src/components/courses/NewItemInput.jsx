@@ -11,8 +11,12 @@ const NewItemInput = props => {
     gridTemplateColumns: "70px 1fr 70px",
     backgroundColor: "#f5f5f5"
   };
+  const submitHandler = e => {
+    e.preventDefault();
+    props.handleSubmit();
+  };
   return (
-    <Paper component="form" onSubmit={props.handleSubmit}>
+    <Paper component="form" onSubmit={submitHandler}>
       <div style={mainGridStyle}>
         <Button type="submit" color="primary">
           <CheckCircleIcon />
