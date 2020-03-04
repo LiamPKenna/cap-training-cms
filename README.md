@@ -1,15 +1,3 @@
-7:30 - 8:00
-
-- _Create Trello Board for project._
-
-8:00 - 8:30
-
-- _Begin Firebase Tutorial: https://www.fullstackfirebase.com/introduction/overview-and-structure_
-
-9:00 - 9:30
-
-- _Watch Google I/O video on Firebase: https://www.youtube.com/watch?v=7CWi_Olz0xw_
-
 # _CAP Training CMS_
 
 #### _Flexible Content Management System for Education and Training, March 2020_
