@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Loading from "../Loading";
 import { addCourse } from "../../actions";
 import NewCourseButton from "./NewCourseButton";
-import NewCourseInput from "./NewCourseInput";
+import NewItemInput from "./NewItemInput";
 
 const Courses = props => {
   const [showForm, setShowForm] = useState(false);
@@ -49,7 +49,7 @@ const Courses = props => {
         ""
       )}
       {showForm ? (
-        <NewCourseInput
+        <NewItemInput
           value={newCourseText}
           handleChange={e => setNewCourseText(e.target.value)}
           handleSubmit={handleNewCourse}
