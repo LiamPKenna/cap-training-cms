@@ -1,7 +1,7 @@
 import React from "react";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 
-const NewCourseButton = props => {
+const NewItemButton = props => {
   const buttonStyle = {
     borderRadius: "50%",
     border: "none",
@@ -20,4 +20,4 @@ const NewCourseButton = props => {
   );
 };
 
-export default NewCourseButton;
+export default NewItemButton;
