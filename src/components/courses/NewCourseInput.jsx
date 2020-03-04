@@ -12,12 +12,13 @@ const NewCourseInput = props => {
     backgroundColor: "#f5f5f5"
   };
   return (
-    <Paper component="form">
+    <Paper component="form" onSubmit={props.handleSubmit}>
       <div style={mainGridStyle}>
-        <Button onClick={props.handleSubmit} color="primary">
+        <Button type="submit" color="primary">
           <CheckCircleIcon />
         </Button>
         <TextField
+          required
           label={props.inputName}
           value={props.value}
           onChange={props.handleChange}

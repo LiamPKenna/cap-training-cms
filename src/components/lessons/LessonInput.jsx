@@ -52,14 +52,15 @@ const LessonInput = props => {
 
   return (
     <div style={inputStyle}>
-      <Paper component="form">
+      <Paper component="form" onSubmit={handleSubmit}>
         <div style={mainGridStyle}>
-          <Button onClick={handleSubmit} color="primary">
+          <Button type="submit" color="primary">
             <CheckCircleIcon />
           </Button>
           <div>
             <h6 style={labelStyle}>{props.element.toUpperCase()}</h6>
             <TextField
+              required
               multiline
               value={props.value}
               onChange={props.handleChange}
