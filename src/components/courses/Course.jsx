@@ -14,6 +14,7 @@ const Course = props => {
   const [newSegmentText, setNewSegmentText] = useState("");
   const [showLessonForm, setShowLessonForm] = useState(false);
   const [newLessonText, setNewLessonText] = useState("");
+  const [segmentFocus, setSegmentFocus] = useState(null);
 
   const makeLessons = lessons => {
     if (lessons && Object.keys(lessons).length > 1) {
@@ -29,6 +30,11 @@ const Course = props => {
     }
   };
 
+  const showThisSegmentLessonInput = segmentId => {
+    setSegmentFocus(segmentId);
+    setShowLessonForm(true);
+  };
+
   const makeSegments = segments => {
     if (segments && Object.keys(segments).length > 1) {
       return Object.keys(segments)
@@ -37,15 +43,15 @@ const Course = props => {
           <li key={segmentId}>
             <h2>{segments[segmentId].title}</h2>
             <ul>{makeLessons(segments[segmentId].lessons)}</ul>
-            {!showLessonForm ? (
+            {!showLessonForm || segmentFocus !== segmentId ? (
               <NewItemButton
-                clickHandler={() => setShowLessonForm(true)}
+                clickHandler={() => showThisSegmentLessonInput(segmentId)}
                 title="New Lesson"
               />
             ) : (
               ""
             )}
-            {showLessonForm ? (
+            {showLessonForm && segmentFocus === segmentId ? (
               <NewItemInput
                 value={newLessonText}
                 handleChange={e => setNewLessonText(e.target.value)}
@@ -71,13 +77,15 @@ const Course = props => {
   };
 
   const handleNewLesson = async segmentId => {
+    setSegmentFocus(null);
     const segmentAction = await addLessonToSegment(
       newLessonText,
       courseId,
       segmentId
     );
     props.dispatch(segmentAction);
-    const lessonAction = await newLesson("New Lesson", courseId, segmentId);
+    const lessonAction = await newLesson(newLessonText, courseId, segmentId);
+    setNewLessonText("");
     props.dispatch(lessonAction);
   };
 
@@ -89,6 +97,7 @@ const Course = props => {
   const cancelLessonInput = () => {
     setShowLessonForm(false);
     setNewLessonText("");
+    setSegmentFocus(null);
   };
 
   if (!course) {
