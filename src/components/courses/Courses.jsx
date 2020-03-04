@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Loading from "../Loading";
 import { addCourse } from "../../actions";
-import NewCourseButton from "./NewCourseButton";
+import NewItemButton from "./NewItemButton";
 import NewItemInput from "./NewItemInput";
 
 const Courses = props => {
@@ -41,10 +41,7 @@ const Courses = props => {
     <div>
       <ul>{makeCourses()}</ul>
       {!showForm ? (
-        <NewCourseButton
-          clickHandler={showNewCourseForm}
-          title={"New Course"}
-        />
+        <NewItemButton clickHandler={showNewCourseForm} title={"New Course"} />
       ) : (
         ""
       )}
