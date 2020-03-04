@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Loading from "../Loading";
+import { addCourse } from "../../actions";
 
 const Courses = props => {
   const makeCourses = () => {
@@ -20,6 +21,7 @@ const Courses = props => {
   return (
     <div>
       <ul>{makeCourses()}</ul>
+      <button onClick={() => props.dispatch(addCourse())}>NEW</button>
     </div>
   );
 };
