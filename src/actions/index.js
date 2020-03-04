@@ -6,26 +6,10 @@ firebase.initializeApp(firebaseConfig);
 
 const db = firebase.database();
 const lessonsTable = db.ref('/lessons');
-const brandTable = db.ref('/brand');
-const linksTable = db.ref('/links');
+// const brandTable = db.ref('/brand');
 const coursesTable = db.ref('/courses');
 
-const getLessons = (lessons) => {
-  return {
-    type: c.GET_ALL_LESSONS,
-    lessons
-  }
-}
 
-export const getLessonsThunk = () => {
-  return dispatch => {
-    let lessonObj;
-    lessonsTable.once('value', snap => {
-      lessonObj = snap.val();
-    })
-      .then(() => dispatch(getLessons(lessonObj)))
-  }
-};
 
 export function watchFirebaseLessonsRef() {
   return (dispatch) => {
@@ -63,6 +47,75 @@ export const updateText = (params) => {
   console.log(params);
 
 };
+
+export const addCourse = (courseTitle = "New Course") => {
+  const newCourseKey = db.ref().child('courses').push().key;
+  var updates = {};
+  updates['/courses/' + newCourseKey] = {
+    "segments": {
+      'default': {
+        title: 'First Segment',
+        lessons: { 'placeholder': { lessonId: 1, title: "TestLesson" } }
+      }
+    },
+    "title": courseTitle,
+    "id": newCourseKey
+  };
+  db.ref().update(updates);
+  return {
+    type: c.ADD_COURSE,
+    title: courseTitle,
+    id: newCourseKey
+  };
+};
+
+export const addSegment = async (segmentTitle = "New segment", courseId) => {
+
+  const newSegmentKey = db.ref('/courses/' + courseId).child('segments').push().key;
+  var updates = {};
+  updates['/courses/' + courseId + '/segments/' + newSegmentKey] = {
+    "lessons": [{ lessonId: 1, title: "TestLesson" }],
+    "title": segmentTitle,
+  };
+
+  const ret = await db.ref().update(updates);
+  console.log(ret);
+
+  return {
+    type: c.ADD_SEGMENT,
+    title: segmentTitle,
+    courseId: courseId,
+    lessons: [{ lessonId: 1, title: "TestLesson" }],
+    segmentId: newSegmentKey
+  };
+};
+
+export const newLesson = (lessonTitle = "New Lesson", courseId, segmentId) => {
+  const newLessonKey = db.ref().child('lessons').push().key;
+  var updates = {};
+  updates['/lessons/' + newLessonKey] = {
+    title: lessonTitle,
+    lessonId: newLessonKey,
+    courseId,
+    segmentId,
+    content: [{ type: 'default' }]
+  };
+  db.ref().update(updates);
+  return {
+    type: c.ADD_LESSON,
+    title: lessonTitle,
+    lessonId: newLessonKey,
+    courseId,
+    segmentId
+  }
+};
+
+export const addLessonToSegment = (params) => {
+
+};
+
+
+
 
 
 
