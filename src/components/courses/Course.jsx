@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Loading from "../Loading";
 import { addSegment, addLessonToSegment, newLesson } from "../../actions";
+import NewItemButton from "./NewItemButton";
+import NewItemInput from "./NewItemInput";
 
 const Course = props => {
   const { courseId } = useParams();
   const course = props.courses[courseId];
+  const [showSegmentForm, setShowSegmentForm] = useState(false);
+  const [newSegmentText, setNewSegmentText] = useState("");
+  const [showLessonForm, setShowLessonForm] = useState(false);
+  const [newLessonText, setNewLessonText] = useState("");
 
-  const makeLessons = (lessons, segmentId) => {
+  const makeLessons = lessons => {
     if (lessons && Object.keys(lessons).length > 1) {
       return lessons
         .filter(l => l !== "default")
@@ -30,10 +36,26 @@ const Course = props => {
         .map(segmentId => (
           <li key={segmentId}>
             <h2>{segments[segmentId].title}</h2>
-            <ul>{makeLessons(segments[segmentId].lessons, segmentId)}</ul>
-            <button onClick={() => newLessonClick(segmentId)}>
-              NEW LESSON
-            </button>
+            <ul>{makeLessons(segments[segmentId].lessons)}</ul>
+            {!showLessonForm ? (
+              <NewItemButton
+                clickHandler={() => setShowLessonForm(true)}
+                title="New Lesson"
+              />
+            ) : (
+              ""
+            )}
+            {showLessonForm ? (
+              <NewItemInput
+                value={newLessonText}
+                handleChange={e => setNewLessonText(e.target.value)}
+                handleSubmit={() => handleNewLesson(segmentId)}
+                inputName="Lesson Name"
+                handleCancel={cancelLessonInput}
+              />
+            ) : (
+              ""
+            )}
           </li>
         ));
     } else {
@@ -41,20 +63,32 @@ const Course = props => {
     }
   };
 
-  const newSegmentClick = async () => {
-    const action = await addSegment("New Segment", courseId);
+  const handleNewSegment = async () => {
+    setShowSegmentForm(false);
+    const action = await addSegment(newSegmentText, courseId);
+    setNewSegmentText("");
     props.dispatch(action);
   };
 
-  const newLessonClick = async segmentId => {
+  const handleNewLesson = async segmentId => {
     const segmentAction = await addLessonToSegment(
-      "New Lesson",
+      newLessonText,
       courseId,
       segmentId
     );
     props.dispatch(segmentAction);
     const lessonAction = await newLesson("New Lesson", courseId, segmentId);
     props.dispatch(lessonAction);
+  };
+
+  const cancelSegmentInput = () => {
+    setShowSegmentForm(false);
+    setNewSegmentText("");
+  };
+
+  const cancelLessonInput = () => {
+    setShowLessonForm(false);
+    setNewLessonText("");
   };
 
   if (!course) {
@@ -65,7 +99,25 @@ const Course = props => {
         <h1>{course.title}</h1>
         <div>
           <ul>{makeSegments(course.segments)}</ul>
-          <button onClick={newSegmentClick}>NEW SEGMENT</button>
+          {!showSegmentForm ? (
+            <NewItemButton
+              clickHandler={() => setShowSegmentForm(true)}
+              title="New Segment"
+            />
+          ) : (
+            ""
+          )}
+          {showSegmentForm ? (
+            <NewItemInput
+              value={newSegmentText}
+              handleChange={e => setNewSegmentText(e.target.value)}
+              handleSubmit={handleNewSegment}
+              inputName="Segment Name"
+              handleCancel={cancelSegmentInput}
+            />
+          ) : (
+            ""
+          )}
         </div>
       </div>
     );
