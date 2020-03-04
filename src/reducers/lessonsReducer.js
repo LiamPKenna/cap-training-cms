@@ -21,7 +21,15 @@ const lessonsReducer = (state = initialState, action) => {
     case c.RECEIVE_LESSON:
       newState = Object.assign({}, state);
       newState[1] = action.lesson;
-      console.log(newState);
+      return newState;
+    case c.ADD_LESSON:
+      newState = { ...state };
+      newState[action.lessonId] = {
+        title: action.title,
+        courseId: action.courseId,
+        segmentId: action.segmentId,
+        content: [{ type: 'default' }]
+      }
       return newState;
     default:
       return state;
