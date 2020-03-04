@@ -1,11 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import Loading from "../Loading";
 
 const Courses = props => {
   const makeCourses = () => {
     if (!props.courses) {
-      return <h1>Loading...</h1>;
+      return <Loading />;
     } else {
       return Object.keys(props.courses).map(courseId => (
         <li key={courseId}>

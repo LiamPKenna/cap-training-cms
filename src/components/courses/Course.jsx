@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import Loading from "../Loading";
 
 const Course = props => {
   const { courseId } = useParams();
@@ -24,7 +25,7 @@ const Course = props => {
     ));
   };
   if (!course) {
-    return <h1>Loading...</h1>;
+    return <Loading />;
   } else {
     return (
       <div>
