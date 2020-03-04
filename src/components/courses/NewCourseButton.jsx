@@ -10,7 +10,11 @@ const NewCourseButton = props => {
     margin: "0.25rem .5rem"
   };
   return (
-    <button style={buttonStyle} onClick={props.clickHandler}>
+    <button
+      style={buttonStyle}
+      onClick={props.clickHandler}
+      title={props.title}
+    >
       <AddCircleIcon fontSize={"large"} />
     </button>
   );

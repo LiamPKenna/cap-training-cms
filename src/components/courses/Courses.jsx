@@ -40,7 +40,14 @@ const Courses = props => {
   return (
     <div>
       <ul>{makeCourses()}</ul>
-      {!showForm ? <NewCourseButton clickHandler={showNewCourseForm} /> : ""}
+      {!showForm ? (
+        <NewCourseButton
+          clickHandler={showNewCourseForm}
+          title={"New Course"}
+        />
+      ) : (
+        ""
+      )}
       {showForm ? (
         <NewCourseInput
           value={newCourseText}
