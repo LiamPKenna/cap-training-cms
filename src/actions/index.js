@@ -74,7 +74,7 @@ export const addSegment = async (segmentTitle = "New segment", courseId) => {
   const newSegmentKey = db.ref('/courses/' + courseId).child('segments').push().key;
   var updates = {};
   updates['/courses/' + courseId + '/segments/' + newSegmentKey] = {
-    "lessons": [{ lessonId: 1, title: "TestLesson" }],
+    "lessons": [{ lessonId: 0, title: "default" }],
     "title": segmentTitle,
   };
 
