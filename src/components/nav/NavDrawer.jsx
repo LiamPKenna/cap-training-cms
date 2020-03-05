@@ -4,6 +4,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { Link } from "react-router-dom";
+import links from "../../constants/links";
 
 const NavDrawer = props => {
   const drawerStyle = {
@@ -35,7 +36,7 @@ const NavDrawer = props => {
         onClick={() => props.setDrawer(false)}
       >
         <List style={drawerListStyle}>
-          {props.links.map((link, index) => (
+          {links.map((link, index) => (
             <ListItem button key={index}>
               <Link to={link.path} style={linkStyle}>
                 <ListItemText primary={link.text} />

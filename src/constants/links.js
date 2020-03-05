@@ -1,4 +1,4 @@
-const mockLinks = [
+const links = [
   {
     text: "Home",
     path: "/"
@@ -13,4 +13,4 @@ const mockLinks = [
   },
 ]
 
-export default mockLinks;
+export default links;
