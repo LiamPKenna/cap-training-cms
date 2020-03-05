@@ -20,7 +20,7 @@ const lessonsReducer = (state = initialState, action) => {
       return newState;
     case c.RECEIVE_LESSON:
       newState = Object.assign({}, state);
-      newState[1] = action.lesson;
+      newState[action.lesson.lessonId] = action.lesson;
       return newState;
     case c.ADD_LESSON:
       newState = { ...state };
