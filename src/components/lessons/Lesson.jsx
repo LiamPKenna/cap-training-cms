@@ -13,7 +13,9 @@ const Lesson = props => {
   const { lessonId } = useParams();
   const lesson = props.lessons[lessonId];
   const addNewElement = newElementType => {
-    createElement(newElementType, lesson.content, lesson.lessonId);
+    props.dispatch(
+      createElement(newElementType, lesson.content, lesson.lessonId)
+    );
   };
   return lesson ? (
     <div>
