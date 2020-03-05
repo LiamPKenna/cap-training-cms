@@ -8,8 +8,6 @@ import Container from "@material-ui/core/Container";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { watchFirebaseLessonsRef, watchFirebaseCoursesRef } from "../actions";
 import { useDispatch } from "react-redux";
-// import constants from "./../constants";
-// const { c } = constants;
 
 function App(props) {
   const dispatch = useDispatch();
