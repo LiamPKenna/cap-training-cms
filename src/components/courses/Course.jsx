@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Loading from "../Loading";
-import { addSegment, addLessonToSegment, newLesson } from "../../actions";
+import { addSegment, newLesson } from "../../actions";
 import NewItemButton from "./NewItemButton";
 import NewItemInput from "./NewItemInput";
 
@@ -19,7 +19,7 @@ const Course = props => {
   const makeLessons = lessons => {
     if (lessons && Object.keys(lessons).length > 1) {
       return lessons
-        .filter(l => l !== "default")
+        .filter(l => l.title !== "default")
         .map(lesson => (
           <li key={lesson.lessonId}>
             <Link to={`/lessons/${lesson.lessonId}`}>{lesson.title}</Link>
@@ -55,7 +55,9 @@ const Course = props => {
               <NewItemInput
                 value={newLessonText}
                 handleChange={e => setNewLessonText(e.target.value)}
-                handleSubmit={() => handleNewLesson(segmentId)}
+                handleSubmit={() =>
+                  handleNewLesson(segmentId, segments[segmentId].lessons.length)
+                }
                 inputName="Lesson Name"
                 handleCancel={cancelLessonInput}
               />
@@ -76,17 +78,23 @@ const Course = props => {
     props.dispatch(action);
   };
 
-  const handleNewLesson = async segmentId => {
+  const handleNewLesson = async (segmentId, index) => {
     setSegmentFocus(null);
-    const segmentAction = await addLessonToSegment(
+    // const segmentAction = await addLessonToSegment(
+    //   newLessonText,
+    //   courseId,
+    //   segmentId,
+    //   index
+    // );
+    const lessonAction = await newLesson(
       newLessonText,
       courseId,
-      segmentId
+      segmentId,
+      index
     );
-    props.dispatch(segmentAction);
-    const lessonAction = await newLesson(newLessonText, courseId, segmentId);
+    props.dispatch(lessonAction[1]);
+    props.dispatch(lessonAction[0]);
     setNewLessonText("");
-    props.dispatch(lessonAction);
   };
 
   const cancelSegmentInput = () => {
