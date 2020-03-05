@@ -2,7 +2,7 @@ import React from "react";
 import LessonTextElement from "./LessonTextElement";
 import PictureBox from "./elements/PictureBox";
 
-const makeElement = (element, index, lessonId) => {
+const makeElement = (element, index, lessonId, fullLessonContent) => {
   switch (element.type) {
     case "picture":
       return (
@@ -26,11 +26,12 @@ const makeElement = (element, index, lessonId) => {
       return (
         <LessonTextElement
           key={index}
-          sectionIndex={index}
+          elementIndex={index}
           lessonId={lessonId}
           content={element.content}
           format={element.format}
           type={element.type}
+          fullLessonContent={fullLessonContent}
         />
       );
   }

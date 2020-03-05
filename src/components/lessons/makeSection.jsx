@@ -2,9 +2,6 @@ import React from "react";
 import makeElement from "./makeElement";
 
 const makeSection = (section, index, lessonId) => {
-  console.log(lessonId);
-  console.log(index);
-
   const sectionStyle = {
     padding: "20px"
   };

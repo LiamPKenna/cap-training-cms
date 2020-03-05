@@ -7,7 +7,7 @@ import NewElementSelector from "./NewElementSelector";
 import { createElement } from "../../actions";
 
 const makePage = (lesson, lessonId) =>
-  lesson.map((e, i) => makeElement(e, i, lessonId));
+  lesson.map((e, i) => makeElement(e, i, lessonId, lesson));
 
 const Lesson = props => {
   const { lessonId } = useParams();

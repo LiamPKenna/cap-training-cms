@@ -28,8 +28,9 @@ const LessonTextElement = props => {
         element={props.type}
         align={align}
         changeAlign={setAlign}
-        sectionIndex={props.sectionIndex}
+        elementIndex={props.elementIndex}
         lessonId={props.lessonId}
+        fullLessonContent={props.fullLessonContent}
       />
     ) : (
       <div>

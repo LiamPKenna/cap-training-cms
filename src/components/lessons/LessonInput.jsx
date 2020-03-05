@@ -11,7 +11,7 @@ import FormatAlignCenterIcon from "@material-ui/icons/FormatAlignCenter";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
-import { updateText } from "../../actions";
+import { updateText, deleteText } from "../../actions";
 
 const LessonInput = props => {
   const mainGridStyle = {
@@ -36,12 +36,23 @@ const LessonInput = props => {
     e.preventDefault();
     props.dispatch(
       updateText({
-        sectionIndex: props.sectionIndex,
+        elementIndex: props.elementIndex,
         content: props.value,
         lessonId: props.lessonId
       })
     );
 
+    props.toggleEdit();
+  };
+
+  const handleDelete = () => {
+    props.dispatch(
+      deleteText({
+        elementIndex: props.elementIndex,
+        lessonId: props.lessonId,
+        fullLessonContent: props.fullLessonContent
+      })
+    );
     props.toggleEdit();
   };
 
@@ -81,10 +92,10 @@ const LessonInput = props => {
               </Button>
             </div>
           </div>
-          <Button color="primary">
+          <Button color="primary" onClick={props.toggleEdit}>
             <CancelIcon />
           </Button>
-          <Button>
+          <Button onClick={handleDelete}>
             <DeleteForeverIcon color="error" />
           </Button>
         </div>
