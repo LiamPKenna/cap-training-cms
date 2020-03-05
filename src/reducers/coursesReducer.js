@@ -5,6 +5,10 @@ const initialState = {};
 const coursesReducer = (state = initialState, action) => {
   const { type } = action;
   let newState;
+  let newCourse;
+  let newSegments;
+  let newSegment;
+  let newLessons;
   switch (type) {
     case 'UPDATE':
       console.log(action);
@@ -17,14 +21,25 @@ const coursesReducer = (state = initialState, action) => {
       return newState;
     case c.ADD_SEGMENT:
       newState = Object.assign({}, state);
-      const newCourse = { ...newState[action.courseId] };
-      const newSegments = { ...newCourse.segments };
+      newCourse = { ...newState[action.courseId] };
+      newSegments = { ...newCourse.segments };
       newSegments[action.segmentId] = {
         title: action.title,
         lessons: action.lessons,
       };
       newCourse.segments = newSegments
       newState[action.courseId] = newCourse
+      return newState;
+    case c.ADD_LESSON_TO_SEGMENT:
+      newState = Object.assign({}, state);
+      newCourse = { ...newState[action.courseId] };
+      newSegments = { ...newCourse.segments };
+      newSegment = newSegments[action.segmentId];
+      newLessons = [...newSegment.lessons, { title: action.title, lessonId: action.lessonId }];
+      newSegment.lessons = newLessons;
+      newSegments[action.segmentId] = newSegment;
+      newCourse.segments = newSegments;
+      newState[action.courseId] = newCourse;
       return newState;
     default:
       break;
