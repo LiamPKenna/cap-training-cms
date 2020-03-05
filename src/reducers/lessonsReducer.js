@@ -40,7 +40,13 @@ const lessonsReducer = (state = initialState, action) => {
       newLesson.content = [...newLesson.content, action.newElement];
       newState[action.lessonId] = newLesson;
       return newState;
-    case c.UPDATE_ELEMENT:
+    case c.REMOVE_ELEMENT:
+      newState = { ...state };
+      newLesson = newState[action.lessonId];
+      newContent = [...newLesson.content];
+      newContent.splice(action.elementIndex, 1);
+      newLesson.content = newContent;
+      newState[action.lessonId] = newLesson;
       return newState;
     default:
       return state;
