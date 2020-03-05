@@ -37,33 +37,45 @@ const Courses = props => {
       ));
     }
   };
+
+  const makeAdminDiv = () => {
+    return (
+      <div>
+        {!showForm ? (
+          <NewItemButton
+            clickHandler={showNewCourseForm}
+            title={"New Course"}
+          />
+        ) : (
+          ""
+        )}
+        {showForm ? (
+          <NewItemInput
+            value={newCourseText}
+            handleChange={e => setNewCourseText(e.target.value)}
+            handleSubmit={handleNewCourse}
+            inputName="Course Name"
+            handleCancel={cancelInput}
+          />
+        ) : (
+          ""
+        )}
+      </div>
+    );
+  };
+
   return (
     <div>
       <ul>{makeCourses()}</ul>
-      {!showForm ? (
-        <NewItemButton clickHandler={showNewCourseForm} title={"New Course"} />
-      ) : (
-        ""
-      )}
-      {showForm ? (
-        <NewItemInput
-          value={newCourseText}
-          handleChange={e => setNewCourseText(e.target.value)}
-          handleSubmit={handleNewCourse}
-          inputName="Course Name"
-          handleCancel={cancelInput}
-        />
-      ) : (
-        ""
-      )}
+      {true ? makeAdminDiv() : ""}
     </div>
   );
 };
 
-const mapStateProps = state => {
+const mapStateToProps = state => {
   return {
     courses: state.courses
   };
 };
 
-export default connect(mapStateProps)(Courses);
+export default connect(mapStateToProps)(Courses);
