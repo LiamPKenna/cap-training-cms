@@ -1,0 +1,110 @@
+{
+  "brand" : {
+    "logo" : "https://static1.squarespace.com/static/5524448ee4b0d6f6b83ab9e2/t/57cf3de246c3c4d2933aa57c/1529949737992/?format=1500w",
+    "name" : "Epicodus"
+  },
+  "courses" : {
+    "1" : {
+      "segments" : [ null, {
+        "lessons" : [ {
+          "lessonId" : 1,
+          "title" : "TestLesson"
+        } ],
+        "title" : "Mock Segment"
+      } ],
+      "title" : "Intro to programming"
+    },
+    "-M1_kJhcVddqLqUoJUXc" : {
+      "title" : "New Course"
+    }
+  },
+  "lessons" : [ null, {
+    "content" : [ {
+      "content" : "This is a title",
+      "format" : {
+        "align" : "center"
+      },
+      "type" : "title"
+    }, {
+      "content" : "This is a heading",
+      "format" : {
+        "align" : "left"
+      },
+      "type" : "heading"
+    }, {
+      "content" : "This is a sub heading",
+      "format" : {
+        "align" : "left"
+      },
+      "type" : "subHeading"
+    }, {
+      "content" : "This is normal text",
+      "format" : {
+        "align" : "left"
+      },
+      "type" : "text"
+    }, {
+      "content" : "const codeStyle = (text) => {\nreturn \"good style\";\n}",
+      "format" : {
+        "align" : "left"
+      },
+      "type" : "code"
+    }, {
+      "content" : "This is normal text talking about code",
+      "format" : {
+        "align" : "left"
+      },
+      "type" : "text"
+    }, {
+      "type" : "break"
+    }, {
+      "content" : "This is another heading",
+      "format" : {
+        "align" : "left"
+      },
+      "type" : "heading"
+    }, {
+      "content" : "This is more normal text",
+      "format" : {
+        "align" : "left"
+      },
+      "type" : "text"
+    }, {
+      "mode" : 1,
+      "pictures" : [ {
+        "alt" : "test image",
+        "src" : "https://www.dropbox.com/s/irxfwuda1fs9t84/github-account-signup.png?raw=1"
+      } ],
+      "type" : "picture"
+    }, {
+      "mode" : 2,
+      "pictures" : [ {
+        "alt" : "test image2",
+        "src" : "http://dl.dropboxusercontent.com/s/lkuljqmmu8bjw9o/create-new-repo.png"
+      }, {
+        "alt" : "test image2",
+        "src" : "https://www.dropbox.com/s/4d0djqw36lrga11/bank-assignment-wireframe.png?raw=1"
+      }, {
+        "alt" : "test image2",
+        "src" : "http://dl.dropboxusercontent.com/s/lkuljqmmu8bjw9o/create-new-repo.png"
+      }, {
+        "alt" : "test image2",
+        "src" : "https://www.dropbox.com/s/4d0djqw36lrga11/bank-assignment-wireframe.png?raw=1"
+      } ],
+      "type" : "picture"
+    } ],
+    "courseId" : 1,
+    "segmentId" : 1,
+    "title" : "This Lesson"
+  } ],
+  "links" : [ {
+    "path" : "/",
+    "text" : "Home"
+  }, {
+    "path" : "/courses",
+    "text" : "All Courses"
+  }, {
+    "path" : "/handbook",
+    "text" : "Student Handbook"
+  } ]
+}
