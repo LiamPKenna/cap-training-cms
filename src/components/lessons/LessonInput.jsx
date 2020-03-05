@@ -11,9 +11,7 @@ import FormatAlignCenterIcon from "@material-ui/icons/FormatAlignCenter";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
-import constants from "../../constants";
 import { updateText } from "../../actions";
-const c = constants.c;
 
 const LessonInput = props => {
   const mainGridStyle = {
@@ -36,17 +34,13 @@ const LessonInput = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    updateText({
-      sectionIndex: props.sectionIndex,
-      content: props.value,
-      lessonId: props.lessonId
-    });
-    props.dispatch({
-      type: c.UPDATE_TEXT,
-      sectionIndex: props.sectionIndex,
-      content: props.value,
-      lessonId: props.lessonId
-    });
+    props.dispatch(
+      updateText({
+        sectionIndex: props.sectionIndex,
+        content: props.value,
+        lessonId: props.lessonId
+      })
+    );
 
     props.toggleEdit();
   };
