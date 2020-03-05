@@ -119,6 +119,24 @@ export const newLesson = (lessonTitle = "New Lesson", courseId, segmentId, oldLe
   }]
 };
 
+export const createElement = (type, oldContent, lessonId) => {
+  const newElement = {
+    type,
+    content: `This is a new ${type.toUpperCase()}`,
+    format: {
+      align: "left"
+    }
+  };
+  var updates = {};
+  updates['/lessons/' + lessonId + '/content'] = [...oldContent, newElement];
+  db.ref().update(updates);
+  return {
+    type: c.ADD_ELEMENT,
+    lessonId,
+    newElement
+  }
+}
+
 export const addLessonToSegment = (params) => {
 
 };
