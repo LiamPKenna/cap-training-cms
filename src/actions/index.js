@@ -144,8 +144,18 @@ export const createElement = (type, oldContent, lessonId) => {
   }
 }
 
-export const addLessonToSegment = (params) => {
-
+export const deleteText = data => {
+  const { elementIndex, lessonId, fullLesson } = data;
+  const newLessonContent = [...fullLesson];
+  newLessonContent.splice(elementIndex, 1);
+  var updates = {};
+  updates['/lessons/' + lessonId + '/content'] = newLessonContent;
+  db.ref().update(updates);
+  console.log(newLessonContent);
+  return {
+    type: c.REMOVE_ELEMENT,
+    lessonId, elementIndex
+  };
 };
 
 
