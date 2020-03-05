@@ -43,9 +43,17 @@ export const receiveCourse = (courseFromFirebase) => {
   };
 }
 
-export const updateText = (params) => {
-  console.log(params);
-
+export const updateText = (data) => {
+  console.log(data);
+  var updates = {};
+  updates['/lessons/' + data.lessonId + '/content/' + data.sectionIndex + '/content'] = data.content;
+  db.ref().update(updates);
+  return {
+    type: c.UPDATE_TEXT,
+    sectionIndex: data.sectionIndex,
+    content: data.content,
+    lessonId: data.lessonId
+  }
 };
 
 export const addCourse = (courseTitle = "New Course") => {
