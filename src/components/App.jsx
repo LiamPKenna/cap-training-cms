@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Lesson from "./lessons/Lesson";
 import Courses from "./courses/Courses";
 import Course from "./courses/Course";
-import NavBar from "./NavBar";
+import NavBar from "./nav/NavBar";
 import Home from "./Home";
 import Container from "@material-ui/core/Container";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
