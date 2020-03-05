@@ -20,6 +20,8 @@ const makeElement = (element, index, lessonId) => {
           <br />
         </div>
       );
+    case "default":
+      return "";
     default:
       return (
         <LessonTextElement
