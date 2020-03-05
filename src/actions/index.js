@@ -6,10 +6,7 @@ firebase.initializeApp(firebaseConfig);
 
 const db = firebase.database();
 const lessonsTable = db.ref('/lessons');
-// const brandTable = db.ref('/brand');
 const coursesTable = db.ref('/courses');
-
-
 
 export function watchFirebaseLessonsRef() {
   return (dispatch) => {
@@ -129,7 +126,7 @@ export const newLesson = (lessonTitle = "New Lesson", courseId, segmentId, oldLe
 export const createElement = (type, oldContent, lessonId) => {
   const newElement = {
     type,
-    content: `This is a new ${type.toUpperCase()}`,
+    content: `This is a new ${type.toUpperCase()} element`,
     format: {
       align: "left"
     }
@@ -145,16 +142,16 @@ export const createElement = (type, oldContent, lessonId) => {
 }
 
 export const deleteText = data => {
-  const { elementIndex, lessonId, fullLesson } = data;
-  const newLessonContent = [...fullLesson];
+  const { elementIndex, lessonId, fullLessonContent } = data;
+  const newLessonContent = [...fullLessonContent];
   newLessonContent.splice(elementIndex, 1);
   var updates = {};
   updates['/lessons/' + lessonId + '/content'] = newLessonContent;
   db.ref().update(updates);
-  console.log(newLessonContent);
   return {
     type: c.REMOVE_ELEMENT,
-    lessonId, elementIndex
+    lessonId,
+    elementIndex
   };
 };
 
