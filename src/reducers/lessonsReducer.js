@@ -6,10 +6,11 @@ const initialState = {}//mockLessons;
 const lessonsReducer = (state = initialState, action) => {
   const { type } = action;
   let newState;
+  let newLesson
   switch (type) {
     case c.UPDATE_TEXT:
       const { lessonId, sectionIndex, content } = action;
-      const newLesson = Object.assign({}, state[lessonId]);
+      newLesson = Object.assign({}, state[lessonId]);
       const newContent = [...state[lessonId].content];
       const newSection = Object.assign({}, state[lessonId].content[sectionIndex]);
       newSection.content = content;
@@ -30,6 +31,14 @@ const lessonsReducer = (state = initialState, action) => {
         segmentId: action.segmentId,
         content: [{ type: 'default' }]
       }
+      return newState;
+    case c.ADD_ELEMENT:
+      newState = { ...state };
+      newLesson = newState[action.lessonId];
+      newLesson.content = [...newLesson.content, action.newElement];
+      newState[action.lessonId] = newLesson;
+      console.log(newState);
+
       return newState;
     default:
       return state;
