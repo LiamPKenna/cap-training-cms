@@ -90,7 +90,7 @@ export const addSegment = async (segmentTitle = "New segment", courseId) => {
   };
 };
 
-export const newLesson = (lessonTitle = "New Lesson", courseId, segmentId) => {
+export const newLesson = (lessonTitle = "New Lesson", courseId, segmentId, index) => {
   const newLessonKey = db.ref().child('lessons').push().key;
   var updates = {};
   updates['/lessons/' + newLessonKey] = {
@@ -100,14 +100,22 @@ export const newLesson = (lessonTitle = "New Lesson", courseId, segmentId) => {
     segmentId,
     content: [{ type: 'default' }]
   };
+  updates['/courses/' + courseId + '/segments/' + segmentId + '/lessons/' + index] = {
+    title: lessonTitle,
+    lessonId: newLessonKey
+  };
   db.ref().update(updates);
-  return {
+  return [{
     type: c.ADD_LESSON,
     title: lessonTitle,
     lessonId: newLessonKey,
     courseId,
     segmentId
-  }
+  }, {
+    type: c.ADD_LESSON_TO_SEGMENT, title: lessonTitle,
+    lessonId: newLessonKey, courseId,
+    segmentId
+  }]
 };
 
 export const addLessonToSegment = (params) => {
