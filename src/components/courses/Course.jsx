@@ -56,7 +56,7 @@ const Course = props => {
                 value={newLessonText}
                 handleChange={e => setNewLessonText(e.target.value)}
                 handleSubmit={() =>
-                  handleNewLesson(segmentId, segments[segmentId].lessons.length)
+                  handleNewLesson(segmentId, segments[segmentId].lessons)
                 }
                 inputName="Lesson Name"
                 handleCancel={cancelLessonInput}
@@ -78,7 +78,7 @@ const Course = props => {
     props.dispatch(action);
   };
 
-  const handleNewLesson = async (segmentId, index) => {
+  const handleNewLesson = async (segmentId, oldLessons) => {
     setSegmentFocus(null);
     // const segmentAction = await addLessonToSegment(
     //   newLessonText,
@@ -90,7 +90,7 @@ const Course = props => {
       newLessonText,
       courseId,
       segmentId,
-      index
+      oldLessons
     );
     props.dispatch(lessonAction[1]);
     props.dispatch(lessonAction[0]);
