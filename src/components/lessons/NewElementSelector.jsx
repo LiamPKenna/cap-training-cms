@@ -27,6 +27,13 @@ const NewElementSelector = props => {
   const newElementStyle = {
     backgroundColor: "#f5f5f5"
   };
+  const radioStyle = {
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "10px 0"
+  };
   return (
     <Paper component="form">
       <div style={newElementStyle}>
@@ -42,36 +49,38 @@ const NewElementSelector = props => {
             onChange={handleChange}
             row
           >
-            <FormControlLabel
-              value="text"
-              control={<Radio color="primary" />}
-              label="Text"
-            />
-            <FormControlLabel
-              value="title"
-              control={<Radio color="primary" />}
-              label="Title"
-            />
-            <FormControlLabel
-              value="heading"
-              control={<Radio color="primary" />}
-              label="Heading"
-            />
-            <FormControlLabel
-              value="subHeading"
-              control={<Radio color="primary" />}
-              label="Sub Heading"
-            />
-            <FormControlLabel
-              value="code"
-              control={<Radio color="primary" />}
-              label="Code"
-            />
-            <FormControlLabel
-              value="picture"
-              control={<Radio color="primary" />}
-              label="Picture"
-            />
+            <div style={radioStyle}>
+              <FormControlLabel
+                value="text"
+                control={<Radio color="primary" />}
+                label="Text"
+              />
+              <FormControlLabel
+                value="title"
+                control={<Radio color="primary" />}
+                label="Title"
+              />
+              <FormControlLabel
+                value="heading"
+                control={<Radio color="primary" />}
+                label="Heading"
+              />
+              <FormControlLabel
+                value="subHeading"
+                control={<Radio color="primary" />}
+                label="Sub Heading"
+              />
+              <FormControlLabel
+                value="code"
+                control={<Radio color="primary" />}
+                label="Code"
+              />
+              {/* <FormControlLabel
+                value="picture"
+                control={<Radio color="primary" />}
+                label="Picture"
+              /> */}
+            </div>
           </RadioGroup>
         </div>
       </div>
