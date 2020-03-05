@@ -85,7 +85,7 @@ export const addSegment = async (segmentTitle = "New segment", courseId) => {
     type: c.ADD_SEGMENT,
     title: segmentTitle,
     courseId: courseId,
-    lessons: [{ lessonId: 1, title: "TestLesson" }],
+    lessons: [{ lessonId: 1, title: "default" }],
     segmentId: newSegmentKey
   };
 };
