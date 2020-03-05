@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import LessonInput from "./LessonInput";
 import EditButton from "./EditButton";
-import LessonTitle from "./LessonTitle";
-import LessonHeading from "./LessonHeading";
-import LessonSub from "./LessonSub";
-import LessonText from "./LessonText";
-import LessonCode from "./LessonCode";
+import LessonTitle from "./elements/LessonTitle";
+import LessonHeading from "./elements/LessonHeading";
+import LessonSub from "./elements/LessonSub";
+import LessonText from "./elements/LessonText";
+import LessonCode from "./elements/LessonCode";
 
 const LessonTextElement = props => {
   const admin = true;

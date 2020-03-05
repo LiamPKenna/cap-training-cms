@@ -1,6 +1,6 @@
 import React from "react";
 import LessonTextElement from "./LessonTextElement";
-import PictureBox from "./PictureBox";
+import PictureBox from "./elements/PictureBox";
 
 const makeElement = (element, index, lessonId) => {
   switch (element.type) {
