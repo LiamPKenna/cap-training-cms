@@ -11,12 +11,12 @@ const lessonsReducer = (state = initialState, action) => {
   let newSection;
   switch (type) {
     case c.UPDATE_TEXT:
-      let { lessonId, sectionIndex, content } = action;
+      let { lessonId, elementIndex, content } = action;
       newLesson = Object.assign({}, state[lessonId]);
       newContent = [...state[lessonId].content];
-      newSection = Object.assign({}, state[lessonId].content[sectionIndex]);
+      newSection = Object.assign({}, state[lessonId].content[elementIndex]);
       newSection.content = content;
-      newContent[sectionIndex] = newSection;
+      newContent[elementIndex] = newSection;
       newLesson.content = newContent;
       newState = Object.assign({}, state);
       newState[lessonId] = newLesson;
@@ -31,6 +31,7 @@ const lessonsReducer = (state = initialState, action) => {
         title: action.title,
         courseId: action.courseId,
         segmentId: action.segmentId,
+        lessonId: action.lessonId,
         content: [{ type: 'default' }]
       }
       return newState;

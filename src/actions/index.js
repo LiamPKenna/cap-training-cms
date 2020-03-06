@@ -42,11 +42,11 @@ export const receiveCourse = (courseFromFirebase) => {
 
 export const updateText = (data) => {
   var updates = {};
-  updates['/lessons/' + data.lessonId + '/content/' + data.sectionIndex + '/content'] = data.content;
+  updates['/lessons/' + data.lessonId + '/content/' + data.elementIndex + '/content'] = data.content;
   db.ref().update(updates);
   return {
     type: c.UPDATE_TEXT,
-    sectionIndex: data.sectionIndex,
+    elementIndex: data.elementIndex,
     content: data.content,
     lessonId: data.lessonId
   }
