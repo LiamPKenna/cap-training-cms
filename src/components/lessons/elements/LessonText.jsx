@@ -1,14 +1,17 @@
 import React from "react";
+import styled from "styled-components";
+
+const TextP = styled.p`
+  margin: 0.75rem 0;
+  font-size: 0.75rem;
+  font-family: roboto;
+`;
 
 const LessonText = params => {
-  const textStyle = {
-    fontSize: ".75rem",
-    fontFamily: "roboto"
-  };
   return (
     <div>
       <pre>
-        <p style={textStyle}>{params.content}</p>
+        <TextP>{params.content}</TextP>
       </pre>
     </div>
   );
