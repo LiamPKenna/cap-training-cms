@@ -1,4 +1,4 @@
-import mockBrand from '../mockData/mockBrand';
+import mockBrand from '../constants/mockData/mockBrand';
 
 const initialState = mockBrand;
 const brandReducer = (state = initialState, action) => {
