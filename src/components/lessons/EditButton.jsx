@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button";
 const EditButton = props => {
   const buttonStyle = {
     position: "absolute",
-    left: "0"
+    left: ".25rem"
   };
   return (
     <Button
