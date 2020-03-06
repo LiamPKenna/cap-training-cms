@@ -56,12 +56,11 @@ a:hover {
 }
 code,
 kbd,
-pre,
 samp {
   font-family: monospace, monospace;
 }
 pre {
-  font-size: 1em;
+  font-size: 1rem;
 }
 b,
 strong {
