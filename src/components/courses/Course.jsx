@@ -6,6 +6,11 @@ import Loading from "../Loading";
 import { addSegment, newLesson } from "../../actions";
 import NewItemButton from "./NewItemButton";
 import NewItemInput from "./NewItemInput";
+import {
+  PageWrapDiv,
+  NewItemDiv,
+  StyledListItem
+} from "./StyledCourseComponents";
 
 const Course = props => {
   const { courseId } = useParams();
@@ -21,12 +26,12 @@ const Course = props => {
       return lessons
         .filter(l => l.title !== "default")
         .map(lesson => (
-          <li key={lesson.lessonId}>
+          <StyledListItem key={lesson.lessonId}>
             <Link to={`/lessons/${lesson.lessonId}`}>{lesson.title}</Link>
-          </li>
+          </StyledListItem>
         ));
     } else {
-      return <li>No lessons yet</li>;
+      return <StyledListItem>No lessons yet</StyledListItem>;
     }
   };
 
@@ -40,31 +45,34 @@ const Course = props => {
       return Object.keys(segments)
         .filter(segmentId => segmentId !== "default")
         .map(segmentId => (
-          <li key={segmentId}>
+          <StyledListItem key={segmentId}>
             <h2>{segments[segmentId].title}</h2>
             <ul>{makeLessons(segments[segmentId].lessons)}</ul>
-            {!showLessonForm || segmentFocus !== segmentId ? (
-              <NewItemButton
-                clickHandler={() => showThisSegmentLessonInput(segmentId)}
-                title="New Lesson"
-              />
-            ) : (
-              ""
-            )}
-            {showLessonForm && segmentFocus === segmentId ? (
-              <NewItemInput
-                value={newLessonText}
-                handleChange={e => setNewLessonText(e.target.value)}
-                handleSubmit={() =>
-                  handleNewLesson(segmentId, segments[segmentId].lessons)
-                }
-                inputName="Lesson Name"
-                handleCancel={cancelLessonInput}
-              />
-            ) : (
-              ""
-            )}
-          </li>
+            <NewItemDiv>
+              {!showLessonForm || segmentFocus !== segmentId ? (
+                <NewItemButton
+                  text="NEW LESSON"
+                  clickHandler={() => showThisSegmentLessonInput(segmentId)}
+                  title="New Lesson"
+                />
+              ) : (
+                ""
+              )}
+              {showLessonForm && segmentFocus === segmentId ? (
+                <NewItemInput
+                  value={newLessonText}
+                  handleChange={e => setNewLessonText(e.target.value)}
+                  handleSubmit={() =>
+                    handleNewLesson(segmentId, segments[segmentId].lessons)
+                  }
+                  inputName="Lesson Name"
+                  handleCancel={cancelLessonInput}
+                />
+              ) : (
+                ""
+              )}
+            </NewItemDiv>
+          </StyledListItem>
         ));
     } else {
       return <li>No segments yet</li>;
@@ -112,31 +120,34 @@ const Course = props => {
     return <Loading />;
   } else {
     return (
-      <div>
+      <PageWrapDiv>
         <h1>{course.title}</h1>
         <div>
           <ul>{makeSegments(course.segments)}</ul>
-          {!showSegmentForm ? (
-            <NewItemButton
-              clickHandler={() => setShowSegmentForm(true)}
-              title="New Segment"
-            />
-          ) : (
-            ""
-          )}
-          {showSegmentForm ? (
-            <NewItemInput
-              value={newSegmentText}
-              handleChange={e => setNewSegmentText(e.target.value)}
-              handleSubmit={handleNewSegment}
-              inputName="Segment Name"
-              handleCancel={cancelSegmentInput}
-            />
-          ) : (
-            ""
-          )}
+          <NewItemDiv>
+            {!showSegmentForm ? (
+              <NewItemButton
+                text="NEW SEGMENT"
+                clickHandler={() => setShowSegmentForm(true)}
+                title="New Segment"
+              />
+            ) : (
+              ""
+            )}
+            {showSegmentForm ? (
+              <NewItemInput
+                value={newSegmentText}
+                handleChange={e => setNewSegmentText(e.target.value)}
+                handleSubmit={handleNewSegment}
+                inputName="Segment Name"
+                handleCancel={cancelSegmentInput}
+              />
+            ) : (
+              ""
+            )}
+          </NewItemDiv>
         </div>
-      </div>
+      </PageWrapDiv>
     );
   }
 };
