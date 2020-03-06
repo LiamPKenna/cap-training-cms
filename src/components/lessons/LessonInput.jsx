@@ -11,7 +11,7 @@ import FormatAlignCenterIcon from "@material-ui/icons/FormatAlignCenter";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
-import { updateText, deleteText } from "../../actions";
+import { updateText, deleteText, moveElement } from "../../actions";
 import styled from "styled-components";
 
 const InputDiv = styled.div`
@@ -60,6 +60,18 @@ const LessonInput = props => {
     props.toggleEdit();
   };
 
+  const handleMove = direction => {
+    props.dispatch(
+      moveElement({
+        elementIndex: props.elementIndex,
+        lessonId: props.lessonId,
+        fullLessonContent: props.fullLessonContent,
+        direction
+      })
+    );
+    props.toggleEdit();
+  };
+
   return (
     <InputDiv>
       <Paper component="form" onSubmit={handleSubmit}>
@@ -79,10 +91,10 @@ const LessonInput = props => {
             />
             <UpDownDiv>
               <div></div>
-              <Button>
+              <Button onClick={() => handleMove("up")}>
                 <ArrowUpwardIcon />
               </Button>
-              <Button>
+              <Button onClick={() => handleMove("down")}>
                 <ArrowDownwardIcon />
               </Button>
               <Button disabled={props.align === "left"}>
