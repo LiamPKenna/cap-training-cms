@@ -5,6 +5,37 @@ import Paper from "@material-ui/core/Paper";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import styled from "styled-components";
+
+const RadioDiv = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0;
+  width: 100%;
+`;
+
+const NewElementWrapperDiv = styled.div`
+  background-color: #f5f5f5;
+`;
+
+const InputLabelHeader = styled.h6`
+  margin: 0;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid lightgrey;
+`;
+
+const NewElementGrid = styled.div`
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  grid-column-gap: 15px;
+  min-height: 5rem;
+`;
+
+const NewElementPaper = styled(Paper)`
+  margin: 20px 0;
+`;
 
 const NewElementSelector = props => {
   const [value, setValue] = useState("text");
@@ -13,32 +44,11 @@ const NewElementSelector = props => {
     setValue(event.target.value);
   };
 
-  const divGridStyle = {
-    display: "grid",
-    gridTemplateColumns: "70px 1fr",
-    gridColumnGap: "15px"
-  };
-  const labelStyle = {
-    textAlign: "center",
-    margin: "0",
-    padding: "10px 0 10px 0",
-    borderBottom: "1px solid lightgrey"
-  };
-  const newElementStyle = {
-    backgroundColor: "#f5f5f5"
-  };
-  const radioStyle = {
-    display: "flex",
-    flexWrap: "wrap",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: "10px 0"
-  };
   return (
-    <Paper component="form">
-      <div style={newElementStyle}>
-        <h6 style={labelStyle}>ADD A NEW ELEMENT</h6>
-        <div style={divGridStyle}>
+    <NewElementPaper component="form">
+      <NewElementWrapperDiv>
+        <InputLabelHeader>ADD A NEW ELEMENT</InputLabelHeader>
+        <NewElementGrid>
           <Button color="primary" onClick={() => props.handleNewElement(value)}>
             <CheckCircleIcon />
           </Button>
@@ -49,7 +59,7 @@ const NewElementSelector = props => {
             onChange={handleChange}
             row
           >
-            <div style={radioStyle}>
+            <RadioDiv>
               <FormControlLabel
                 value="text"
                 control={<Radio color="primary" />}
@@ -80,11 +90,11 @@ const NewElementSelector = props => {
                 control={<Radio color="primary" />}
                 label="Picture"
               /> */}
-            </div>
+            </RadioDiv>
           </RadioGroup>
-        </div>
-      </div>
-    </Paper>
+        </NewElementGrid>
+      </NewElementWrapperDiv>
+    </NewElementPaper>
   );
 };
 
