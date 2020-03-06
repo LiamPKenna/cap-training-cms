@@ -1,30 +1,25 @@
 import React from "react";
 import EditIcon from "@material-ui/icons/Edit";
 import Button from "@material-ui/core/Button";
+import styled from "styled-components";
+
+const PencilDiv = styled.div`
+  margin: 0;
+  position: absolute;
+  left: 0.25rem;
+  opacity: 0;
+  :hover {
+    opacity: 1;
+  }
+`;
 
 const EditButton = props => {
-  const buttonStyle = {
-    position: "absolute",
-    left: ".25rem"
-  };
   return (
-    <Button
-      variant="contained"
-      color="primary"
-      style={buttonStyle}
-      className="edit-button"
-      onClick={props.handleClick}
-    >
-      <style>{`
-          .edit-button {
-            opacity: 0
-          }
-          .edit-button:hover {
-            opacity: 1
-          }
-      `}</style>
-      <EditIcon />
-    </Button>
+    <PencilDiv>
+      <Button variant="contained" color="primary" onClick={props.handleClick}>
+        <EditIcon fontSize="small" />
+      </Button>
+    </PencilDiv>
   );
 };
 
