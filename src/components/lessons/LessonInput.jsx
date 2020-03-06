@@ -26,7 +26,10 @@ const InputGridDiv = styled.div`
 
 const UpDownDiv = styled.div`
   display: grid;
-  grid-template-columns: 1fr 60px 60px 60px 60px 60px;
+  grid-template-columns: ${props =>
+    props.element === "code"
+      ? "1fr 60px 60px"
+      : "1fr 60px 60px 60px 60px 60px"};
 `;
 
 const InputLabelHeader = styled.h6`
@@ -89,7 +92,7 @@ const LessonInput = props => {
               fullWidth
               variant="filled"
             />
-            <UpDownDiv>
+            <UpDownDiv element={props.element}>
               <div></div>
               <Button onClick={() => handleMove("up")}>
                 <ArrowUpwardIcon />
@@ -97,15 +100,21 @@ const LessonInput = props => {
               <Button onClick={() => handleMove("down")}>
                 <ArrowDownwardIcon />
               </Button>
-              <Button disabled={props.align === "left"}>
-                <FormatAlignLeftIcon />
-              </Button>
-              <Button disabled={props.align === "center"}>
-                <FormatAlignCenterIcon />
-              </Button>
-              <Button disabled={props.align === "right"}>
-                <FormatAlignRightIcon />
-              </Button>
+              {props.element === "code" ? (
+                ""
+              ) : (
+                <>
+                  <Button disabled={props.align === "left"}>
+                    <FormatAlignLeftIcon />
+                  </Button>
+                  <Button disabled={props.align === "center"}>
+                    <FormatAlignCenterIcon />
+                  </Button>
+                  <Button disabled={props.align === "right"}>
+                    <FormatAlignRightIcon />
+                  </Button>
+                </>
+              )}
             </UpDownDiv>
           </div>
           <Button color="primary" onClick={props.toggleEdit}>
