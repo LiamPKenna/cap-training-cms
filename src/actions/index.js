@@ -155,6 +155,28 @@ export const deleteText = data => {
   };
 };
 
+export const moveElement = data => {
+  const { fullLessonContent, elementIndex, direction, lessonId } = data;
+  let newContent = [...fullLessonContent];
+  const before = newContent.slice(0, elementIndex);
+  const after = newContent.slice(elementIndex + 1);
+  const element = newContent[elementIndex];
+  let move;
+  if (direction === 'down') {
+    move = after.shift();
+    newContent = [...before, move, element, ...after];
+  } else {
+    move = before.pop();
+    newContent = [...before, element, move, ...after];
+  }
+  var updates = {};
+  updates['/lessons/' + lessonId + '/content'] = newContent;
+  db.ref().update(updates);
+  return {
+    type: c.MOVE_ELEMENT, elementIndex: elementIndex,
+    lessonId: lessonId, direction: direction
+  }
+}
 
 
 
