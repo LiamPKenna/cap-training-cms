@@ -1,17 +1,19 @@
 import React from "react";
+import styled from "styled-components";
+
+const CodeDiv = styled.div`
+  margin: 15px 0;
+  padding: 1rem 2rem;
+  background-color: lightgray;
+`;
 
 const LessonCode = params => {
-  const codeStyle = {
-    margin: "15px 0",
-    padding: "3px 20px",
-    backgroundColor: "lightgray"
-  };
   return (
-    <div style={codeStyle}>
+    <CodeDiv>
       <pre>
         <code>{params.content}</code>
       </pre>
-    </div>
+    </CodeDiv>
   );
 };
 
