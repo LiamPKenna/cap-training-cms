@@ -88,12 +88,6 @@ const Course = props => {
 
   const handleNewLesson = async (segmentId, oldLessons) => {
     setSegmentFocus(null);
-    // const segmentAction = await addLessonToSegment(
-    //   newLessonText,
-    //   courseId,
-    //   segmentId,
-    //   index
-    // );
     const lessonAction = await newLesson(
       newLessonText,
       courseId,
