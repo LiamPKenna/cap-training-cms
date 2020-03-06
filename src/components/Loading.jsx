@@ -1,14 +1,16 @@
 import React from "react";
+import styled from "styled-components";
+
+const LoadingDiv = styled.div`
+  padding-top: 6rem;
+  text-align: center;
+`;
 
 const Loading = () => {
-  const loadStyle = {
-    paddingTop: "6rem",
-    textAlign: "center"
-  };
   return (
-    <div style={loadStyle}>
+    <LoadingDiv>
       <h2>LOADING...</h2>
-    </div>
+    </LoadingDiv>
   );
 };
 
