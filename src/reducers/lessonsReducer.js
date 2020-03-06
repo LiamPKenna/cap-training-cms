@@ -53,24 +53,20 @@ const lessonsReducer = (state = initialState, action) => {
       newState = { ...state };
       newLesson = newState[action.lessonId];
       newContent = [...newLesson.content];
-      if (action.elementIndex === newContent.length - 1) {
-        return state;
+      const before = newContent.slice(0, action.elementIndex);
+      const after = newContent.slice(action.elementIndex + 1);
+      const element = newContent[action.elementIndex];
+      let move;
+      if (action.direction === 'down') {
+        move = after.shift();
+        newContent = [...before, move, element, ...after];
       } else {
-        const before = newContent.slice(0, action.elementIndex);
-        const after = newContent.slice(action.elementIndex);
-        const element = newContent[action.elementIndex];
-        let move;
-        if (action.direction === 'down') {
-          move = after.shift();
-          newContent = [...before, move, element, after];
-        } else {
-          move = before.pop();
-          newContent = [...before, element, move, after];
-        }
-        newLesson.content = newContent;
-        newState[action.lessonId] = newLesson;
-        return newState;
+        move = before.pop();
+        newContent = [...before, element, move, ...after];
       }
+      newLesson.content = newContent;
+      newState[action.lessonId] = newLesson;
+      return newState;
     default:
       return state;
   }
