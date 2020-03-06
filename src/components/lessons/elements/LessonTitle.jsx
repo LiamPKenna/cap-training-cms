@@ -1,12 +1,19 @@
 import React from "react";
+import styled from "styled-components";
 
-const LessonTitle = params => {
-  const { format, content } = params;
-  const titleStyle = {
-    margin: "2rem 0 0.5rem",
-    textAlign: format.align
-  };
-  return <h1 style={titleStyle}>{content}</h1>;
+const Title = styled.h1`
+  margin: 2rem 0 0.5rem;
+  text-align: ${props => props.format.align};
+`;
+
+const LessonTitle = props => {
+  const { format, content } = props;
+  const titleStyle = {};
+  return (
+    <Title format={format} style={titleStyle}>
+      {content}
+    </Title>
+  );
 };
 
 export default LessonTitle;
