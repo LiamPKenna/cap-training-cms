@@ -11,4 +11,5 @@ export const REMOVE_COURSE = 'REMOVE_COURSE';
 export const SHIFT_ELEMENT = 'SHIFT_ELEMENT';
 export const UPDATE_COURSE = 'UPDATE_COURSE';
 export const UPDATE_TEXT = 'UPDATE_TEXT';
+export const MOVE_ELEMENT = 'MOVE_ELEMENT';
 
