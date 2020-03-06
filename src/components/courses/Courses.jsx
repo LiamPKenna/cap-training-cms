@@ -5,6 +5,20 @@ import Loading from "../Loading";
 import { addCourse } from "../../actions";
 import NewItemButton from "./NewItemButton";
 import NewItemInput from "./NewItemInput";
+import styled from "styled-components";
+
+const CourseListItem = styled.li`
+  margin: 1rem 3rem 0.5rem;
+`;
+
+const CourseWrapDiv = styled.div`
+  margin-top: 2rem;
+`;
+
+const NewCourseDiv = styled.div`
+  text-align: center;
+  margin-top: 2rem;
+`;
 
 const Courses = props => {
   const [showForm, setShowForm] = useState(false);
@@ -29,46 +43,49 @@ const Courses = props => {
       return <Loading />;
     } else {
       return Object.keys(props.courses).map(courseId => (
-        <li key={courseId}>
+        <CourseListItem key={courseId}>
           <Link to={`/courses/${courseId}`}>
             <h2>{props.courses[courseId].title}</h2>
           </Link>
-        </li>
+        </CourseListItem>
       ));
     }
   };
 
   const makeAdminDiv = () => {
     return (
-      <div>
-        {!showForm ? (
-          <NewItemButton
-            clickHandler={showNewCourseForm}
-            title={"New Course"}
-          />
-        ) : (
-          ""
-        )}
-        {showForm ? (
-          <NewItemInput
-            value={newCourseText}
-            handleChange={e => setNewCourseText(e.target.value)}
-            handleSubmit={handleNewCourse}
-            inputName="Course Name"
-            handleCancel={cancelInput}
-          />
-        ) : (
-          ""
-        )}
-      </div>
+      <>
+        <NewCourseDiv>
+          {!showForm ? (
+            <NewItemButton
+              clickHandler={showNewCourseForm}
+              title={"New Course"}
+            />
+          ) : (
+            ""
+          )}
+          {showForm ? (
+            <NewItemInput
+              value={newCourseText}
+              handleChange={e => setNewCourseText(e.target.value)}
+              handleSubmit={handleNewCourse}
+              inputName="Course Name"
+              handleCancel={cancelInput}
+            />
+          ) : (
+            ""
+          )}
+        </NewCourseDiv>
+      </>
     );
   };
 
   return (
-    <div>
+    <CourseWrapDiv>
+      <h1>All Courses:</h1>
       <ul>{makeCourses()}</ul>
       {true ? makeAdminDiv() : ""}
-    </div>
+    </CourseWrapDiv>
   );
 };
 
