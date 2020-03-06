@@ -1,38 +1,37 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
-
 import MenuIcon from "@material-ui/icons/Menu";
 import NavDrawer from "./NavDrawer";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+
+const NavDiv = styled.div`
+  height: 75px;
+  object-fit: contain;
+  border: 1px solid rgb(175, 174, 174);
+  display: grid;
+  grid-template-columns: 1fr 100px;
+  width: 100%;
+`;
+
+const BrandImg = styled.img`
+  height: 50px;
+  margin: 10px;
+`;
+
+const BrandNameHeading = styled.img`
+  margin: 25px 10px;
+`;
 
 const NavBar = props => {
   const [drawer, setDrawer] = useState(false);
 
-  const navStyle = {
-    height: "75px",
-    objectFit: "contain",
-    border: "1px solid grey",
-    display: "grid",
-    gridTemplateColumns: "1fr 100px",
-    width: "100%"
-  };
-  const imgStyle = {
-    height: "50px",
-    margin: "10px"
-  };
-  const h2Style = {
-    margin: "25px 10px"
-  };
   const makeHero = () => {
     return props.brand.logo ? (
-      <img
-        style={imgStyle}
-        src={props.brand.logo}
-        alt={`${props.brand.name} logo`}
-      />
+      <BrandImg src={props.brand.logo} alt={`${props.brand.name} logo`} />
     ) : (
-      <h2 style={h2Style}>{props.brand.name}</h2>
+      <BrandNameHeading>{props.brand.name}</BrandNameHeading>
     );
   };
 
@@ -48,12 +47,12 @@ const NavBar = props => {
 
   return (
     <>
-      <div style={navStyle} className="nav-bar">
+      <NavDiv className="nav-bar">
         <Link to="/">{makeHero()}</Link>
         <Button onClick={toggleDrawer("right", true)}>
           <MenuIcon />
         </Button>
-      </div>
+      </NavDiv>
       <NavDrawer drawer={drawer} setDrawer={setDrawer} links={props.links} />
     </>
   );
