@@ -48,7 +48,7 @@ const NavBar = props => {
 
   return (
     <div>
-      <div style={navStyle}>
+      <div style={navStyle} className="nav-bar">
         <Link to="/">{makeHero()}</Link>
         <Button onClick={toggleDrawer("right", true)}>
           <MenuIcon />
