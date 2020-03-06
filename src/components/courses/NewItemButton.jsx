@@ -1,20 +1,17 @@
 import React from "react";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-import styled from "styled-components";
-
-const PlusButton = styled.button`
-  border-radius: 50%;
-  border: none;
-  background-color: rgba(0, 0, 0, 0);
-  color: grey;
-  margin: 0.25rem;
-`;
+import Button from "@material-ui/core/Button";
 
 const NewItemButton = props => {
   return (
-    <PlusButton onClick={props.clickHandler} title={props.title}>
-      <AddCircleIcon fontSize={"large"} />
-    </PlusButton>
+    <Button
+      variant="contained"
+      color="primary"
+      onClick={props.clickHandler}
+      title={props.title}
+    >
+      {props.text ? props.text : <AddCircleIcon fontSize={"large"} />}
+    </Button>
   );
 };
 
