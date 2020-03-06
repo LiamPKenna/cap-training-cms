@@ -30,9 +30,9 @@ const UpDownDiv = styled.div`
 `;
 
 const InputLabelHeader = styled.h6`
+  text-align: center;
   margin: 0;
   padding: 1rem 1.25rem;
-  border-bottom: 1px solid lightgrey;
 `;
 
 const LessonInput = props => {
