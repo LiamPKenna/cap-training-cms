@@ -1,9 +1,10 @@
 import constants from './constants';
 import firebase from 'firebase';
+import firebaseui from 'firebaseui';
 const { firebaseConfig } = constants;
 
 firebase.initializeApp(firebaseConfig);
 
-const db = firebase.database();
+export const db = firebase.database();
 
-export default db;
+export const ui = new firebaseui.auth.AuthUI(firebase.auth());
