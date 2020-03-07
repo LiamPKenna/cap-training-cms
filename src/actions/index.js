@@ -1,16 +1,11 @@
 import constants from './../constants';
-import firebase from 'firebase';
-const { firebaseConfig, c } = constants;
+import { db } from '../firebase';
+const { c } = constants;
 
-firebase.initializeApp(firebaseConfig);
-
-const db = firebase.database();
-const lessonsTable = db.ref('/lessons');
-const coursesTable = db.ref('/courses');
 
 export function watchFirebaseLessonsRef() {
   return (dispatch) => {
-    lessonsTable.on('child_added', data => {
+    db.ref('/lessons').on('child_added', data => {
       const newLesson = Object.assign({}, data.val());
       dispatch(receiveLesson(newLesson));
     });
@@ -26,7 +21,7 @@ export const receiveLesson = (lessonFromFirebase) => {
 
 export function watchFirebaseCoursesRef() {
   return (dispatch) => {
-    coursesTable.on('child_added', data => {
+    db.ref('/courses').on('child_added', data => {
       const newCourse = Object.assign({}, data.val());
       dispatch(receiveCourse(newCourse));
     });
