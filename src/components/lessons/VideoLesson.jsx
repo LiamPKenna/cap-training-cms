@@ -30,7 +30,6 @@ const VideoLesson = props => {
   };
   return lesson ? (
     <div>
-      <VideoUpload />
       {makePage(lesson.content, lessonId)}
       {true ? <NewElementSelector handleNewElement={addNewElement} /> : ""}
     </div>
