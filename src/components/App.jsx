@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Lesson from "./lessons/Lesson";
+import VideoLesson from "./lessons/VideoLesson";
 import Courses from "./courses/Courses";
 import Course from "./courses/Course";
 import NavBar from "./nav/NavBar";
@@ -35,6 +36,9 @@ function App(props) {
             </Route>
             <Route path="/lessons/:lessonId">
               <Lesson />
+            </Route>
+            <Route path="/video_lessons/:lessonId">
+              <VideoLesson />
             </Route>
           </Switch>
         </Container>
