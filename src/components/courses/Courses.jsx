@@ -10,6 +10,7 @@ import {
   PageWrapDiv,
   NewItemDiv
 } from "./StyledCourseComponents";
+import VideoUpload from "../videoLessons/VideoUpload";
 
 const Courses = props => {
   const [showForm, setShowForm] = useState(false);
@@ -76,6 +77,7 @@ const Courses = props => {
       <h1>All Courses:</h1>
       <ul>{makeCourses()}</ul>
       {true ? makeAdminDiv() : ""}
+      <VideoUpload />
     </PageWrapDiv>
   );
 };
