@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
-import { storage } from "../../firebase";
+import { storage } from "../../../firebase";
 
 const VideoInputDiv = styled.div`
   display: flex;
