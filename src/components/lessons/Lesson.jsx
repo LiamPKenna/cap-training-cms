@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import Loading from "../Loading";
 import NewElementSelector from "./NewElementSelector";
-import { createElement } from "../../actions";
+import { createElement, addVideo, addPicture } from "../../actions";
 import VideoBlock from "./videoElements/VideoBlock";
 
 const makePage = (lesson, lessonId) =>
@@ -14,17 +14,22 @@ const Lesson = props => {
   const { lessonId } = useParams();
   const lesson = props.lessons[lessonId];
   const addNewElement = newElementType => {
-    props.dispatch(
-      createElement(newElementType, lesson.content, lesson.lessonId)
-    );
+    if (newElementType === "video") {
+      props.dispatch(addVideo(lesson.lessonId));
+    } else if (newElementType === "picture") {
+      props.dispatch(
+        addPicture({ lessonId: lesson.lessonId, allContent: lesson.content })
+      );
+    } else {
+      props.dispatch(
+        createElement(newElementType, lesson.content, lesson.lessonId)
+      );
+    }
   };
   return lesson ? (
     <div>
-      {true ? (
-        <VideoBlock
-          src={"https://www.youtube-nocookie.com/embed/JQjroW6J4mw"}
-          title={"test"}
-        />
+      {lesson.video ? (
+        <VideoBlock src={lesson.video.src} title={lesson.video.title} />
       ) : (
         ""
       )}
