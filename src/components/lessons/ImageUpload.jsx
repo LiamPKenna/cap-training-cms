@@ -1,33 +1,57 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
-import { storage } from "../../../firebase";
+import TextField from "@material-ui/core/TextField";
+import { storage } from "../../firebase";
+import { useDispatch } from "react-redux";
+import { addPicture } from "../../actions";
 
 const ImageInputDiv = styled.div`
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  max-width: 25rem;
+  background: linear-gradient(
+    90deg,
+    rgba(40, 40, 40, 1) ${props => props.uploadProgress - 1}%,
+    rgba(0, 0, 0, 0) ${props => props.uploadProgress}%,
+    rgba(113, 113, 113, 0) 100%
+  );
 `;
 
-const ImageUpload = () => {
+const StyledInput = styled.input`
+  width: 100%;
+  display: none;
+`;
+
+const SelectedDiv = styled.div`
+  text-align: center;
+  width: 100%;
+`;
+
+const ImageUpload = props => {
   const [image, setImage] = useState(null);
+  const [altText, setAltText] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const dispatch = useDispatch();
 
   const handleChange = e => {
     if (e.target.files[0]) {
       setImage(e.target.files[0]);
+      setTimeout(() => {
+        console.log(image);
+        if (image) setAltText(image.name);
+      }, 1000);
     }
   };
 
-  const handleUpload = () => {
+  const handleUpload = e => {
+    e.preventDefault();
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
-    console.log(uploadTask);
-
     uploadTask.on(
       "state_changed",
       snap => {
-        console.log(
-          `${Math.floor((snap.bytesTransferred / snap.totalBytes) * 100)}%`
+        setUploadProgress(
+          Math.floor((snap.bytesTransferred / snap.totalBytes) * 100)
         );
       },
       error => console.log(error),
@@ -36,17 +60,52 @@ const ImageUpload = () => {
           .ref("images")
           .child(image.name)
           .getDownloadURL()
-          .then(url => console.log(url));
+          .then(url => {
+            console.log(url);
+            setImageUrl(url);
+            setUploadProgress(0);
+            dispatch(addPicture({ url: imageUrl, alt: altText }));
+          });
       }
     );
   };
 
   return (
-    <ImageInputDiv>
-      <input type="file" onChange={handleChange} />
-      <Button color="primary" variant="contained" onClick={handleUpload}>
-        Upload
-      </Button>
+    <ImageInputDiv uploadProgress={uploadProgress}>
+      <form onSubmit={handleUpload}>
+        <StyledInput
+          type="file"
+          onChange={handleChange}
+          id="upload"
+          accept="image/*"
+        />
+        <label htmlFor="upload">
+          <Button
+            variant="contained"
+            color="primary"
+            component="span"
+            fullWidth
+          >
+            Select Image
+          </Button>
+        </label>
+        {image ? (
+          <SelectedDiv>{`Image selected: ${image.name}`}</SelectedDiv>
+        ) : (
+          ""
+        )}
+        <TextField
+          required
+          label="Alt Text"
+          value={altText}
+          onChange={e => setAltText(e.target.value)}
+          fullWidth
+          variant="filled"
+        />
+        <Button variant="contained" color="primary" fullWidth type="submit">
+          Upload
+        </Button>
+      </form>
     </ImageInputDiv>
   );
 };
