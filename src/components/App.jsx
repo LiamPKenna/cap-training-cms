@@ -10,6 +10,8 @@ import { watchFirebaseLessonsRef, watchFirebaseCoursesRef } from "../actions";
 import { useDispatch } from "react-redux";
 import SignIn from "./SignIn";
 import { auth } from "../firebase";
+import constants from "../constants";
+const { c } = constants;
 
 function App(props) {
   const dispatch = useDispatch();
@@ -19,12 +21,12 @@ function App(props) {
     if (user) {
       setCurrentUser(user);
       dispatch({
-        type: "SET_ADMIN",
+        type: c.SET_ADMIN,
         admin: user.email === "liam@liamkenna.com"
       });
     } else {
       setCurrentUser(null);
-      dispatch({ type: "SET_ADMIN", admin: false });
+      dispatch({ type: c.SET_ADMIN, admin: false });
     }
   });
   useEffect(() => {
