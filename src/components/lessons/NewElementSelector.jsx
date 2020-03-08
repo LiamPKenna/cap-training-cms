@@ -85,11 +85,16 @@ const NewElementSelector = props => {
                 control={<Radio color="primary" />}
                 label="Code"
               />
-              {/* <FormControlLabel
+              <FormControlLabel
                 value="picture"
                 control={<Radio color="primary" />}
                 label="Picture"
-              /> */}
+              />
+              <FormControlLabel
+                value="video"
+                control={<Radio color="primary" />}
+                label="Video"
+              />
             </RadioDiv>
           </RadioGroup>
         </NewElementGrid>
