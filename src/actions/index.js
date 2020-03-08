@@ -5,8 +5,8 @@ const { c } = constants;
 
 export function watchFirebaseLessonsRef() {
   return (dispatch) => {
-    db.ref('/lessons').on('child_added', data => {
-      const newLesson = Object.assign({}, data.val());
+    db.ref('/lessons').on('child_added', params => {
+      const newLesson = Object.assign({}, params.val());
       dispatch(receiveLesson(newLesson));
     });
   };
@@ -21,8 +21,8 @@ export const receiveLesson = (lessonFromFirebase) => {
 
 export function watchFirebaseCoursesRef() {
   return (dispatch) => {
-    db.ref('/courses').on('child_added', data => {
-      const newCourse = Object.assign({}, data.val());
+    db.ref('/courses').on('child_added', params => {
+      const newCourse = Object.assign({}, params.val());
       dispatch(receiveCourse(newCourse));
     });
   };
@@ -39,15 +39,15 @@ export const signOut = () => {
   auth.signOut();
 }
 
-export const updateText = (data) => {
+export const updateText = (params) => {
   var updates = {};
-  updates['/lessons/' + data.lessonId + '/content/' + data.elementIndex + '/content'] = data.content;
+  updates['/lessons/' + params.lessonId + '/content/' + params.elementIndex + '/content'] = params.content;
   db.ref().update(updates);
   return {
     type: c.UPDATE_TEXT,
-    elementIndex: data.elementIndex,
-    content: data.content,
-    lessonId: data.lessonId
+    elementIndex: params.elementIndex,
+    content: params.content,
+    lessonId: params.lessonId
   }
 };
 
@@ -154,7 +154,14 @@ export const addVideo = lessonId => {
 }
 
 export const updateVideo = (params) => {
-  console.log(params);
+  const { url, title, lessonId } = params;
+  var updates = {};
+  updates['/lessons/' + lessonId + '/video'] = {
+    src: url,
+    title
+  };
+  db.ref().update(updates);
+  return { type: c.UPDATE_VIDEO, src: url, title, lessonId };
 }
 
 export const deleteVideo = lessonId => {
@@ -167,13 +174,13 @@ export const deleteVideo = lessonId => {
   }
 }
 
-export const addPicture = data => {
-  console.log(data);
+export const addPicture = params => {
+  console.log(params);
   return { type: 'none' };
 }
 
-export const deleteText = data => {
-  const { elementIndex, lessonId, fullLessonContent } = data;
+export const deleteText = params => {
+  const { elementIndex, lessonId, fullLessonContent } = params;
   const newLessonContent = [...fullLessonContent];
   newLessonContent.splice(elementIndex, 1);
   var updates = {};
@@ -186,8 +193,8 @@ export const deleteText = data => {
   };
 };
 
-export const moveElement = data => {
-  const { fullLessonContent, elementIndex, direction, lessonId } = data;
+export const moveElement = params => {
+  const { fullLessonContent, elementIndex, direction, lessonId } = params;
   let newContent = [...fullLessonContent];
   const before = newContent.slice(0, elementIndex);
   const after = newContent.slice(elementIndex + 1);
