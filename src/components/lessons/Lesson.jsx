@@ -29,12 +29,21 @@ const Lesson = props => {
   return lesson ? (
     <div>
       {lesson.video ? (
-        <VideoBlock src={lesson.video.src} title={lesson.video.title} />
+        <VideoBlock
+          src={lesson.video.src}
+          title={lesson.video.title}
+          lessonId={lesson.lessonId}
+          admin={props.admin}
+        />
       ) : (
         ""
       )}
       {makePage(lesson.content, lessonId)}
-      {true ? <NewElementSelector handleNewElement={addNewElement} /> : ""}
+      {props.admin ? (
+        <NewElementSelector handleNewElement={addNewElement} />
+      ) : (
+        ""
+      )}
     </div>
   ) : (
     <Loading />
@@ -43,7 +52,8 @@ const Lesson = props => {
 
 const mapStateToProps = state => {
   return {
-    lessons: state.lessons
+    lessons: state.lessons,
+    admin: state.users.admin
   };
 };
 
