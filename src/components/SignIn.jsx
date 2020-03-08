@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { auth } from "../firebase";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -21,10 +21,6 @@ const SignIn = () => {
     });
     history.push("/");
   };
-
-  useEffect(() => {
-    auth.signOut();
-  });
 
   const handleSignUp = () => {
     auth.createUserWithEmailAndPassword(email, password).catch(function(error) {

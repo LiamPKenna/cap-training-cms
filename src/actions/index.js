@@ -1,5 +1,5 @@
 import constants from './../constants';
-import { db } from '../firebase';
+import { db, auth } from '../firebase';
 const { c } = constants;
 
 
@@ -33,6 +33,10 @@ export const receiveCourse = (courseFromFirebase) => {
     type: c.RECEIVE_COURSE,
     course: courseFromFirebase
   };
+}
+
+export const signOut = () => {
+  auth.signOut();
 }
 
 export const updateText = (data) => {
@@ -147,6 +151,10 @@ export const addVideo = lessonId => {
     type: c.ADD_VIDEO,
     lessonId
   }
+}
+
+export const updateVideo = (params) => {
+  console.log(params);
 }
 
 export const deleteVideo = lessonId => {

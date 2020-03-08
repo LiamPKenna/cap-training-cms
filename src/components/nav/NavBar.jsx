@@ -5,6 +5,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import NavDrawer from "./NavDrawer";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { signOut } from "../../actions";
 
 const NavDiv = styled.div`
   height: 75px;
@@ -59,7 +60,9 @@ const NavBar = props => {
             <>
               {props.user.email}
               <br />
-              <Link to="/signin">Sign Out</Link>
+              <Link to="/signin" onClick={signOut}>
+                Sign Out
+              </Link>
             </>
           ) : (
             ""
