@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import NewVideoForm from "./NewVideoForm";
 
 const VideoDiv = styled.div`
   padding: 3%;
@@ -26,16 +27,27 @@ const VideoFrame = styled.iframe`
 const VideoBlock = props => {
   return (
     <VideoDiv>
-      <VideoWrapDiv>
-        <VideoFrame
-          src={props.src}
-          frameBorder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen={true}
-          sandbox="allow-forms allow-scripts allow-pointer-lock allow-same-origin allow-top-navigation allow-presentation"
-          title={props.title}
-        ></VideoFrame>
-      </VideoWrapDiv>
+      {props.src ? (
+        <VideoWrapDiv>
+          <VideoFrame
+            src={props.src}
+            frameBorder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen={true}
+            sandbox="allow-forms allow-scripts allow-pointer-lock allow-same-origin allow-top-navigation allow-presentation"
+            title={props.title}
+          ></VideoFrame>
+        </VideoWrapDiv>
+      ) : (
+        <NewVideoForm />
+      )}
+
+      {/* <VideoFrame
+          src="https://player.vimeo.com/video/396208451"
+          frameborder="0"
+          allow="autoplay; fullscreen"
+          allowfullscreen
+        ></VideoFrame> */}
     </VideoDiv>
   );
 };
