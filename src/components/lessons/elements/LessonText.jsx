@@ -8,11 +8,14 @@ const TextP = styled.p`
 `;
 
 const LessonText = params => {
+  const formatText = text => {
+    return text.split("\n");
+  };
   return (
     <div>
-      <pre>
-        <TextP>{params.content}</TextP>
-      </pre>
+      {formatText(params.content).map((c, i) => (
+        <TextP key={i}>{c}</TextP>
+      ))}
     </div>
   );
 };
