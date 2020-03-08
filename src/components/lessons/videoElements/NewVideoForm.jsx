@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -13,14 +13,22 @@ const MainGridDiv = styled.div`
 `;
 
 const NewVideoForm = props => {
+  const [url, setUrl] = useState("");
+  const [title, setTitle] = useState("");
+
   const submitHandler = e => {
     e.preventDefault();
-    props.handleSubmit();
+    props.handleSubmit({ url, title });
   };
 
   const handleDelete = () => {
-    console.log("delete");
+    props.handleDelete();
   };
+
+  useEffect(() => {
+    if (props.src) setUrl(props.src);
+    if (props.title) setTitle(props.title);
+  }, [props.src, props.title]);
   return (
     <Paper component="form" onSubmit={submitHandler}>
       <MainGridDiv>
@@ -31,16 +39,16 @@ const NewVideoForm = props => {
           <TextField
             required
             label="Video URL"
-            value={props.value}
-            onChange={props.handleChange}
+            value={url}
+            onChange={e => setUrl(e.target.value)}
             fullWidth
             variant="filled"
           />
           <TextField
             required
             label="Video Title"
-            value={props.value}
-            onChange={props.handleChange}
+            value={title}
+            onChange={e => setTitle(e.target.value)}
             fullWidth
             variant="filled"
           />
