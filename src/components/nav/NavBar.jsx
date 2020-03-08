@@ -5,25 +5,19 @@ import MenuIcon from "@material-ui/icons/Menu";
 import NavDrawer from "./NavDrawer";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { signOut } from "../../actions";
 
 const NavDiv = styled.div`
   height: 75px;
   object-fit: contain;
   border: 1px solid rgb(175, 174, 174);
   display: grid;
-  grid-template-columns: 1fr 200px 100px;
+  grid-template-columns: 1fr 100px;
   width: 100%;
 `;
 
 const BrandImg = styled.img`
   height: 50px;
   margin: 10px;
-`;
-
-const UserEmailDiv = styled.div`
-  text-align: right;
-  padding-top: 1rem;
 `;
 
 const BrandNameHeading = styled.img`
@@ -55,24 +49,16 @@ const NavBar = props => {
     <>
       <NavDiv className="nav-bar">
         <Link to="/">{makeHero()}</Link>
-        <UserEmailDiv>
-          {props.user ? (
-            <>
-              {props.user.email}
-              <br />
-              <Link to="/signin" onClick={signOut}>
-                Sign Out
-              </Link>
-            </>
-          ) : (
-            ""
-          )}
-        </UserEmailDiv>
         <Button onClick={toggleDrawer("right", true)}>
           <MenuIcon />
         </Button>
       </NavDiv>
-      <NavDrawer drawer={drawer} setDrawer={setDrawer} links={props.links} />
+      <NavDrawer
+        drawer={drawer}
+        setDrawer={setDrawer}
+        links={props.links}
+        user={props.user}
+      />
     </>
   );
 };

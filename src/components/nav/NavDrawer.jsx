@@ -5,6 +5,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { Link } from "react-router-dom";
 import links from "../../constants/links";
+import { signOut } from "../../actions";
 
 const NavDrawer = props => {
   const drawerStyle = {
@@ -36,6 +37,20 @@ const NavDrawer = props => {
         onClick={() => props.setDrawer(false)}
       >
         <List style={drawerListStyle}>
+          {props.user ? (
+            <>
+              <ListItem button key="signout">
+                <ListItemText primary={props.user.email} />
+              </ListItem>
+              <ListItem button key="signout" onClick={signOut}>
+                <Link to="/signin" style={linkStyle}>
+                  <ListItemText primary="Sign Out" />
+                </Link>
+              </ListItem>
+            </>
+          ) : (
+            ""
+          )}
           {links.map((link, index) => (
             <ListItem button key={index}>
               <Link to={link.path} style={linkStyle}>
