@@ -69,6 +69,19 @@ const lessonsReducer = (state = initialState, action) => {
       };
       newState[action.lessonId] = newLesson;
       return newState;
+    case c.UPDATE_VIDEO:
+      newLesson = newState[action.lessonId];
+      newLesson.video = {
+        src: action.src,
+        title: action.title
+      };
+      newState[action.lessonId] = newLesson;
+      return newState;
+    case c.REMOVE_VIDEO:
+      newLesson = newState[action.lessonId];
+      newLesson.video = null;
+      newState[action.lessonId] = newLesson;
+      return newState;
     default:
       return state;
   }
