@@ -5,7 +5,7 @@ const c = constants.c;
 const initialState = {}//mockLessons;
 const lessonsReducer = (state = initialState, action) => {
   const { type } = action;
-  let newState;
+  const newState = { ...state };
   let newLesson;
   let newContent;
   let newSection;
@@ -18,15 +18,12 @@ const lessonsReducer = (state = initialState, action) => {
       newSection.content = content;
       newContent[elementIndex] = newSection;
       newLesson.content = newContent;
-      newState = Object.assign({}, state);
       newState[lessonId] = newLesson;
       return newState;
     case c.RECEIVE_LESSON:
-      newState = Object.assign({}, state);
       newState[action.lesson.lessonId] = action.lesson;
       return newState;
     case c.ADD_LESSON:
-      newState = { ...state };
       newState[action.lessonId] = {
         title: action.title,
         courseId: action.courseId,
@@ -36,13 +33,11 @@ const lessonsReducer = (state = initialState, action) => {
       }
       return newState;
     case c.ADD_ELEMENT:
-      newState = { ...state };
       newLesson = newState[action.lessonId];
       newLesson.content = [...newLesson.content, action.newElement];
       newState[action.lessonId] = newLesson;
       return newState;
     case c.REMOVE_ELEMENT:
-      newState = { ...state };
       newLesson = newState[action.lessonId];
       newContent = [...newLesson.content];
       newContent.splice(action.elementIndex, 1);
@@ -50,7 +45,6 @@ const lessonsReducer = (state = initialState, action) => {
       newState[action.lessonId] = newLesson;
       return newState;
     case c.MOVE_ELEMENT:
-      newState = { ...state };
       newLesson = newState[action.lessonId];
       newContent = [...newLesson.content];
       const before = newContent.slice(0, action.elementIndex);
@@ -65,6 +59,14 @@ const lessonsReducer = (state = initialState, action) => {
         newContent = [...before, element, move, ...after];
       }
       newLesson.content = newContent;
+      newState[action.lessonId] = newLesson;
+      return newState;
+    case c.ADD_VIDEO:
+      newLesson = newState[action.lessonId];
+      newLesson.video = {
+        src: false,
+        title: false
+      };
       newState[action.lessonId] = newLesson;
       return newState;
     default:
