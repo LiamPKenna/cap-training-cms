@@ -136,6 +136,34 @@ export const createElement = (type, oldContent, lessonId) => {
   }
 }
 
+export const addVideo = lessonId => {
+  var updates = {};
+  updates['/lessons/' + lessonId + '/video'] = {
+    src: false,
+    title: false
+  };
+  db.ref().update(updates);
+  return {
+    type: c.ADD_VIDEO,
+    lessonId
+  }
+}
+
+export const deleteVideo = lessonId => {
+  var updates = {};
+  updates['/lessons/' + lessonId + '/video'] = {};
+  db.ref().update(updates);
+  return {
+    type: c.REMOVE_VIDEO,
+    lessonId
+  }
+}
+
+export const addPicture = data => {
+  console.log(data);
+  return { type: 'none' };
+}
+
 export const deleteText = data => {
   const { elementIndex, lessonId, fullLessonContent } = data;
   const newLessonContent = [...fullLessonContent];
