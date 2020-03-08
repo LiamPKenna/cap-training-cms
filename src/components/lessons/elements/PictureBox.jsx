@@ -1,53 +1,56 @@
 import React from "react";
+import styled from "styled-components";
+
+const MultiPicDiv = styled.div`
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  @media (min-width: 800px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 15px;
+  }
+  @media (min-width: 1150px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+`;
+
+const SinglePicDiv = styled.div`
+  display: block;
+  width: 100%;
+  overflow: hidden;
+`;
+
+const HeroImage = styled.img`
+  margin: 20px 0;
+  width: 100%;
+`;
+
+const GroupImage = styled.img`
+  margin: 15px auto;
+  min-width: 200px;
+  max-width: 100%;
+  align-self: center;
+`;
 
 const PictureBox = props => {
-  const pictureBoxStyles = {
-    width: "100%",
-    overflow: "hidden"
-  };
-  const imgStyles = {
-    1: {
-      margin: "20px 0",
-      width: "100%"
-    },
-    2: {
-      margin: "15px auto",
-      minWidth: "200px",
-      maxWidth: "100%",
-      alignSelf: "center"
-    }
-  };
   const makePics = pics => {
-    return pics.map((pic, index) => (
-      <img
-        style={imgStyles[props.mode]}
-        src={pic.src}
-        alt={pic.alt}
-        key={index}
-      />
-    ));
+    return pics.map((pic, index) =>
+      props.mode === 1 ? (
+        <HeroImage src={pic.src} alt={pic.alt} key={index} />
+      ) : (
+        <GroupImage src={pic.src} alt={pic.alt} key={index} />
+      )
+    );
   };
   return (
-    <div className={`picture-box-${props.mode}`} style={pictureBoxStyles}>
-      <style>{`
-        .picture-box-2 {
-          display: block;
-        }
-        @media (min-width: 800px) {
-          .picture-box-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-column-gap: 15px;
-          }
-        }
-        @media (min-width: 1150px) {
-          .picture-box-2 {
-            grid-template-columns: 1fr 1fr 1fr;
-          }
-        }
-      `}</style>
-      {makePics(props.pictures)}
-    </div>
+    <>
+      {props.mode === 1 ? (
+        <SinglePicDiv>{makePics(props.pictures)}</SinglePicDiv>
+      ) : (
+        <MultiPicDiv>{makePics(props.pictures)}</MultiPicDiv>
+      )}
+    </>
   );
 };
 
