@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { auth } from "../firebase";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import { useHistory } from "react-router-dom";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const history = useHistory();
   const handleSignIn = e => {
     e.preventDefault();
     auth.signInWithEmailAndPassword(email, password).catch(function(error) {
@@ -17,6 +19,7 @@ const SignIn = () => {
 
       // ...
     });
+    history.push("/");
   };
 
   useEffect(() => {
