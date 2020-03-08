@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import NewVideoForm from "./NewVideoForm";
+import { updateVideo, deleteVideo } from "../../../actions";
+import { useDispatch } from "react-redux";
+import EditButton from "../EditButton";
 
 const VideoDiv = styled.div`
   padding: 3%;
@@ -25,21 +28,48 @@ const VideoFrame = styled.iframe`
 `;
 
 const VideoBlock = props => {
+  const dispatch = useDispatch();
+  const { lessonId, src, title } = props;
+  const [showForm, setShowForm] = useState(false);
+
+  const addUrlAndTitle = input => {
+    toggleEdit();
+    const { url, title } = input;
+    dispatch(updateVideo({ url, title, lessonId }));
+  };
+
+  const removeVideo = () => {
+    toggleEdit();
+    dispatch(deleteVideo(lessonId));
+  };
+
+  const toggleEdit = () => {
+    setShowForm(!showForm);
+  };
+
   return (
     <VideoDiv>
-      {props.src ? (
-        <VideoWrapDiv>
-          <VideoFrame
-            src={props.src}
-            frameBorder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen={true}
-            sandbox="allow-forms allow-scripts allow-pointer-lock allow-same-origin allow-top-navigation allow-presentation"
-            title={props.title}
-          ></VideoFrame>
-        </VideoWrapDiv>
+      {src && !showForm ? (
+        <>
+          {props.admin ? <EditButton handleClick={toggleEdit} /> : ""}
+          <VideoWrapDiv>
+            <VideoFrame
+              src={src}
+              frameBorder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen={true}
+              sandbox="allow-forms allow-scripts allow-pointer-lock allow-same-origin allow-top-navigation allow-presentation"
+              title={title}
+            ></VideoFrame>
+          </VideoWrapDiv>
+        </>
       ) : (
-        <NewVideoForm />
+        <NewVideoForm
+          handleSubmit={addUrlAndTitle}
+          handleDelete={removeVideo}
+          src={src}
+          title={title}
+        />
       )}
 
       {/* <VideoFrame
