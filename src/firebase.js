@@ -9,12 +9,15 @@ firebase.initializeApp(firebaseConfig);
 
 export const db = firebase.database();
 
-export const ui = firebase.auth();
+export const auth = firebase.auth();
 
 export const uiConfig = {
   signInFlow: "popup",
   signInSuccessUrl: "/courses",
-  signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID]
+  signInOptions: [{
+    provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+    requireDisplayName: false
+  }]
 };
 
 export const storage = firebase.storage()
