@@ -6,6 +6,7 @@ import Loading from "../Loading";
 import NewElementSelector from "./NewElementSelector";
 import { createElement, addVideo, addPicture } from "../../actions";
 import VideoBlock from "./videoElements/VideoBlock";
+import ImageUpload from "./ImageUpload";
 
 const makePage = (lesson, lessonId) =>
   lesson.map((e, i) => makeElement(e, i, lessonId, lesson));
@@ -44,6 +45,7 @@ const Lesson = props => {
       ) : (
         ""
       )}
+      <ImageUpload />
     </div>
   ) : (
     <Loading />
