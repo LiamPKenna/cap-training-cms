@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import Loading from "../Loading";
 import NewElementSelector from "./NewElementSelector";
 import { createElement } from "../../actions";
+import VideoBlock from "./videoElements/VideoBlock";
 
 const makePage = (lesson, lessonId) =>
   lesson.map((e, i) => makeElement(e, i, lessonId, lesson));
@@ -19,6 +20,14 @@ const Lesson = props => {
   };
   return lesson ? (
     <div>
+      {true ? (
+        <VideoBlock
+          src={"https://www.youtube-nocookie.com/embed/JQjroW6J4mw"}
+          title={"test"}
+        />
+      ) : (
+        ""
+      )}
       {makePage(lesson.content, lessonId)}
       {true ? <NewElementSelector handleNewElement={addNewElement} /> : ""}
     </div>
