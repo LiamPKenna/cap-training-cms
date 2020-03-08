@@ -13,6 +13,7 @@ export const REMOVE_VIDEO = 'REMOVE_VIDEO';
 export const SHIFT_ELEMENT = 'SHIFT_ELEMENT';
 export const UPDATE_COURSE = 'UPDATE_COURSE';
 export const UPDATE_TEXT = 'UPDATE_TEXT';
+export const UPDATE_VIDEO = 'UPDATE_VIDEO';
 export const MOVE_ELEMENT = 'MOVE_ELEMENT';
 export const SET_ADMIN = 'SET_ADMIN';
 
