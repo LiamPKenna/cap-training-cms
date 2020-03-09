@@ -1,8 +1,8 @@
 // import mockLessons from '../mockData/mockLessons';
-import constants from '../constants';
+import constants from "../constants";
 
 const c = constants.c;
-const initialState = {}//mockLessons;
+const initialState = {}; //mockLessons;
 const lessonsReducer = (state = initialState, action) => {
   const { type } = action;
   const newState = { ...state };
@@ -29,8 +29,8 @@ const lessonsReducer = (state = initialState, action) => {
         courseId: action.courseId,
         segmentId: action.segmentId,
         lessonId: action.lessonId,
-        content: [{ type: 'default' }]
-      }
+        content: [{ type: "default" }]
+      };
       return newState;
     case c.ADD_ELEMENT:
       newLesson = newState[action.lessonId];
@@ -51,7 +51,7 @@ const lessonsReducer = (state = initialState, action) => {
       const after = newContent.slice(action.elementIndex + 1);
       const element = newContent[action.elementIndex];
       let move;
-      if (action.direction === 'down') {
+      if (action.direction === "down") {
         move = after.shift();
         newContent = [...before, move, element, ...after];
       } else {
@@ -95,10 +95,17 @@ const lessonsReducer = (state = initialState, action) => {
       newLesson.content = newContent;
       newState[action.lessonId] = newLesson;
       return newState;
+    case c.REMOVE_LESSON:
+      const newerState = {};
+      Object.keys(newState).forEach(lesson => {
+        if (lesson !== action.lessonId) {
+          newerState[lesson] = newState[lesson];
+        }
+      });
+      return newerState;
     default:
       return state;
   }
-
-}
+};
 
 export default lessonsReducer;
