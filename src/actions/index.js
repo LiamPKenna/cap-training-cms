@@ -175,8 +175,34 @@ export const deleteVideo = lessonId => {
 }
 
 export const addPicture = params => {
-  console.log(params);
-  return { type: 'none' };
+  const { lessonId, allContent } = params;
+  const newPicture = {
+    type: 'picture',
+    mode: false,
+    pictures: false
+  }
+  const newLessonContent = [...allContent, newPicture];
+  var updates = {};
+  updates['/lessons/' + lessonId + '/content'] = newLessonContent;
+  db.ref().update(updates);
+  return { type: c.ADD_PICTURE, lessonId, newPicture };
+}
+
+export const updatePicture = (params) => {
+  const { url, alt, lessonId, elementIndex } = params;
+  if (!url) return 'NO URL!!!'
+  const updatedPicture = {
+    pictures: [{
+      src: url,
+      alt
+    }],
+    mode: 1,
+    type: 'picture'
+  };
+  var updates = {};
+  updates['/lessons/' + lessonId + '/content/' + elementIndex] = updatedPicture;
+  db.ref().update(updates);
+  return { type: c.UPDATE_PICTURE, lessonId, elementIndex, updatedPicture };
 }
 
 export const deleteText = params => {
