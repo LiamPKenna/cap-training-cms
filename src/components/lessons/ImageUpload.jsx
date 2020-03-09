@@ -30,7 +30,6 @@ const SelectedDiv = styled.div`
 const ImageUpload = props => {
   const [image, setImage] = useState(null);
   const [altText, setAltText] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
   const [uploadProgress, setUploadProgress] = useState(0);
   const dispatch = useDispatch();
 
@@ -64,7 +63,6 @@ const ImageUpload = props => {
           .getDownloadURL()
           .then(url => {
             console.log(url);
-            setImageUrl(url);
             setUploadProgress(0);
             dispatch(
               updatePicture({
