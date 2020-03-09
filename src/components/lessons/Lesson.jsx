@@ -6,6 +6,7 @@ import Loading from "../Loading";
 import NewElementSelector from "./NewElementSelector";
 import { createElement, addVideo, addPicture } from "../../actions";
 import VideoBlock from "./videoElements/VideoBlock";
+import MainLessonTitle from "./elements/MainLessonTitle";
 
 const makePage = (lesson, lessonId) =>
   lesson.map((e, i) => makeElement(e, i, lessonId, lesson));
@@ -28,6 +29,7 @@ const Lesson = props => {
   };
   return lesson ? (
     <div>
+      <MainLessonTitle title={lesson.title} />
       {lesson.video ? (
         <VideoBlock
           src={lesson.video.src}
