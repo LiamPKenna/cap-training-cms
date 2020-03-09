@@ -1,10 +1,10 @@
 import React from "react";
-import LessonTextElement from "./LessonTextElement";
+import LessonElement from "./LessonElement";
 
 const makeElement = params => {
   const { element, index, lessonId, fullLessonContent } = params;
   return (
-    <LessonTextElement
+    <LessonElement
       key={index}
       elementIndex={index}
       lessonId={lessonId}
