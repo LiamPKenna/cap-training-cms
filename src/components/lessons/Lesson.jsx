@@ -8,8 +8,15 @@ import { createElement, addVideo, addPicture } from "../../actions";
 import VideoBlock from "./videoElements/VideoBlock";
 import MainLessonTitle from "./elements/MainLessonTitle";
 
-const makePage = (lesson, lessonId) =>
-  lesson.map((e, i) => makeElement(e, i, lessonId, lesson));
+const makePage = (fullLessonContent, lessonId) =>
+  fullLessonContent.map((e, i) =>
+    makeElement({
+      element: e,
+      index: i,
+      lessonId,
+      fullLessonContent
+    })
+  );
 
 const Lesson = props => {
   const { lessonId } = useParams();
