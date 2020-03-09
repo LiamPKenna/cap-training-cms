@@ -6,12 +6,13 @@ import LessonHeading from "./elements/LessonHeading";
 import LessonSub from "./elements/LessonSub";
 import LessonText from "./elements/LessonText";
 import LessonCode from "./elements/LessonCode";
+import Break from "./elements/Break";
 
 const LessonTextElement = props => {
   const admin = true;
   const { format, content } = props;
   const [text, setText] = useState(content);
-  const [align, setAlign] = useState(format.align);
+  const [align, setAlign] = useState(format ? format.align : null);
   const [editMode, setEditMode] = useState(false);
 
   const toggleEdit = () => {
@@ -52,6 +53,8 @@ const LessonTextElement = props => {
         return <LessonText content={content} format={format} />;
       case "code":
         return <LessonCode content={content} format={format} />;
+      case "break":
+        return <Break />;
       default:
         return "";
     }

@@ -1,7 +1,6 @@
 import React from "react";
 import LessonTextElement from "./LessonTextElement";
 import PictureBox from "./elements/PictureBox";
-import Break from "./elements/Break";
 
 const makeElement = (element, index, lessonId, fullLessonContent) => {
   switch (element.type) {
@@ -16,8 +15,6 @@ const makeElement = (element, index, lessonId, fullLessonContent) => {
           elementIndex={index}
         />
       );
-    case "break":
-      return <Break key={index} />;
     case "default":
       return "";
     default:

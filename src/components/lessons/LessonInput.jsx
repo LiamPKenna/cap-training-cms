@@ -27,8 +27,8 @@ const InputGridDiv = styled.div`
 const UpDownDiv = styled.div`
   display: grid;
   grid-template-columns: ${props =>
-    props.element === "code"
-      ? "1fr 60px 60px"
+    props.element === "break"
+      ? "1fr 60px 60px 1fr"
       : "1fr 60px 60px 60px 60px 60px"};
 `;
 
@@ -84,14 +84,18 @@ const LessonInput = props => {
           </Button>
           <div>
             <InputLabelHeader>{props.element.toUpperCase()}</InputLabelHeader>
-            <TextField
-              required
-              multiline
-              value={props.value}
-              onChange={props.handleChange}
-              fullWidth
-              variant="filled"
-            />
+            {props.element === "break" ? (
+              <div></div>
+            ) : (
+              <TextField
+                required
+                multiline
+                value={props.value}
+                onChange={props.handleChange}
+                fullWidth
+                variant="filled"
+              />
+            )}
             <UpDownDiv element={props.element}>
               <div></div>
               <Button onClick={() => handleMove("up")}>
@@ -100,7 +104,7 @@ const LessonInput = props => {
               <Button onClick={() => handleMove("down")}>
                 <ArrowDownwardIcon />
               </Button>
-              {props.element === "code" ? (
+              {props.element === "break" ? (
                 ""
               ) : (
                 <>

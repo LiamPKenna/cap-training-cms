@@ -95,6 +95,11 @@ const NewElementSelector = props => {
                 control={<Radio color="primary" />}
                 label="Video"
               />
+              <FormControlLabel
+                value="break"
+                control={<Radio color="primary" />}
+                label="Break"
+              />
             </RadioDiv>
           </RadioGroup>
         </NewElementGrid>

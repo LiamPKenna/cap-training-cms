@@ -123,7 +123,7 @@ export const newLesson = (lessonTitle = "New Lesson", courseId, segmentId, oldLe
 };
 
 export const createElement = (type, oldContent, lessonId) => {
-  const newElement = {
+  const newElement = (type === 'break') ? { type } : {
     type,
     content: `This is a new ${type.toUpperCase()} element`,
     format: {
