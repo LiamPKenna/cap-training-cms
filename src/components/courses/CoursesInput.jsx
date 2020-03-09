@@ -8,7 +8,7 @@ import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
-import { updateText, deleteText } from "../../actions";
+import { updateCourseName, deleteCourse } from "../../actions";
 import styled from "styled-components";
 
 const InputDiv = styled.div`
@@ -23,8 +23,7 @@ const InputGridDiv = styled.div`
 
 const UpDownDiv = styled.div`
   display: grid;
-  grid-template-columns: "60px 60px";
-  margin: 0 auto;
+  grid-template-columns: 1fr 60px 60px 1fr;
 `;
 
 const InputLabelHeader = styled.h6`
@@ -34,36 +33,30 @@ const InputLabelHeader = styled.h6`
 `;
 
 const CourseInput = props => {
-  const { courseId, dispatch, toggleEdit, value, handleChange } = props;
+  const { courseId, dispatch, toggleEdit, value, handleChange, upDown } = props;
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log({
-      courseId
-    });
-    // dispatch(
-    //   updateText({
-    //     courseIndex,
-    //     content: value,
-    //     courseId
-    //   })
-    // );
-    dispatch({ type: "none" });
+    dispatch(
+      updateCourseName({
+        name: value,
+        courseId
+      })
+    );
     toggleEdit();
   };
 
   const handleDelete = () => {
-    console.log({
-      courseId
+    const thingsToDelete = deleteCourse({
+      courseId,
+      course: props.courses[courseId]
     });
-
-    // dispatch(
-    //   deleteText({
-    //     courseIndex,
-    //     courseId,
-    //   })
-    // );
+    thingsToDelete.forEach(obj => dispatch(obj));
     toggleEdit();
+  };
+
+  const handleMove = direction => {
+    console.log(direction);
   };
 
   return (
@@ -84,12 +77,23 @@ const CourseInput = props => {
               variant="filled"
             />
             <UpDownDiv>
-              <Button>
-                <ArrowUpwardIcon />
-              </Button>
-              <Button>
-                <ArrowDownwardIcon />
-              </Button>
+              <div> </div>
+
+              {upDown ? (
+                <>
+                  <Button onClick={() => handleMove("up")}>
+                    <ArrowUpwardIcon />
+                  </Button>
+                  <Button onClick={() => handleMove("down")}>
+                    <ArrowDownwardIcon />
+                  </Button>
+                </>
+              ) : (
+                <div>
+                  <br />
+                  <br />
+                </div>
+              )}
             </UpDownDiv>
           </div>
           <Button color="primary" onClick={toggleEdit}>
@@ -104,4 +108,10 @@ const CourseInput = props => {
   );
 };
 
-export default connect()(CourseInput);
+const mapStateToProps = state => {
+  return {
+    courses: state.courses
+  };
+};
+
+export default connect(mapStateToProps)(CourseInput);
