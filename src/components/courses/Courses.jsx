@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import Loading from "../Loading";
 import { addCourse } from "../../actions";
 import NewItemButton from "./NewItemButton";
 import NewItemInput from "./NewItemInput";
+import CourseLink from "./CourseLink";
 import {
   StyledListItem,
   PageWrapDiv,
@@ -35,9 +35,10 @@ const Courses = props => {
     } else {
       return Object.keys(props.courses).map(courseId => (
         <StyledListItem key={courseId}>
-          <Link to={`/courses/${courseId}`}>
-            <h2>{props.courses[courseId].title}</h2>
-          </Link>
+          <CourseLink
+            courseId={courseId}
+            title={props.courses[courseId].title}
+          />
         </StyledListItem>
       ));
     }
@@ -47,7 +48,7 @@ const Courses = props => {
     return (
       <>
         <NewItemDiv>
-          {!showForm ? (
+          {showForm ? (
             <NewItemButton
               clickHandler={showNewCourseForm}
               title={"New Course"}
