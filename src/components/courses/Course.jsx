@@ -48,30 +48,34 @@ const Course = props => {
           <StyledListItem key={segmentId}>
             <h2>{segments[segmentId].title}</h2>
             <ul>{makeLessons(segments[segmentId].lessons)}</ul>
-            <NewItemDiv>
-              {!showLessonForm || segmentFocus !== segmentId ? (
-                <NewItemButton
-                  text="NEW LESSON"
-                  clickHandler={() => showThisSegmentLessonInput(segmentId)}
-                  title="New Lesson"
-                />
-              ) : (
-                ""
-              )}
-              {showLessonForm && segmentFocus === segmentId ? (
-                <NewItemInput
-                  value={newLessonText}
-                  handleChange={e => setNewLessonText(e.target.value)}
-                  handleSubmit={() =>
-                    handleNewLesson(segmentId, segments[segmentId].lessons)
-                  }
-                  inputName="Lesson Name"
-                  handleCancel={cancelLessonInput}
-                />
-              ) : (
-                ""
-              )}
-            </NewItemDiv>
+            {props.admin ? (
+              <NewItemDiv>
+                {!showLessonForm || segmentFocus !== segmentId ? (
+                  <NewItemButton
+                    text="NEW LESSON"
+                    clickHandler={() => showThisSegmentLessonInput(segmentId)}
+                    title="New Lesson"
+                  />
+                ) : (
+                  ""
+                )}
+                {showLessonForm && segmentFocus === segmentId ? (
+                  <NewItemInput
+                    value={newLessonText}
+                    handleChange={e => setNewLessonText(e.target.value)}
+                    handleSubmit={() =>
+                      handleNewLesson(segmentId, segments[segmentId].lessons)
+                    }
+                    inputName="Lesson Name"
+                    handleCancel={cancelLessonInput}
+                  />
+                ) : (
+                  ""
+                )}
+              </NewItemDiv>
+            ) : (
+              ""
+            )}
           </StyledListItem>
         ));
     } else {
@@ -118,28 +122,32 @@ const Course = props => {
         <h1>{course.title}</h1>
         <div>
           <ul>{makeSegments(course.segments)}</ul>
-          <NewItemDiv>
-            {!showSegmentForm ? (
-              <NewItemButton
-                text="NEW SEGMENT"
-                clickHandler={() => setShowSegmentForm(true)}
-                title="New Segment"
-              />
-            ) : (
-              ""
-            )}
-            {showSegmentForm ? (
-              <NewItemInput
-                value={newSegmentText}
-                handleChange={e => setNewSegmentText(e.target.value)}
-                handleSubmit={handleNewSegment}
-                inputName="Segment Name"
-                handleCancel={cancelSegmentInput}
-              />
-            ) : (
-              ""
-            )}
-          </NewItemDiv>
+          {props.admin ? (
+            <NewItemDiv>
+              {!showSegmentForm ? (
+                <NewItemButton
+                  text="NEW SEGMENT"
+                  clickHandler={() => setShowSegmentForm(true)}
+                  title="New Segment"
+                />
+              ) : (
+                ""
+              )}
+              {showSegmentForm ? (
+                <NewItemInput
+                  value={newSegmentText}
+                  handleChange={e => setNewSegmentText(e.target.value)}
+                  handleSubmit={handleNewSegment}
+                  inputName="Segment Name"
+                  handleCancel={cancelSegmentInput}
+                />
+              ) : (
+                ""
+              )}
+            </NewItemDiv>
+          ) : (
+            ""
+          )}
         </div>
       </PageWrapDiv>
     );
@@ -148,7 +156,8 @@ const Course = props => {
 
 const mapPropsToState = state => {
   return {
-    courses: state.courses
+    courses: state.courses,
+    admin: state.users.admin
   };
 };
 

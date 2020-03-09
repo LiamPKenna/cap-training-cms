@@ -18,6 +18,7 @@ const Courses = props => {
   const showNewCourseForm = () => {
     setShowForm(true);
   };
+  console.log(props);
 
   const handleNewCourse = () => {
     setShowForm(false);
@@ -47,27 +48,31 @@ const Courses = props => {
   const makeAdminDiv = () => {
     return (
       <>
-        <NewItemDiv>
-          {showForm ? (
-            <NewItemButton
-              clickHandler={showNewCourseForm}
-              title={"New Course"}
-            />
-          ) : (
-            ""
-          )}
-          {showForm ? (
-            <NewItemInput
-              value={newCourseText}
-              handleChange={e => setNewCourseText(e.target.value)}
-              handleSubmit={handleNewCourse}
-              inputName="Course Name"
-              handleCancel={cancelInput}
-            />
-          ) : (
-            ""
-          )}
-        </NewItemDiv>
+        {props.admin ? (
+          <NewItemDiv>
+            {!showForm ? (
+              <NewItemButton
+                clickHandler={showNewCourseForm}
+                title={"New Course"}
+              />
+            ) : (
+              ""
+            )}
+            {showForm ? (
+              <NewItemInput
+                value={newCourseText}
+                handleChange={e => setNewCourseText(e.target.value)}
+                handleSubmit={handleNewCourse}
+                inputName="Course Name"
+                handleCancel={cancelInput}
+              />
+            ) : (
+              ""
+            )}
+          </NewItemDiv>
+        ) : (
+          ""
+        )}
       </>
     );
   };
@@ -83,7 +88,8 @@ const Courses = props => {
 
 const mapStateToProps = state => {
   return {
-    courses: state.courses
+    courses: state.courses,
+    admin: state.users.admin
   };
 };
 

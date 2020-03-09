@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -9,6 +9,7 @@ const CourseLinkHeader = styled.h2`
 `;
 
 const CourseLink = props => {
+  const [editMode, setEditMode] = useState(false);
   const { courseId, title } = props;
   return (
     <>

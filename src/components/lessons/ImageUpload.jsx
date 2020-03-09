@@ -5,6 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import { storage } from "../../firebase";
 import { useDispatch } from "react-redux";
 import { updatePicture } from "../../actions";
+import { connect } from "react-redux";
 
 const ImageInputDiv = styled.div`
   align-items: center;
@@ -79,43 +80,55 @@ const ImageUpload = props => {
   };
 
   return (
-    <ImageInputDiv uploadProgress={uploadProgress}>
-      <form onSubmit={handleUpload}>
-        <StyledInput
-          type="file"
-          onChange={handleChange}
-          id="upload"
-          accept="image/*"
-        />
-        <label htmlFor="upload">
-          <Button
-            variant="contained"
-            color="primary"
-            component="span"
-            fullWidth
-          >
-            Select Image
-          </Button>
-        </label>
-        {image ? (
-          <SelectedDiv>{`Image selected: ${image.name}`}</SelectedDiv>
-        ) : (
-          ""
-        )}
-        <TextField
-          required
-          label="Alt Text"
-          value={altText}
-          onChange={e => setAltText(e.target.value)}
-          fullWidth
-          variant="filled"
-        />
-        <Button variant="contained" color="primary" fullWidth type="submit">
-          Upload
-        </Button>
-      </form>
-    </ImageInputDiv>
+    <>
+      {props.admin ? (
+        <ImageInputDiv uploadProgress={uploadProgress}>
+          <form onSubmit={handleUpload}>
+            <StyledInput
+              type="file"
+              onChange={handleChange}
+              id="upload"
+              accept="image/*"
+            />
+            <label htmlFor="upload">
+              <Button
+                variant="contained"
+                color="primary"
+                component="span"
+                fullWidth
+              >
+                Select Image
+              </Button>
+            </label>
+            {image ? (
+              <SelectedDiv>{`Image selected: ${image.name}`}</SelectedDiv>
+            ) : (
+              ""
+            )}
+            <TextField
+              required
+              label="Alt Text"
+              value={altText}
+              onChange={e => setAltText(e.target.value)}
+              fullWidth
+              variant="filled"
+            />
+            <Button variant="contained" color="primary" fullWidth type="submit">
+              Upload
+            </Button>
+          </form>
+        </ImageInputDiv>
+      ) : (
+        ""
+      )}
+    </>
   );
 };
 
-export default ImageUpload;
+const mapStateToProps = state => {
+  return {
+    admin: state.users.admin
+  };
+};
+
+export default connect(mapStateToProps)(ImageUpload);
