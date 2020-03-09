@@ -2,6 +2,7 @@ export const ADD_ELEMENT = 'ADD_ELEMENT';
 export const ADD_COURSE = 'ADD_COURSE';
 export const ADD_LESSON = 'ADD_LESSON';
 export const ADD_VIDEO = 'ADD_VIDEO';
+export const ADD_PICTURE = 'ADD_PICTURE';
 export const ADD_LESSON_TO_SEGMENT = 'ADD_LESSON_TO_SEGMENT';
 export const ADD_SEGMENT = 'ADD_SEGMENT';
 export const REMOVE_ELEMENT = 'REMOVE_ELEMENT';
@@ -14,6 +15,7 @@ export const SHIFT_ELEMENT = 'SHIFT_ELEMENT';
 export const UPDATE_COURSE = 'UPDATE_COURSE';
 export const UPDATE_TEXT = 'UPDATE_TEXT';
 export const UPDATE_VIDEO = 'UPDATE_VIDEO';
+export const UPDATE_PICTURE = 'UPDATE_PICTURE';
 export const MOVE_ELEMENT = 'MOVE_ELEMENT';
 export const SET_ADMIN = 'SET_ADMIN';
 
