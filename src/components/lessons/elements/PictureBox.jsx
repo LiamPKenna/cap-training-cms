@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import ImageUpload from "../ImageUpload";
 
 const MultiPicDiv = styled.div`
   display: block;
@@ -45,10 +46,19 @@ const PictureBox = props => {
   };
   return (
     <>
-      {props.mode === 1 ? (
-        <SinglePicDiv>{makePics(props.pictures)}</SinglePicDiv>
+      {props.mode ? (
+        <>
+          {props.mode === 1 ? (
+            <SinglePicDiv>{makePics(props.pictures)}</SinglePicDiv>
+          ) : (
+            <MultiPicDiv>{makePics(props.pictures)}</MultiPicDiv>
+          )}
+        </>
       ) : (
-        <MultiPicDiv>{makePics(props.pictures)}</MultiPicDiv>
+        <ImageUpload
+          lessonId={props.lessonId}
+          elementIndex={props.elementIndex}
+        />
       )}
     </>
   );
