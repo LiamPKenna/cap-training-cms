@@ -15,6 +15,7 @@ const ImageInputDiv = styled.div`
     rgba(0, 0, 0, 0) ${props => props.uploadProgress}%,
     rgba(113, 113, 113, 0) 100%
   );
+  margin: 1rem auto;
 `;
 
 const StyledInput = styled.input`
