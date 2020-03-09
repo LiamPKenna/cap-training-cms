@@ -33,29 +33,37 @@ const InputLabelHeader = styled.h6`
   padding: 1rem 1.25rem;
 `;
 
-const LessonInput = props => {
+const CourseInput = props => {
+  const { courseId, dispatch, toggleEdit, value, handleChange } = props;
+
   const handleSubmit = e => {
     e.preventDefault();
-    props.dispatch(
-      updateText({
-        elementIndex: props.elementIndex,
-        content: props.value,
-        lessonId: props.lessonId
-      })
-    );
-
-    props.toggleEdit();
+    console.log({
+      courseId
+    });
+    // dispatch(
+    //   updateText({
+    //     courseIndex,
+    //     content: value,
+    //     courseId
+    //   })
+    // );
+    dispatch({ type: "none" });
+    toggleEdit();
   };
 
   const handleDelete = () => {
-    props.dispatch(
-      deleteText({
-        elementIndex: props.elementIndex,
-        lessonId: props.lessonId,
-        fullLessonContent: props.fullLessonContent
-      })
-    );
-    props.toggleEdit();
+    console.log({
+      courseId
+    });
+
+    // dispatch(
+    //   deleteText({
+    //     courseIndex,
+    //     courseId,
+    //   })
+    // );
+    toggleEdit();
   };
 
   return (
@@ -66,12 +74,12 @@ const LessonInput = props => {
             <CheckCircleIcon />
           </Button>
           <div>
-            <InputLabelHeader>{props.element.toUpperCase()}</InputLabelHeader>
+            <InputLabelHeader>COURSE NAME</InputLabelHeader>
             <TextField
               required
               multiline
-              value={props.value}
-              onChange={props.handleChange}
+              value={value}
+              onChange={handleChange}
               fullWidth
               variant="filled"
             />
@@ -84,7 +92,7 @@ const LessonInput = props => {
               </Button>
             </UpDownDiv>
           </div>
-          <Button color="primary" onClick={props.toggleEdit}>
+          <Button color="primary" onClick={toggleEdit}>
             <CancelIcon />
           </Button>
           <Button onClick={handleDelete}>
@@ -96,4 +104,4 @@ const LessonInput = props => {
   );
 };
 
-export default connect()(LessonInput);
+export default connect()(CourseInput);
