@@ -27,7 +27,7 @@ const InputGridDiv = styled.div`
 const UpDownDiv = styled.div`
   display: grid;
   grid-template-columns: ${props =>
-    props.element === "break"
+    props.element === "break" || props.element === "picture"
       ? "1fr 60px 60px 1fr"
       : "1fr 60px 60px 60px 60px 60px"};
 `;
@@ -39,40 +39,54 @@ const InputLabelHeader = styled.h6`
 `;
 
 const LessonInput = props => {
+  const {
+    elementIndex,
+    value,
+    lessonId,
+    fullLessonContent,
+    dispatch,
+    element,
+    toggleEdit,
+    handleChange,
+    changeAlign,
+    align
+  } = props;
+
   const handleSubmit = e => {
     e.preventDefault();
-    props.dispatch(
-      updateText({
-        elementIndex: props.elementIndex,
-        content: props.value,
-        lessonId: props.lessonId
-      })
-    );
-
-    props.toggleEdit();
+    if (element !== "picture" && element !== "break") {
+      dispatch(
+        updateText({
+          elementIndex: elementIndex,
+          content: value,
+          lessonId: lessonId
+        })
+      );
+    }
+    toggleEdit();
   };
 
   const handleDelete = () => {
-    props.dispatch(
+    dispatch(
       deleteText({
-        elementIndex: props.elementIndex,
-        lessonId: props.lessonId,
-        fullLessonContent: props.fullLessonContent
+        elementIndex,
+        lessonId,
+        fullLessonContent
       })
     );
-    props.toggleEdit();
+    toggleEdit();
   };
 
   const handleMove = direction => {
-    props.dispatch(
+    dispatch(
       moveElement({
-        elementIndex: props.elementIndex,
-        lessonId: props.lessonId,
-        fullLessonContent: props.fullLessonContent,
+        elementIndex,
+        lessonId,
+        fullLessonContent,
         direction
       })
     );
-    props.toggleEdit();
+    toggleEdit();
   };
 
   return (
@@ -83,20 +97,20 @@ const LessonInput = props => {
             <CheckCircleIcon />
           </Button>
           <div>
-            <InputLabelHeader>{props.element.toUpperCase()}</InputLabelHeader>
-            {props.element === "break" ? (
+            <InputLabelHeader>{element.toUpperCase()}</InputLabelHeader>
+            {element === "break" || element === "picture" ? (
               <div></div>
             ) : (
               <TextField
                 required
                 multiline
-                value={props.value}
-                onChange={props.handleChange}
+                value={value}
+                onChange={handleChange}
                 fullWidth
                 variant="filled"
               />
             )}
-            <UpDownDiv element={props.element}>
+            <UpDownDiv element={element}>
               <div></div>
               <Button onClick={() => handleMove("up")}>
                 <ArrowUpwardIcon />
@@ -104,24 +118,33 @@ const LessonInput = props => {
               <Button onClick={() => handleMove("down")}>
                 <ArrowDownwardIcon />
               </Button>
-              {props.element === "break" ? (
+              {element === "break" || element === "picture" ? (
                 ""
               ) : (
                 <>
-                  <Button disabled={props.align === "left"}>
+                  <Button
+                    disabled={align === "left"}
+                    onClick={() => changeAlign("left")}
+                  >
                     <FormatAlignLeftIcon />
                   </Button>
-                  <Button disabled={props.align === "center"}>
+                  <Button
+                    disabled={align === "center"}
+                    onClick={() => changeAlign("center")}
+                  >
                     <FormatAlignCenterIcon />
                   </Button>
-                  <Button disabled={props.align === "right"}>
+                  <Button
+                    disabled={align === "right"}
+                    onClick={() => changeAlign("right")}
+                  >
                     <FormatAlignRightIcon />
                   </Button>
                 </>
               )}
             </UpDownDiv>
           </div>
-          <Button color="primary" onClick={props.toggleEdit}>
+          <Button color="primary" onClick={toggleEdit}>
             <CancelIcon />
           </Button>
           <Button onClick={handleDelete}>
