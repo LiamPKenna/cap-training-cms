@@ -79,7 +79,7 @@ const Course = props => {
           </StyledListItem>
         ));
     } else {
-      return <li>No segments yet</li>;
+      return <StyledListItem>No segments yet</StyledListItem>;
     }
   };
 
