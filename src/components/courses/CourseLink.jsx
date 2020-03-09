@@ -20,12 +20,14 @@ const CourseLink = props => {
   };
   return (
     <>
-      {admin ? <EditButton handleClick={toggleEdit} /> : ""}
+      {admin && !editMode ? <EditButton handleClick={toggleEdit} /> : ""}
       {editMode ? (
         <CoursesInput
           toggleEdit={toggleEdit}
           value={value}
           handleChange={e => setValue(e.target.value)}
+          upDown={false}
+          courseId={courseId}
         />
       ) : (
         <Link to={`/courses/${courseId}`} style={{ textDecoration: "none" }}>
