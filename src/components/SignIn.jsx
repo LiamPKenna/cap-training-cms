@@ -3,11 +3,13 @@ import { auth } from "../firebase";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router-dom";
+import { addUser } from "../actions";
+import { useDispatch } from "react-redux";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const dispatch = useDispatch();
   const history = useHistory();
   const handleSignIn = e => {
     e.preventDefault();
@@ -16,20 +18,19 @@ const SignIn = () => {
       var errorCode = error.code;
       var errorMessage = error.message;
       console.log(errorCode, errorMessage);
-
-      // ...
     });
     history.push("/");
   };
 
   const handleSignUp = () => {
-    auth.createUserWithEmailAndPassword(email, password).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log(errorCode, errorMessage);
-      // ...
-    });
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .catch(function(error) {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      })
+      .then(dispatch(addUser(email)));
   };
   return (
     <div>
