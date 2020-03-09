@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const TextP = styled.p`
   margin: 0.75rem 0;
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-family: roboto;
 `;
 
