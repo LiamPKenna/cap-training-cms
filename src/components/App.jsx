@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 import SignIn from "./SignIn";
 import { auth } from "../firebase";
 import constants from "../constants";
-const { c } = constants;
+const { c, adminEmails } = constants;
 
 function App(props) {
   const dispatch = useDispatch();
@@ -21,12 +21,13 @@ function App(props) {
     if (user) {
       setCurrentUser(user);
       dispatch({
-        type: c.SET_ADMIN,
-        admin: user.email === "liam@liamkenna.com"
+        type: c.SET_USER,
+        admin: adminEmails.includes(user.email),
+        user
       });
     } else {
       setCurrentUser(null);
-      dispatch({ type: c.SET_ADMIN, admin: false });
+      dispatch({ type: c.SET_USER, admin: false, user: false });
     }
   });
   useEffect(() => {
