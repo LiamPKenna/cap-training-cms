@@ -18,7 +18,6 @@ const Courses = props => {
   const showNewCourseForm = () => {
     setShowForm(true);
   };
-  console.log(props);
 
   const handleNewCourse = () => {
     setShowForm(false);
