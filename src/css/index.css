@@ -8,9 +8,14 @@ body {
   font-family: roboto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(248, 247, 247);
 }
 
 .nav-bar {
   background-color: rgb(248, 247, 247);
   box-shadow: 1px 1px 3px rgb(175, 174, 174);
+}
+
+.course-links {
+  color: rgb(11, 55, 65);
 }
