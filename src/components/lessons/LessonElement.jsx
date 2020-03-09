@@ -10,8 +10,7 @@ import Break from "./elements/Break";
 import PictureBox from "./elements/PictureBox";
 
 const LessonTextElement = props => {
-  const admin = true;
-  const { element, lessonId, elementIndex, fullLessonContent } = props;
+  const { element, lessonId, elementIndex, fullLessonContent, admin } = props;
   const [text, setText] = useState(element.content ? element.content : null);
   const [align, setAlign] = useState(
     element.format ? element.format.align : null

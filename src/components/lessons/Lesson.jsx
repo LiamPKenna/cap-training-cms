@@ -1,5 +1,4 @@
 import React from "react";
-import makeElement from "./makeElement";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import Loading from "../Loading";
@@ -7,20 +6,12 @@ import NewElementSelector from "./NewElementSelector";
 import { createElement, addVideo, addPicture } from "../../actions";
 import VideoBlock from "./videoElements/VideoBlock";
 import MainLessonTitle from "./elements/MainLessonTitle";
-
-const makePage = (fullLessonContent, lessonId) =>
-  fullLessonContent.map((e, i) =>
-    makeElement({
-      element: e,
-      index: i,
-      lessonId,
-      fullLessonContent
-    })
-  );
+import LessonElement from "./LessonElement";
 
 const Lesson = props => {
   const { lessonId } = useParams();
   const lesson = props.lessons[lessonId];
+
   const addNewElement = newElementType => {
     if (newElementType === "video") {
       props.dispatch(addVideo(lesson.lessonId));
@@ -33,6 +24,18 @@ const Lesson = props => {
         createElement(newElementType, lesson.content, lesson.lessonId)
       );
     }
+  };
+  const makePage = (fullLessonContent, lessonId) => {
+    return fullLessonContent.map((e, i) => (
+      <LessonElement
+        key={i}
+        elementIndex={i}
+        lessonId={lessonId}
+        fullLessonContent={fullLessonContent}
+        element={e}
+        admin={props.admin}
+      />
+    ));
   };
   return lesson ? (
     <div>
