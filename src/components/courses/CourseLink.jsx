@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import EditButton from "../utilities/EditButton";
+import { connect } from "react-redux";
+import CoursesInput from "./CoursesInput";
 
 const CourseLinkHeader = styled.h2`
   :link {
@@ -10,14 +13,33 @@ const CourseLinkHeader = styled.h2`
 
 const CourseLink = props => {
   const [editMode, setEditMode] = useState(false);
-  const { courseId, title } = props;
+  const { courseId, title, admin } = props;
+  const [value, setValue] = useState(title);
+  const toggleEdit = () => {
+    setEditMode(!editMode);
+  };
   return (
     <>
-      <Link to={`/courses/${courseId}`} style={{ textDecoration: "none" }}>
-        <CourseLinkHeader className="course-links">{title}</CourseLinkHeader>
-      </Link>
+      {admin ? <EditButton handleClick={toggleEdit} /> : ""}
+      {editMode ? (
+        <CoursesInput
+          toggleEdit={toggleEdit}
+          value={value}
+          handleChange={e => setValue(e.target.value)}
+        />
+      ) : (
+        <Link to={`/courses/${courseId}`} style={{ textDecoration: "none" }}>
+          <CourseLinkHeader className="course-links">{title}</CourseLinkHeader>
+        </Link>
+      )}
     </>
   );
 };
 
-export default CourseLink;
+const mapStateToProps = state => {
+  return {
+    admin: state.users.admin
+  };
+};
+
+export default connect(mapStateToProps)(CourseLink);
