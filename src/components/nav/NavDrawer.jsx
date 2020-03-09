@@ -39,7 +39,7 @@ const NavDrawer = props => {
         <List style={drawerListStyle}>
           {props.user ? (
             <>
-              <ListItem button key="signout">
+              <ListItem button key="userEmail">
                 <ListItemText primary={props.user.email} />
               </ListItem>
               <ListItem button key="signout" onClick={signOut}>
