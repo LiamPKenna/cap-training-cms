@@ -66,7 +66,7 @@ export const addCourse = (courseTitle = "New Course") => {
     segments: {
       default: {
         title: "First Segment",
-        lessons: { placeholder: { lessonId: 1, title: "TestLesson" } }
+        lessons: [{ lessonId: 0, title: "default" }]
       }
     },
     title: courseTitle,
@@ -80,7 +80,34 @@ export const addCourse = (courseTitle = "New Course") => {
   };
 };
 
-export const addSegment = async (segmentTitle = "New segment", courseId) => {
+export const updateCourseName = params => {
+  const { courseId, name } = params;
+  const updates = {};
+  updates["/courses/" + courseId + "/title"] = name;
+  db.ref().update(updates);
+  return { type: c.UPDATE_COURSE_TITLE, courseId, name };
+};
+
+export const deleteCourse = params => {
+  const { courseId, course } = params;
+  const lessons = [];
+  Object.keys(course.segments).forEach(s =>
+    course.segments[s].lessons.forEach(l => lessons.push(l))
+  );
+  const updates = {};
+  lessons.forEach(l => {
+    updates["/lessons/" + l.lessonId] = {};
+  });
+  updates["/courses/" + courseId] = {};
+  db.ref().update(updates);
+  const lessonsToDelete = lessons.map(l => ({
+    type: c.REMOVE_LESSON,
+    lessonId: l.lessonId
+  }));
+  return [{ type: c.REMOVE_COURSE, courseId }, ...lessonsToDelete];
+};
+
+export const addSegment = (segmentTitle = "New segment", courseId) => {
   const newSegmentKey = db
     .ref("/courses/" + courseId)
     .child("segments")
@@ -90,15 +117,12 @@ export const addSegment = async (segmentTitle = "New segment", courseId) => {
     lessons: [{ lessonId: 0, title: "default" }],
     title: segmentTitle
   };
-
-  const ret = await db.ref().update(updates);
-  console.log(ret);
-
+  db.ref().update(updates);
   return {
     type: c.ADD_SEGMENT,
     title: segmentTitle,
     courseId: courseId,
-    lessons: [{ lessonId: 1, title: "default" }],
+    lessons: [{ lessonId: 0, title: "default" }],
     segmentId: newSegmentKey
   };
 };
