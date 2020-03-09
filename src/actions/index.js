@@ -34,6 +34,20 @@ export const receiveCourse = courseFromFirebase => {
   };
 };
 
+export const addUser = email => {
+  const updates = {};
+  updates["/users/" + email.split(".").join("")] = {
+    email,
+    completedCourses: { default: true }
+  };
+  db.ref().update(updates);
+  return {
+    type: c.ADD_USER,
+    completedCourses: { default: true },
+    email
+  };
+};
+
 export const signOut = () => {
   auth.signOut();
 };
