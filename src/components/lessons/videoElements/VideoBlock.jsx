@@ -3,7 +3,7 @@ import styled from "styled-components";
 import NewVideoForm from "./NewVideoForm";
 import { updateVideo, deleteVideo } from "../../../actions";
 import { useDispatch } from "react-redux";
-import EditButton from "../EditButton";
+import EditButton from "../../utilities/EditButton";
 
 const VideoDiv = styled.div`
   padding: 3%;

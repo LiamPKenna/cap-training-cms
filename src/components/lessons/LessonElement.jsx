@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import LessonInput from "./LessonInput";
-import EditButton from "./EditButton";
+import EditButton from "../utilities/EditButton";
 import LessonTitle from "./elements/LessonTitle";
 import LessonHeading from "./elements/LessonHeading";
 import LessonSub from "./elements/LessonSub";
