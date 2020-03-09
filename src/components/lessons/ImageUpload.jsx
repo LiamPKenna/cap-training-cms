@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { storage } from "../../firebase";
 import { useDispatch } from "react-redux";
-import { addPicture } from "../../actions";
+import { updatePicture } from "../../actions";
 
 const ImageInputDiv = styled.div`
   align-items: center;
@@ -33,6 +33,8 @@ const ImageUpload = props => {
   const [imageUrl, setImageUrl] = useState("");
   const [uploadProgress, setUploadProgress] = useState(0);
   const dispatch = useDispatch();
+
+  const { lessonId, elementIndex } = props;
 
   const handleChange = e => {
     if (e.target.files[0]) {
@@ -64,7 +66,14 @@ const ImageUpload = props => {
             console.log(url);
             setImageUrl(url);
             setUploadProgress(0);
-            dispatch(addPicture({ url: imageUrl, alt: altText }));
+            dispatch(
+              updatePicture({
+                url: url,
+                alt: altText,
+                lessonId,
+                elementIndex
+              })
+            );
           });
       }
     );
