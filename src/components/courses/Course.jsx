@@ -10,7 +10,8 @@ import NewItemInput from "./NewItemInput";
 import {
   PageWrapDiv,
   NewItemDiv,
-  StyledListItem
+  StyledListItem,
+  CourseTitleHeader
 } from "./StyledCourseComponents";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
@@ -62,52 +63,50 @@ const Course = props => {
       return Object.keys(segments)
         .filter(segmentId => segmentId !== "default")
         .map(segmentId => (
-          <>
-            <ExpansionPanel
-              expanded={expanded === `panel${segmentId}`}
-              onChange={handleChange(`panel${segmentId}`)}
-              key={segmentId}
+          <ExpansionPanel
+            expanded={expanded === `panel${segmentId}`}
+            onChange={handleChange(`panel${segmentId}`)}
+            key={segmentId}
+          >
+            <ExpansionPanelSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls={`panel${segmentId}`}
+              id={`panel${segmentId}`}
             >
-              <ExpansionPanelSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls={`panel${segmentId}`}
-                id={`panel${segmentId}`}
-              >
-                <Typography>{segments[segmentId].title}</Typography>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-                <ul>{makeLessons(segments[segmentId].lessons)}</ul>
-              </ExpansionPanelDetails>
-              {props.admin ? (
-                <NewItemDiv>
-                  {!showLessonForm || segmentFocus !== segmentId ? (
-                    <NewItemButton
-                      text="NEW LESSON"
-                      clickHandler={() => showThisSegmentLessonInput(segmentId)}
-                      title="New Lesson"
-                    />
-                  ) : (
-                    ""
-                  )}
-                  {showLessonForm && segmentFocus === segmentId ? (
-                    <NewItemInput
-                      value={newLessonText}
-                      handleChange={e => setNewLessonText(e.target.value)}
-                      handleSubmit={() =>
-                        handleNewLesson(segmentId, segments[segmentId].lessons)
-                      }
-                      inputName="Lesson Name"
-                      handleCancel={cancelLessonInput}
-                    />
-                  ) : (
-                    ""
-                  )}
-                </NewItemDiv>
-              ) : (
-                ""
-              )}
-            </ExpansionPanel>
-          </>
+              <Typography>{segments[segmentId].title}</Typography>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+              <ul>{makeLessons(segments[segmentId].lessons)}</ul>
+            </ExpansionPanelDetails>
+            {props.admin ? (
+              <NewItemDiv>
+                {!showLessonForm || segmentFocus !== segmentId ? (
+                  <NewItemButton
+                    text="NEW LESSON"
+                    clickHandler={() => showThisSegmentLessonInput(segmentId)}
+                    title="New Lesson"
+                  />
+                ) : (
+                  ""
+                )}
+                {showLessonForm && segmentFocus === segmentId ? (
+                  <NewItemInput
+                    value={newLessonText}
+                    handleChange={e => setNewLessonText(e.target.value)}
+                    handleSubmit={() =>
+                      handleNewLesson(segmentId, segments[segmentId].lessons)
+                    }
+                    inputName="Lesson Name"
+                    handleCancel={cancelLessonInput}
+                  />
+                ) : (
+                  ""
+                )}
+              </NewItemDiv>
+            ) : (
+              ""
+            )}
+          </ExpansionPanel>
         ));
     } else {
       return <StyledListItem>No segments yet</StyledListItem>;
@@ -150,7 +149,7 @@ const Course = props => {
   } else {
     return (
       <PageWrapDiv>
-        <h1>{course.title}</h1>
+        <CourseTitleHeader>{course.title}</CourseTitleHeader>
         <div>
           <ul>{makeSegments(course.segments)}</ul>
           {props.admin ? (
