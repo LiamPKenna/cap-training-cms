@@ -6,7 +6,7 @@ const userReducer = (state = { admin: false }, action) => {
   const { type } = action;
   const newState = { ...state };
   switch (type) {
-    case c.SET_ADMIN:
+    case c.SET_USER:
       newState.admin = action.admin;
       return newState;
     case c.ADD_USER:

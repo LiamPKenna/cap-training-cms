@@ -18,11 +18,12 @@ function App(props) {
   const [currentUser, setCurrentUser] = useState(null);
 
   auth.onAuthStateChanged(function(user) {
+    const isAdmin = adminEmails.includes(user.email);
     if (user) {
       setCurrentUser(user);
       dispatch({
         type: c.SET_USER,
-        admin: adminEmails.includes(user.email),
+        admin: isAdmin,
         user
       });
     } else {
