@@ -13,6 +13,7 @@ import VideoBlock from "./videoElements/VideoBlock";
 import MainLessonTitle from "./elements/MainLessonTitle";
 import LessonElement from "./LessonElement";
 import Button from "@material-ui/core/Button";
+import LessonCompleted from "./elements/LessonCompleted";
 
 const Lesson = props => {
   const { lessonId } = useParams();
@@ -33,6 +34,8 @@ const Lesson = props => {
   };
 
   const markComplete = params => {
+    console.log(props.users);
+
     props.dispatch(
       lessonCompleted({ lessonId, currentUser: props.currentUser })
     );
@@ -52,6 +55,11 @@ const Lesson = props => {
   };
   return lesson ? (
     <div>
+      {props.completedLessons && props.completedLessons[lessonId] ? (
+        <LessonCompleted />
+      ) : (
+        ""
+      )}
       <MainLessonTitle title={lesson.title} />
       {lesson.video ? (
         <VideoBlock
@@ -69,15 +77,19 @@ const Lesson = props => {
       ) : (
         ""
       )}
-      <Button
-        variant="contained"
-        color="primary"
-        component="span"
-        fullWidth
-        onClick={markComplete}
-      >
-        Mark Complete
-      </Button>
+      {props.completedLessons && props.completedLessons[lessonId] ? (
+        ""
+      ) : (
+        <Button
+          variant="contained"
+          color="primary"
+          component="span"
+          fullWidth
+          onClick={markComplete}
+        >
+          Mark Complete
+        </Button>
+      )}
     </div>
   ) : (
     <Loading />
@@ -88,7 +100,8 @@ const mapStateToProps = state => {
   return {
     lessons: state.lessons,
     admin: state.users.admin,
-    currentUser: state.users.currentUser
+    currentUser: state.users.currentUser,
+    completedLessons: state.users.completedLessons
   };
 };
 

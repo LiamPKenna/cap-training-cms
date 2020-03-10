@@ -6,7 +6,11 @@ import NavBar from "./nav/NavBar";
 import Home from "./Home";
 import Container from "@material-ui/core/Container";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { watchFirebaseLessonsRef, watchFirebaseCoursesRef } from "../actions";
+import {
+  watchFirebaseLessonsRef,
+  watchFirebaseCoursesRef,
+  getCompletedLessons
+} from "../actions";
 import { useDispatch } from "react-redux";
 import SignIn from "./SignIn";
 import { auth } from "../firebase";
@@ -24,11 +28,18 @@ function App(props) {
       dispatch({
         type: c.SET_USER,
         admin: isAdmin,
-        user
+        user,
+        completedLessons: []
       });
+      dispatch(getCompletedLessons(user.email.split(".").join("")));
     } else {
       setCurrentUser(null);
-      dispatch({ type: c.SET_USER, admin: false, user: false });
+      dispatch({
+        type: c.SET_USER,
+        admin: false,
+        user: false,
+        completedLessons: []
+      });
     }
   });
   useEffect(() => {

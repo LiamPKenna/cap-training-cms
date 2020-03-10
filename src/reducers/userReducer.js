@@ -13,8 +13,12 @@ const userReducer = (state = { admin: false }, action) => {
     case c.ADD_USER:
       newState[action.email.split(".").join("")] = {
         email: action.email,
-        completedCourses: action.completedCourses
+        completedLessons: action.completedLessons
       };
+      return newState;
+    case c.COMPLETE_LESSON:
+      newState.completedLessons = action.completedLessons;
+      console.log(newState);
       return newState;
     default:
       return state;

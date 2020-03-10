@@ -20,3 +20,4 @@ export const UPDATE_PICTURE = "UPDATE_PICTURE";
 export const MOVE_ELEMENT = "MOVE_ELEMENT";
 export const SET_USER = "SET_USER";
 export const ADD_USER = "ADD_USER";
+export const COMPLETE_LESSON = "COMPLETE_LESSON";

@@ -38,12 +38,12 @@ export const addUser = email => {
   const updates = {};
   updates["/users/" + email.split(".").join("")] = {
     email,
-    completedCourses: { default: true }
+    completedLessons: { default: true }
   };
   db.ref().update(updates);
   return {
     type: c.ADD_USER,
-    completedCourses: { default: true },
+    completedLessons: { default: true },
     email
   };
 };
@@ -312,10 +312,29 @@ export const moveElement = params => {
   };
 };
 
-export const lessonCompleted = (params) => {
+export const lessonCompleted = params => {
   const updates = {};
-  updates["/users/" + params.currentUser + "/completedCourses/" + params.lessonId] = true;
+  updates[
+    "/users/" + params.currentUser + "/completedLessons/" + params.lessonId
+  ] = true;
   db.ref().update(updates);
-  console.log(updates);
-  return {type: 'none'};
-}
+  return getCompletedLessons(params.currentUser);
+};
+
+export const getCompletedLessons = currentUser => {
+  return async dispatch => {
+    return db
+      .ref("/users/" + currentUser)
+      .once("value")
+      .then(snap => {
+        if (snap.val()) {
+          dispatch({
+            type: c.COMPLETE_LESSON,
+            completedLessons: snap.val().completedLessons
+          });
+        } else {
+          dispatch({ type: "none" });
+        }
+      });
+  };
+};
