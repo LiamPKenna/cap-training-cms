@@ -9,7 +9,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import {
   watchFirebaseLessonsRef,
   watchFirebaseCoursesRef,
-  getCompletedLessons
+  getCompletedLessons,
+  getAllUsers
 } from "../actions";
 import { useDispatch } from "react-redux";
 import SignIn from "./SignIn";
@@ -32,6 +33,9 @@ function App(props) {
         completedLessons: []
       });
       dispatch(getCompletedLessons(user.email.split(".").join("")));
+      if (isAdmin) {
+        dispatch(getAllUsers());
+      }
     } else {
       setCurrentUser(null);
       dispatch({
