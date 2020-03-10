@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import Loading from "../Loading";
+import Loading from "../utilities/Loading";
+import CheckMark from "../utilities/CheckMark";
 import { addSegment, newLesson } from "../../actions";
 import NewItemButton from "./NewItemButton";
 import NewItemInput from "./NewItemInput";
@@ -28,6 +29,12 @@ const Course = props => {
         .map(lesson => (
           <StyledListItem key={lesson.lessonId}>
             <Link to={`/lessons/${lesson.lessonId}`}>{lesson.title}</Link>
+            {props.completedLessons &&
+            props.completedLessons[lesson.lessonId] ? (
+              <CheckMark />
+            ) : (
+              ""
+            )}
           </StyledListItem>
         ));
     } else {
@@ -157,7 +164,8 @@ const Course = props => {
 const mapPropsToState = state => {
   return {
     courses: state.courses,
-    admin: state.users.admin
+    admin: state.users.admin,
+    completedLessons: state.users.completedLessons
   };
 };
 
