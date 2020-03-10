@@ -58,6 +58,15 @@ const NavDrawer = props => {
               </Link>
             </ListItem>
           ))}
+          {props.admin ? (
+            <ListItem button key="adminDashboard">
+              <Link to="/admin" style={linkStyle}>
+                <ListItemText primary="Admin Dashboard" />
+              </Link>
+            </ListItem>
+          ) : (
+            ""
+          )}
         </List>
       </Drawer>
     </div>

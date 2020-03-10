@@ -58,6 +58,7 @@ const NavBar = props => {
         setDrawer={setDrawer}
         links={props.links}
         user={props.user}
+        admin={props.admin}
       />
     </>
   );
@@ -66,7 +67,8 @@ const NavBar = props => {
 const mapStateToProps = state => {
   return {
     brand: state.brand,
-    links: state.links
+    links: state.links,
+    admin: state.users.admin
   };
 };
 

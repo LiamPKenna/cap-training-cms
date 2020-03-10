@@ -4,6 +4,7 @@ import Courses from "./courses/Courses";
 import Course from "./courses/Course";
 import NavBar from "./nav/NavBar";
 import Home from "./Home";
+import AdminDashboard from "./AdminDashboard";
 import Container from "@material-ui/core/Container";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import {
@@ -12,7 +13,7 @@ import {
   getCompletedLessons,
   getAllUsers
 } from "../actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, connect } from "react-redux";
 import SignIn from "./SignIn";
 import { auth } from "../firebase";
 import constants from "../constants";
@@ -77,6 +78,9 @@ function App(props) {
                   <SignIn />
                 </>
               </Route>
+              <Route path="/admin">
+                {props.admin ? <AdminDashboard /> : <Home />}
+              </Route>
             </Switch>
           ) : (
             <SignIn />
@@ -87,4 +91,10 @@ function App(props) {
   );
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    admin: state.users.admin
+  };
+};
+
+export default connect(mapStateToProps)(App);
