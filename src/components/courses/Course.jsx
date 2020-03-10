@@ -12,6 +12,11 @@ import {
   NewItemDiv,
   StyledListItem
 } from "./StyledCourseComponents";
+import ExpansionPanel from "@material-ui/core/ExpansionPanel";
+import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import Typography from "@material-ui/core/Typography";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 const Course = props => {
   const { courseId } = useParams();
@@ -21,6 +26,11 @@ const Course = props => {
   const [showLessonForm, setShowLessonForm] = useState(false);
   const [newLessonText, setNewLessonText] = useState("");
   const [segmentFocus, setSegmentFocus] = useState(null);
+  const [expanded, setExpanded] = useState(false);
+
+  const handleChange = panel => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
 
   const makeLessons = lessons => {
     if (lessons && Object.keys(lessons).length > 1) {
@@ -52,38 +62,52 @@ const Course = props => {
       return Object.keys(segments)
         .filter(segmentId => segmentId !== "default")
         .map(segmentId => (
-          <StyledListItem key={segmentId}>
-            <h2>{segments[segmentId].title}</h2>
-            <ul>{makeLessons(segments[segmentId].lessons)}</ul>
-            {props.admin ? (
-              <NewItemDiv>
-                {!showLessonForm || segmentFocus !== segmentId ? (
-                  <NewItemButton
-                    text="NEW LESSON"
-                    clickHandler={() => showThisSegmentLessonInput(segmentId)}
-                    title="New Lesson"
-                  />
-                ) : (
-                  ""
-                )}
-                {showLessonForm && segmentFocus === segmentId ? (
-                  <NewItemInput
-                    value={newLessonText}
-                    handleChange={e => setNewLessonText(e.target.value)}
-                    handleSubmit={() =>
-                      handleNewLesson(segmentId, segments[segmentId].lessons)
-                    }
-                    inputName="Lesson Name"
-                    handleCancel={cancelLessonInput}
-                  />
-                ) : (
-                  ""
-                )}
-              </NewItemDiv>
-            ) : (
-              ""
-            )}
-          </StyledListItem>
+          <>
+            <ExpansionPanel
+              expanded={expanded === `panel${segmentId}`}
+              onChange={handleChange(`panel${segmentId}`)}
+              key={segmentId}
+            >
+              <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls={`panel${segmentId}`}
+                id={`panel${segmentId}`}
+              >
+                <Typography>{segments[segmentId].title}</Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <ul>{makeLessons(segments[segmentId].lessons)}</ul>
+              </ExpansionPanelDetails>
+              {props.admin ? (
+                <NewItemDiv>
+                  {!showLessonForm || segmentFocus !== segmentId ? (
+                    <NewItemButton
+                      text="NEW LESSON"
+                      clickHandler={() => showThisSegmentLessonInput(segmentId)}
+                      title="New Lesson"
+                    />
+                  ) : (
+                    ""
+                  )}
+                  {showLessonForm && segmentFocus === segmentId ? (
+                    <NewItemInput
+                      value={newLessonText}
+                      handleChange={e => setNewLessonText(e.target.value)}
+                      handleSubmit={() =>
+                        handleNewLesson(segmentId, segments[segmentId].lessons)
+                      }
+                      inputName="Lesson Name"
+                      handleCancel={cancelLessonInput}
+                    />
+                  ) : (
+                    ""
+                  )}
+                </NewItemDiv>
+              ) : (
+                ""
+              )}
+            </ExpansionPanel>
+          </>
         ));
     } else {
       return <StyledListItem>No segments yet</StyledListItem>;

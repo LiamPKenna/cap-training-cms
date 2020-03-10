@@ -10,5 +10,5 @@ export const PageWrapDiv = styled.div`
 
 export const NewItemDiv = styled.div`
   text-align: center;
-  margin-top: 2rem;
+  margin-top: 0.5rem;
 `;
