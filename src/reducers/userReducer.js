@@ -18,7 +18,6 @@ const userReducer = (state = { admin: false }, action) => {
       return newState;
     case c.COMPLETE_LESSON:
       newState.completedLessons = action.completedLessons;
-      console.log(newState);
       return newState;
     default:
       return state;
