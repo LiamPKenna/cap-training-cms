@@ -3,10 +3,16 @@ import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import Loading from "../Loading";
 import NewElementSelector from "./NewElementSelector";
-import { createElement, addVideo, addPicture } from "../../actions";
+import {
+  createElement,
+  addVideo,
+  addPicture,
+  lessonCompleted
+} from "../../actions";
 import VideoBlock from "./videoElements/VideoBlock";
 import MainLessonTitle from "./elements/MainLessonTitle";
 import LessonElement from "./LessonElement";
+import Button from "@material-ui/core/Button";
 
 const Lesson = props => {
   const { lessonId } = useParams();
@@ -25,6 +31,13 @@ const Lesson = props => {
       );
     }
   };
+
+  const markComplete = params => {
+    props.dispatch(
+      lessonCompleted({ lessonId, currentUser: props.currentUser })
+    );
+  };
+
   const makePage = (fullLessonContent, lessonId) => {
     return fullLessonContent.map((e, i) => (
       <LessonElement
@@ -56,6 +69,15 @@ const Lesson = props => {
       ) : (
         ""
       )}
+      <Button
+        variant="contained"
+        color="primary"
+        component="span"
+        fullWidth
+        onClick={markComplete}
+      >
+        Mark Complete
+      </Button>
     </div>
   ) : (
     <Loading />
@@ -65,7 +87,8 @@ const Lesson = props => {
 const mapStateToProps = state => {
   return {
     lessons: state.lessons,
-    admin: state.users.admin
+    admin: state.users.admin,
+    currentUser: state.users.currentUser
   };
 };
 

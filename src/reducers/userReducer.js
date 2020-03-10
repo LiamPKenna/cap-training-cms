@@ -8,6 +8,7 @@ const userReducer = (state = { admin: false }, action) => {
   switch (type) {
     case c.SET_USER:
       newState.admin = action.admin;
+      newState.currentUser = action.user.email.split(".").join("");
       return newState;
     case c.ADD_USER:
       newState[action.email.split(".").join("")] = {

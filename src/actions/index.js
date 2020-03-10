@@ -301,7 +301,7 @@ export const moveElement = params => {
     move = before.pop();
     newContent = [...before, element, move, ...after];
   }
-  var updates = {};
+  const updates = {};
   updates["/lessons/" + lessonId + "/content"] = newContent;
   db.ref().update(updates);
   return {
@@ -311,3 +311,11 @@ export const moveElement = params => {
     direction: direction
   };
 };
+
+export const lessonCompleted = (params) => {
+  const updates = {};
+  updates["/users/" + params.currentUser + "/completedCourses/" + params.lessonId] = true;
+  db.ref().update(updates);
+  console.log(updates);
+  return {type: 'none'};
+}
