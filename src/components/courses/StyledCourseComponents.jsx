@@ -12,3 +12,8 @@ export const NewItemDiv = styled.div`
   text-align: center;
   margin-top: 0.5rem;
 `;
+
+export const CourseTitleHeader = styled.h1`
+  text-align: center;
+  margin-bottom: 2rem;
+`;
