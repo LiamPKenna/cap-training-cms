@@ -338,3 +338,21 @@ export const getCompletedLessons = currentUser => {
       });
   };
 };
+
+export const getAllUsers = params => {
+  return async dispatch => {
+    return db
+      .ref("/users")
+      .once("value")
+      .then(snap => {
+        if (snap.val()) {
+          dispatch({
+            type: c.ALL_USERS,
+            allUsers: snap.val()
+          });
+        } else {
+          dispatch({ type: "none" });
+        }
+      });
+  };
+};
