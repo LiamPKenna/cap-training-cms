@@ -51,6 +51,7 @@ const InputLabelHeader = styled.h6`
   text-align: center;
   margin: 0;
   padding: 1rem 1.25rem;
+  font-size: 1rem;
 `;
 
 const LessonInput = props => {

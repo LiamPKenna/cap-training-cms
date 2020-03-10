@@ -24,6 +24,7 @@ const InputLabelHeader = styled.h6`
   margin: 0;
   padding: 1rem 1.25rem;
   border-bottom: 1px solid lightgrey;
+  font-size: 1rem;
 `;
 
 const NewElementGrid = styled.div`
