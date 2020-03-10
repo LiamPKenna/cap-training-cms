@@ -10,6 +10,7 @@ const MainGrid = styled.div`
   display: grid;
   gridtemplatecolumns: 70px 1fr 70px;
   backgroundcolor: #f5f5f5;
+  border: 1px solid rgb(175, 174, 174);
 `;
 
 const NewItemInput = props => {
