@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import CancelIcon from "@material-ui/icons/Cancel";
@@ -12,10 +12,25 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 import { updateText, deleteText, moveElement } from "../../actions";
+import {
+  Editor,
+  EditorState,
+  RichUtils,
+  convertToRaw,
+  convertFromHTML,
+  ContentState
+} from "draft-js";
 import styled from "styled-components";
+import draftToHtml from "draftjs-to-html";
 
 const InputDiv = styled.div`
   margin: 20px 0;
+`;
+
+const EditorWrap = styled.div`
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 1rem;
 `;
 
 const InputGridDiv = styled.div`
@@ -51,10 +66,42 @@ const LessonInput = props => {
     changeAlign,
     align
   } = props;
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  useEffect(() => {
+    if (value) {
+      const blocksFromHTML = convertFromHTML(value);
+      const state = ContentState.createFromBlockArray(
+        blocksFromHTML.contentBlocks,
+        blocksFromHTML.entityMap
+      );
+      const newEditorState = EditorState.createWithContent(state);
+      setEditorState(newEditorState);
+    }
+  }, [value]);
+
+  const handleKeyCommand = (command, editorState) => {
+    const newState = RichUtils.handleKeyCommand(editorState, command);
+    if (newState) {
+      setEditorState(newState);
+      return "handled";
+    }
+    return "not-handled";
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (element !== "picture" && element !== "break") {
+    if (element === "text") {
+      const rawTextElement = convertToRaw(editorState.getCurrentContent());
+      const html = draftToHtml(rawTextElement);
+      dispatch(
+        updateText({
+          elementIndex: elementIndex,
+          content: html,
+          lessonId: lessonId
+        })
+      );
+    } else if (element !== "picture" && element !== "break") {
       dispatch(
         updateText({
           elementIndex: elementIndex,
@@ -101,14 +148,26 @@ const LessonInput = props => {
             {element === "break" || element === "picture" ? (
               <div></div>
             ) : (
-              <TextField
-                required
-                multiline
-                value={value}
-                onChange={handleChange}
-                fullWidth
-                variant="filled"
-              />
+              <>
+                {element === "text" ? (
+                  <EditorWrap>
+                    <Editor
+                      editorState={editorState}
+                      handleKeyCommand={handleKeyCommand}
+                      onChange={setEditorState}
+                    />
+                  </EditorWrap>
+                ) : (
+                  <TextField
+                    required
+                    multiline
+                    value={value}
+                    onChange={handleChange}
+                    fullWidth
+                    variant="filled"
+                  />
+                )}
+              </>
             )}
             <UpDownDiv element={element}>
               <div></div>
@@ -118,7 +177,9 @@ const LessonInput = props => {
               <Button onClick={() => handleMove("down")}>
                 <ArrowDownwardIcon />
               </Button>
-              {element === "break" || element === "picture" ? (
+              {element === "break" ||
+              element === "picture" ||
+              element === "text" ? (
                 ""
               ) : (
                 <>
