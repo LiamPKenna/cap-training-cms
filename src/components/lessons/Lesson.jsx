@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
-import Loading from "../Loading";
+import Loading from "../utilities/Loading";
 import NewElementSelector from "./NewElementSelector";
 import {
   createElement,
