@@ -4,6 +4,7 @@ import styled from "styled-components";
 const CompletedDiv = styled.div`
   width: 100%;
   padding: 1rem 0;
+  margin-top: 1rem;
   background-color: lightgreen;
   color: black;
   text-align: center;
