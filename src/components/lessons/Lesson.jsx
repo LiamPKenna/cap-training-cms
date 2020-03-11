@@ -2,7 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Loading from '../utilities/Loading';
+import BackLink from '../utilities/BackLink';
 import NewElementSelector from './NewElementSelector';
+import { Link } from 'react-router-dom';
 import {
   createElement,
   addVideo,
@@ -80,16 +82,22 @@ const Lesson = props => {
       {props.completedLessons && props.completedLessons[lessonId] ? (
         ''
       ) : (
-        <Button
-          variant="contained"
-          color="primary"
-          component="span"
-          fullWidth
-          onClick={markComplete}
-        >
-          Mark Complete
-        </Button>
+        <>
+          <Button
+            variant="contained"
+            color="primary"
+            component="span"
+            fullWidth
+            onClick={markComplete}
+          >
+            Mark Complete
+          </Button>
+          <br />
+        </>
       )}
+      <Link to={'/courses/' + lesson.courseId}>
+        <BackLink>Back to Course</BackLink>
+      </Link>
     </div>
   ) : (
     <Loading />

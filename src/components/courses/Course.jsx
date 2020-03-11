@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Loading from '../utilities/Loading';
 import CheckMark from '../utilities/CheckMark';
+import BackLink from '../utilities/BackLink';
 import { addSegment, newLesson } from '../../actions';
 import NewItemButton from './NewItemButton';
 import NewItemInput from './NewItemInput';
@@ -12,7 +13,6 @@ import {
   NewItemDiv,
   StyledListItem,
   CourseTitleHeader,
-  BackLink,
 } from './StyledCourseComponents';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
