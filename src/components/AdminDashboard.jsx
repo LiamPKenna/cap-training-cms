@@ -37,10 +37,10 @@ const AdminDashboard = props => {
   const makeCompletedLessons = completedLessons => {
     return completedLessons
       ? Object.keys(completedLessons)
-          .filter(l => l !== 'default')
-          .map((l, i) => (
-            <StyledListItem key={i}>{props.lessons[l].title}</StyledListItem>
-          ))
+        .filter(l => l !== 'default')
+        .map((l, i) => (
+          <StyledListItem key={i}>{props.lessons[l].title}</StyledListItem>
+        ))
       : '';
   };
 

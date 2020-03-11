@@ -5,19 +5,20 @@ import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
 import { addUser } from '../actions';
 import { useDispatch } from 'react-redux';
+import { Alert, AlertTitle } from '@material-ui/lab';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
+  const [errorText, setErrorText] = useState('');
   const dispatch = useDispatch();
   const history = useHistory();
   const handleSignIn = e => {
     e.preventDefault();
     auth.signInWithEmailAndPassword(email, password).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log(errorCode, errorMessage);
+      const errorMessage = error.message;
+      handleError(errorMessage);
     });
     history.push('/');
   };
@@ -26,16 +27,34 @@ const SignIn = () => {
     auth
       .createUserWithEmailAndPassword(email, password)
       .catch(function(error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+        const errorMessage = error.message;
+        handleError(errorMessage);
       })
       .then(dispatch(addUser(email)));
   };
+
+  const handleError = errorMessage => {
+    setError(true);
+    setErrorText(errorMessage);
+    setTimeout(() => {
+      setError(false);
+      setErrorText('');
+    }, 5000);
+  };
+
   return (
     <div>
+      {error ? (
+        <Alert severity="error">
+          <AlertTitle>Error</AlertTitle>
+          {errorText}
+        </Alert>
+      ) : (
+        ''
+      )}
       <form action="" onSubmit={handleSignIn}>
         <TextField
+          error={error}
           variant="outlined"
           margin="normal"
           required
@@ -48,6 +67,7 @@ const SignIn = () => {
           autoFocus
         />
         <TextField
+          error={error}
           variant="outlined"
           margin="normal"
           required
