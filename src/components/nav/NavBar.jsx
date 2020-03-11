@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import Button from "@material-ui/core/Button";
-import MenuIcon from "@material-ui/icons/Menu";
-import NavDrawer from "./NavDrawer";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import Button from '@material-ui/core/Button';
+import MenuIcon from '@material-ui/icons/Menu';
+import NavDrawer from './NavDrawer';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 const NavDiv = styled.div`
   height: 75px;
@@ -35,10 +35,10 @@ const NavBar = props => {
     );
   };
 
-  const toggleDrawer = (side, open) => event => {
+  const toggleDrawer = () => event => {
     if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
+      event.type === 'keydown' &&
+      (event.key === 'Tab' || event.key === 'Shift')
     ) {
       return;
     }
@@ -49,7 +49,7 @@ const NavBar = props => {
     <>
       <NavDiv className="nav-bar">
         <Link to="/">{makeHero()}</Link>
-        <Button onClick={toggleDrawer("right", true)}>
+        <Button onClick={toggleDrawer('right', true)}>
           <MenuIcon />
         </Button>
       </NavDiv>
@@ -68,7 +68,7 @@ const mapStateToProps = state => {
   return {
     brand: state.brand,
     links: state.links,
-    admin: state.users.admin
+    admin: state.users.admin,
   };
 };
 

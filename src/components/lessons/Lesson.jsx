@@ -1,28 +1,28 @@
-import React from "react";
-import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
-import Loading from "../utilities/Loading";
-import NewElementSelector from "./NewElementSelector";
+import React from 'react';
+import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import Loading from '../utilities/Loading';
+import NewElementSelector from './NewElementSelector';
 import {
   createElement,
   addVideo,
   addPicture,
-  lessonCompleted
-} from "../../actions";
-import VideoBlock from "./videoElements/VideoBlock";
-import MainLessonTitle from "./elements/MainLessonTitle";
-import LessonElement from "./LessonElement";
-import Button from "@material-ui/core/Button";
-import LessonCompleted from "./elements/LessonCompleted";
+  lessonCompleted,
+} from '../../actions';
+import VideoBlock from './videoElements/VideoBlock';
+import MainLessonTitle from './elements/MainLessonTitle';
+import LessonElement from './LessonElement';
+import Button from '@material-ui/core/Button';
+import LessonCompleted from './elements/LessonCompleted';
 
 const Lesson = props => {
   const { lessonId } = useParams();
   const lesson = props.lessons[lessonId];
 
   const addNewElement = newElementType => {
-    if (newElementType === "video") {
+    if (newElementType === 'video') {
       props.dispatch(addVideo(lesson.lessonId));
-    } else if (newElementType === "picture") {
+    } else if (newElementType === 'picture') {
       props.dispatch(
         addPicture({ lessonId: lesson.lessonId, allContent: lesson.content })
       );
@@ -33,7 +33,7 @@ const Lesson = props => {
     }
   };
 
-  const markComplete = params => {
+  const markComplete = () => {
     console.log(props.users);
 
     props.dispatch(
@@ -58,7 +58,7 @@ const Lesson = props => {
       {props.completedLessons && props.completedLessons[lessonId] ? (
         <LessonCompleted />
       ) : (
-        ""
+        ''
       )}
       <MainLessonTitle title={lesson.title} />
       {lesson.video ? (
@@ -69,16 +69,16 @@ const Lesson = props => {
           admin={props.admin}
         />
       ) : (
-        ""
+        ''
       )}
       {makePage(lesson.content, lessonId)}
       {props.admin ? (
         <NewElementSelector handleNewElement={addNewElement} />
       ) : (
-        ""
+        ''
       )}
       {props.completedLessons && props.completedLessons[lessonId] ? (
-        ""
+        ''
       ) : (
         <Button
           variant="contained"
@@ -101,7 +101,7 @@ const mapStateToProps = state => {
     lessons: state.lessons,
     admin: state.users.admin,
     currentUser: state.users.currentUser,
-    completedLessons: state.users.completedLessons
+    completedLessons: state.users.completedLessons,
   };
 };
 
