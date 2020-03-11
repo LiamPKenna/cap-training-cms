@@ -181,7 +181,7 @@ const Course = props => {
           )}
         </div>
         <Link to="/courses">
-          <BackLink>Back to Courses</BackLink>
+          <BackLink text="Back to Courses" />
         </Link>
       </PageWrapDiv>
     );

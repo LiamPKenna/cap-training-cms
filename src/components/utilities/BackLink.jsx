@@ -6,10 +6,12 @@ const StyledBackLink = styled.h3`
   margin-top: 2rem;
 `;
 
-const BackLink = () => {
+const BackLink = props => {
+  console.log(props.text);
+
   return (
     <div>
-      <StyledBackLink />
+      <StyledBackLink>{props.text}</StyledBackLink>
     </div>
   );
 };

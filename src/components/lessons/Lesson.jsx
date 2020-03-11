@@ -96,7 +96,7 @@ const Lesson = props => {
         </>
       )}
       <Link to={'/courses/' + lesson.courseId}>
-        <BackLink>Back to Course</BackLink>
+        <BackLink text="Back to Course" />
       </Link>
     </div>
   ) : (
