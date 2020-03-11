@@ -1,7 +1,7 @@
-import React from "react";
-import EditIcon from "@material-ui/icons/Edit";
-import Button from "@material-ui/core/Button";
-import styled from "styled-components";
+import React from 'react';
+import EditIcon from '@material-ui/icons/Edit';
+import Button from '@material-ui/core/Button';
+import styled from 'styled-components';
 
 const PencilDiv = styled.div`
   margin: 0;

@@ -7,7 +7,7 @@
   "extends": ["eslint:recommended", "plugin:react/recommended"],
   "parserOptions": {
     "ecmaFeatures": {
-      "ecmaVersion": 8,
+      "ecmaVersion": 6,
       "experimentalObjectRestSpread": true,
       "jsx": true
     },
@@ -28,7 +28,7 @@
     "react/no-direct-mutation-state": 2,
     "react/jsx-indent-props": ["error", 2],
     "react/jsx-pascal-case": 2,
-    "react/prop-types": 2,
+    "react/prop-types": 0,
     "indent": ["error", 2],
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "single"],

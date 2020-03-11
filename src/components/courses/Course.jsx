@@ -1,32 +1,32 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import Loading from "../utilities/Loading";
-import CheckMark from "../utilities/CheckMark";
-import { addSegment, newLesson } from "../../actions";
-import NewItemButton from "./NewItemButton";
-import NewItemInput from "./NewItemInput";
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import Loading from '../utilities/Loading';
+import CheckMark from '../utilities/CheckMark';
+import { addSegment, newLesson } from '../../actions';
+import NewItemButton from './NewItemButton';
+import NewItemInput from './NewItemInput';
 import {
   PageWrapDiv,
   NewItemDiv,
   StyledListItem,
   CourseTitleHeader,
-  BackLink
-} from "./StyledCourseComponents";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import Typography from "@material-ui/core/Typography";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+  BackLink,
+} from './StyledCourseComponents';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const Course = props => {
   const { courseId } = useParams();
   const course = props.courses[courseId];
   const [showSegmentForm, setShowSegmentForm] = useState(false);
-  const [newSegmentText, setNewSegmentText] = useState("");
+  const [newSegmentText, setNewSegmentText] = useState('');
   const [showLessonForm, setShowLessonForm] = useState(false);
-  const [newLessonText, setNewLessonText] = useState("");
+  const [newLessonText, setNewLessonText] = useState('');
   const [segmentFocus, setSegmentFocus] = useState(null);
   const [expanded, setExpanded] = useState(false);
 
@@ -37,7 +37,7 @@ const Course = props => {
   const makeLessons = lessons => {
     if (lessons && Object.keys(lessons).length > 1) {
       return lessons
-        .filter(l => l.title !== "default")
+        .filter(l => l.title !== 'default')
         .map(lesson => (
           <StyledListItem key={lesson.lessonId}>
             <Link to={`/lessons/${lesson.lessonId}`}>{lesson.title}</Link>
@@ -45,7 +45,7 @@ const Course = props => {
             props.completedLessons[lesson.lessonId] ? (
               <CheckMark />
             ) : (
-              ""
+              ''
             )}
           </StyledListItem>
         ));
@@ -62,7 +62,7 @@ const Course = props => {
   const makeSegments = segments => {
     if (segments && Object.keys(segments).length > 1) {
       return Object.keys(segments)
-        .filter(segmentId => segmentId !== "default")
+        .filter(segmentId => segmentId !== 'default')
         .map(segmentId => (
           <ExpansionPanel
             expanded={expanded === `panel${segmentId}`}
@@ -88,7 +88,7 @@ const Course = props => {
                     title="New Lesson"
                   />
                 ) : (
-                  ""
+                  ''
                 )}
                 {showLessonForm && segmentFocus === segmentId ? (
                   <NewItemInput
@@ -101,11 +101,11 @@ const Course = props => {
                     handleCancel={cancelLessonInput}
                   />
                 ) : (
-                  ""
+                  ''
                 )}
               </NewItemDiv>
             ) : (
-              ""
+              ''
             )}
           </ExpansionPanel>
         ));
@@ -117,7 +117,7 @@ const Course = props => {
   const handleNewSegment = async () => {
     setShowSegmentForm(false);
     const action = await addSegment(newSegmentText, courseId);
-    setNewSegmentText("");
+    setNewSegmentText('');
     props.dispatch(action);
   };
 
@@ -131,17 +131,17 @@ const Course = props => {
     );
     props.dispatch(lessonAction[1]);
     props.dispatch(lessonAction[0]);
-    setNewLessonText("");
+    setNewLessonText('');
   };
 
   const cancelSegmentInput = () => {
     setShowSegmentForm(false);
-    setNewSegmentText("");
+    setNewSegmentText('');
   };
 
   const cancelLessonInput = () => {
     setShowLessonForm(false);
-    setNewLessonText("");
+    setNewLessonText('');
     setSegmentFocus(null);
   };
 
@@ -162,7 +162,7 @@ const Course = props => {
                   title="New Segment"
                 />
               ) : (
-                ""
+                ''
               )}
               {showSegmentForm ? (
                 <NewItemInput
@@ -173,11 +173,11 @@ const Course = props => {
                   handleCancel={cancelSegmentInput}
                 />
               ) : (
-                ""
+                ''
               )}
             </NewItemDiv>
           ) : (
-            ""
+            ''
           )}
         </div>
         <Link to="/courses">
@@ -192,7 +192,7 @@ const mapPropsToState = state => {
   return {
     courses: state.courses,
     admin: state.users.admin,
-    completedLessons: state.users.completedLessons
+    completedLessons: state.users.completedLessons,
   };
 };
 

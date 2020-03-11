@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import { storage } from "../../firebase";
-import { useDispatch } from "react-redux";
-import { updatePicture } from "../../actions";
-import { connect } from "react-redux";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import { storage } from '../../firebase';
+import { useDispatch } from 'react-redux';
+import { updatePicture } from '../../actions';
+import { connect } from 'react-redux';
 
 const ImageInputDiv = styled.div`
   align-items: center;
@@ -31,7 +31,7 @@ const SelectedDiv = styled.div`
 
 const ImageUpload = props => {
   const [image, setImage] = useState(null);
-  const [altText, setAltText] = useState("");
+  const [altText, setAltText] = useState('');
   const [uploadProgress, setUploadProgress] = useState(0);
   const dispatch = useDispatch();
 
@@ -51,7 +51,7 @@ const ImageUpload = props => {
     e.preventDefault();
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
     uploadTask.on(
-      "state_changed",
+      'state_changed',
       snap => {
         setUploadProgress(
           Math.floor((snap.bytesTransferred / snap.totalBytes) * 100)
@@ -60,7 +60,7 @@ const ImageUpload = props => {
       error => console.log(error),
       () => {
         storage
-          .ref("images")
+          .ref('images')
           .child(image.name)
           .getDownloadURL()
           .then(url => {
@@ -103,7 +103,7 @@ const ImageUpload = props => {
             {image ? (
               <SelectedDiv>{`Image selected: ${image.name}`}</SelectedDiv>
             ) : (
-              ""
+              ''
             )}
             <TextField
               required
@@ -119,7 +119,7 @@ const ImageUpload = props => {
           </form>
         </ImageInputDiv>
       ) : (
-        ""
+        ''
       )}
     </>
   );

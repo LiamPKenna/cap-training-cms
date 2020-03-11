@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-import CancelIcon from "@material-ui/icons/Cancel";
-import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
-import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
-import FormatAlignLeftIcon from "@material-ui/icons/FormatAlignLeft";
-import FormatAlignRightIcon from "@material-ui/icons/FormatAlignRight";
-import FormatAlignCenterIcon from "@material-ui/icons/FormatAlignCenter";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Paper from "@material-ui/core/Paper";
-import { updateText, deleteText, moveElement } from "../../actions";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import CancelIcon from '@material-ui/icons/Cancel';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import FormatAlignLeftIcon from '@material-ui/icons/FormatAlignLeft';
+import FormatAlignRightIcon from '@material-ui/icons/FormatAlignRight';
+import FormatAlignCenterIcon from '@material-ui/icons/FormatAlignCenter';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Paper from '@material-ui/core/Paper';
+import { updateText, deleteText, moveElement } from '../../actions';
 import {
   Editor,
   EditorState,
@@ -19,9 +19,9 @@ import {
   convertToRaw,
   convertFromHTML,
   ContentState
-} from "draft-js";
-import styled from "styled-components";
-import draftToHtml from "draftjs-to-html";
+} from 'draft-js';
+import styled from 'styled-components';
+import draftToHtml from 'draftjs-to-html';
 
 const InputDiv = styled.div`
   margin: 20px 0;
@@ -42,9 +42,9 @@ const InputGridDiv = styled.div`
 const UpDownDiv = styled.div`
   display: grid;
   grid-template-columns: ${props =>
-    props.element === "break" || props.element === "picture"
-      ? "1fr 60px 60px 1fr"
-      : "1fr 60px 60px 60px 60px 60px"};
+    props.element === 'break' || props.element === 'picture'
+      ? '1fr 60px 60px 1fr'
+      : '1fr 60px 60px 60px 60px 60px'};
 `;
 
 const InputLabelHeader = styled.h6`
@@ -85,14 +85,14 @@ const LessonInput = props => {
     const newState = RichUtils.handleKeyCommand(editorState, command);
     if (newState) {
       setEditorState(newState);
-      return "handled";
+      return 'handled';
     }
-    return "not-handled";
+    return 'not-handled';
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (element === "text") {
+    if (element === 'text') {
       const rawTextElement = convertToRaw(editorState.getCurrentContent());
       const html = draftToHtml(rawTextElement);
       dispatch(
@@ -102,7 +102,7 @@ const LessonInput = props => {
           lessonId: lessonId
         })
       );
-    } else if (element !== "picture" && element !== "break") {
+    } else if (element !== 'picture' && element !== 'break') {
       dispatch(
         updateText({
           elementIndex: elementIndex,
@@ -146,11 +146,11 @@ const LessonInput = props => {
           </Button>
           <div>
             <InputLabelHeader>{element.toUpperCase()}</InputLabelHeader>
-            {element === "break" || element === "picture" ? (
+            {element === 'break' || element === 'picture' ? (
               <div></div>
             ) : (
               <>
-                {element === "text" ? (
+                {element === 'text' ? (
                   <EditorWrap>
                     <Editor
                       editorState={editorState}
@@ -172,38 +172,38 @@ const LessonInput = props => {
             )}
             <UpDownDiv element={element}>
               <div></div>
-              <Button onClick={() => handleMove("up")}>
+              <Button onClick={() => handleMove('up')}>
                 <ArrowUpwardIcon />
               </Button>
-              <Button onClick={() => handleMove("down")}>
+              <Button onClick={() => handleMove('down')}>
                 <ArrowDownwardIcon />
               </Button>
-              {element === "break" ||
-              element === "picture" ||
-              element === "text" ? (
-                ""
-              ) : (
-                <>
-                  <Button
-                    disabled={align === "left"}
-                    onClick={() => changeAlign("left")}
-                  >
-                    <FormatAlignLeftIcon />
-                  </Button>
-                  <Button
-                    disabled={align === "center"}
-                    onClick={() => changeAlign("center")}
-                  >
-                    <FormatAlignCenterIcon />
-                  </Button>
-                  <Button
-                    disabled={align === "right"}
-                    onClick={() => changeAlign("right")}
-                  >
-                    <FormatAlignRightIcon />
-                  </Button>
-                </>
-              )}
+              {element === 'break' ||
+              element === 'picture' ||
+              element === 'text' ? (
+                  ''
+                ) : (
+                  <>
+                    <Button
+                      disabled={align === 'left'}
+                      onClick={() => changeAlign('left')}
+                    >
+                      <FormatAlignLeftIcon />
+                    </Button>
+                    <Button
+                      disabled={align === 'center'}
+                      onClick={() => changeAlign('center')}
+                    >
+                      <FormatAlignCenterIcon />
+                    </Button>
+                    <Button
+                      disabled={align === 'right'}
+                      onClick={() => changeAlign('right')}
+                    >
+                      <FormatAlignRightIcon />
+                    </Button>
+                  </>
+                )}
             </UpDownDiv>
           </div>
           <Button color="primary" onClick={toggleEdit}>

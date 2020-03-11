@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import Loading from "../utilities/Loading";
-import { addCourse } from "../../actions";
-import NewItemButton from "./NewItemButton";
-import NewItemInput from "./NewItemInput";
-import CourseLink from "./CourseLink";
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import Loading from '../utilities/Loading';
+import { addCourse } from '../../actions';
+import NewItemButton from './NewItemButton';
+import NewItemInput from './NewItemInput';
+import CourseLink from './CourseLink';
 import {
   StyledListItem,
   PageWrapDiv,
   NewItemDiv
-} from "./StyledCourseComponents";
+} from './StyledCourseComponents';
 
 const Courses = props => {
   const [showForm, setShowForm] = useState(false);
-  const [newCourseText, setNewCourseText] = useState("");
+  const [newCourseText, setNewCourseText] = useState('');
 
   const showNewCourseForm = () => {
     setShowForm(true);
@@ -26,7 +26,7 @@ const Courses = props => {
 
   const cancelInput = () => {
     setShowForm(false);
-    setNewCourseText("");
+    setNewCourseText('');
   };
 
   const makeCourses = () => {
@@ -52,10 +52,10 @@ const Courses = props => {
             {!showForm ? (
               <NewItemButton
                 clickHandler={showNewCourseForm}
-                title={"New Course"}
+                title={'New Course'}
               />
             ) : (
-              ""
+              ''
             )}
             {showForm ? (
               <NewItemInput
@@ -66,11 +66,11 @@ const Courses = props => {
                 handleCancel={cancelInput}
               />
             ) : (
-              ""
+              ''
             )}
           </NewItemDiv>
         ) : (
-          ""
+          ''
         )}
       </>
     );
@@ -80,7 +80,7 @@ const Courses = props => {
     <PageWrapDiv>
       <h1>All Courses:</h1>
       <ul>{makeCourses()}</ul>
-      {true ? makeAdminDiv() : ""}
+      {true ? makeAdminDiv() : ''}
     </PageWrapDiv>
   );
 };

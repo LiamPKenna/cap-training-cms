@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-import Button from "@material-ui/core/Button";
-import Paper from "@material-ui/core/Paper";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import styled from "styled-components";
+import React, { useState } from 'react';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import styled from 'styled-components';
 
 const RadioDiv = styled.div`
   display: flex;
@@ -39,7 +39,7 @@ const NewElementPaper = styled(Paper)`
 `;
 
 const NewElementSelector = props => {
-  const [value, setValue] = useState("text");
+  const [value, setValue] = useState('text');
 
   const handleChange = event => {
     setValue(event.target.value);

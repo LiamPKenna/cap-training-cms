@@ -1,30 +1,30 @@
-import React from "react";
-import Drawer from "@material-ui/core/Drawer";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import { Link } from "react-router-dom";
-import links from "../../constants/links";
-import { signOut } from "../../actions";
+import React from 'react';
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import { Link } from 'react-router-dom';
+import links from '../../constants/links';
+import { signOut } from '../../actions';
 
 const NavDrawer = props => {
   const drawerStyle = {
-    position: "fixed",
-    right: "0",
-    left: "auto",
-    width: "150px",
-    boxSizing: "inherit",
-    background: "rgba(0,0,0,0)",
-    display: "block"
+    position: 'fixed',
+    right: '0',
+    left: 'auto',
+    width: '150px',
+    boxSizing: 'inherit',
+    background: 'rgba(0,0,0,0)',
+    display: 'block'
   };
   const drawerListStyle = {
-    background: "#545454",
-    color: "white",
-    height: "100vh"
+    background: '#545454',
+    color: 'white',
+    height: '100vh'
   };
   const linkStyle = {
-    textDecoration: "none",
-    color: "white"
+    textDecoration: 'none',
+    color: 'white'
   };
 
   return (
@@ -49,7 +49,7 @@ const NavDrawer = props => {
               </ListItem>
             </>
           ) : (
-            ""
+            ''
           )}
           {links.map((link, index) => (
             <ListItem button key={index}>
@@ -65,7 +65,7 @@ const NavDrawer = props => {
               </Link>
             </ListItem>
           ) : (
-            ""
+            ''
           )}
         </List>
       </Drawer>

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import EditButton from "../utilities/EditButton";
-import { connect } from "react-redux";
-import CoursesInput from "./CoursesInput";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import EditButton from '../utilities/EditButton';
+import { connect } from 'react-redux';
+import CoursesInput from './CoursesInput';
 
 const CourseLinkHeader = styled.h2`
   :link {
@@ -20,7 +20,7 @@ const CourseLink = props => {
   };
   return (
     <>
-      {admin && !editMode ? <EditButton handleClick={toggleEdit} /> : ""}
+      {admin && !editMode ? <EditButton handleClick={toggleEdit} /> : ''}
       {editMode ? (
         <CoursesInput
           toggleEdit={toggleEdit}
@@ -30,7 +30,7 @@ const CourseLink = props => {
           courseId={courseId}
         />
       ) : (
-        <Link to={`/courses/${courseId}`} style={{ textDecoration: "none" }}>
+        <Link to={`/courses/${courseId}`} style={{ textDecoration: 'none' }}>
           <CourseLinkHeader className="course-links">{title}</CourseLinkHeader>
         </Link>
       )}

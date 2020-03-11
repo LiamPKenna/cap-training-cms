@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import LessonInput from "./LessonInput";
-import EditButton from "../utilities/EditButton";
-import LessonTitle from "./elements/LessonTitle";
-import LessonHeading from "./elements/LessonHeading";
-import LessonSub from "./elements/LessonSub";
-import LessonText from "./elements/LessonText";
-import LessonCode from "./elements/LessonCode";
-import Break from "./elements/Break";
-import PictureBox from "./elements/PictureBox";
+import React, { useState } from 'react';
+import LessonInput from './LessonInput';
+import EditButton from '../utilities/EditButton';
+import LessonTitle from './elements/LessonTitle';
+import LessonHeading from './elements/LessonHeading';
+import LessonSub from './elements/LessonSub';
+import LessonText from './elements/LessonText';
+import LessonCode from './elements/LessonCode';
+import Break from './elements/Break';
+import PictureBox from './elements/PictureBox';
 
 const LessonTextElement = props => {
   const { element, lessonId, elementIndex, fullLessonContent, admin } = props;
@@ -38,7 +38,7 @@ const LessonTextElement = props => {
       />
     ) : (
       <div>
-        {admin ? <EditButton handleClick={toggleEdit} /> : ""}
+        {admin ? <EditButton handleClick={toggleEdit} /> : ''}
         {pickElement()}
       </div>
     );
@@ -46,34 +46,34 @@ const LessonTextElement = props => {
 
   const pickElement = () => {
     switch (element.type) {
-      case "title":
-        return (
-          <LessonTitle content={element.content} format={element.format} />
-        );
-      case "heading":
-        return (
-          <LessonHeading content={element.content} format={element.format} />
-        );
-      case "subHeading":
-        return <LessonSub content={element.content} format={element.format} />;
-      case "text":
-        return <LessonText content={element.content} format={element.format} />;
-      case "code":
-        return <LessonCode content={element.content} format={element.format} />;
-      case "break":
-        return <Break />;
-      case "picture":
-        return (
-          <PictureBox
-            mode={element.mode}
-            pictures={element.pictures}
-            elementIndex={elementIndex}
-            lessonId={lessonId}
-            fullLessonContent={fullLessonContent}
-          />
-        );
-      default:
-        return "";
+    case 'title':
+      return (
+        <LessonTitle content={element.content} format={element.format} />
+      );
+    case 'heading':
+      return (
+        <LessonHeading content={element.content} format={element.format} />
+      );
+    case 'subHeading':
+      return <LessonSub content={element.content} format={element.format} />;
+    case 'text':
+      return <LessonText content={element.content} format={element.format} />;
+    case 'code':
+      return <LessonCode content={element.content} format={element.format} />;
+    case 'break':
+      return <Break />;
+    case 'picture':
+      return (
+        <PictureBox
+          mode={element.mode}
+          pictures={element.pictures}
+          elementIndex={elementIndex}
+          lessonId={lessonId}
+          fullLessonContent={fullLessonContent}
+        />
+      );
+    default:
+      return '';
     }
   };
 

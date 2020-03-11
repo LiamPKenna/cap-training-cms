@@ -11,7 +11,7 @@ import {
   watchFirebaseLessonsRef,
   watchFirebaseCoursesRef,
   getCompletedLessons,
-  getAllUsers
+  getAllUsers,
 } from '../actions';
 import { useDispatch, connect } from 'react-redux';
 import SignIn from './SignIn';
@@ -31,7 +31,7 @@ function App(props) {
         type: c.SET_USER,
         admin: isAdmin,
         user,
-        completedLessons: []
+        completedLessons: [],
       });
       dispatch(getCompletedLessons(user.email.split('.').join('')));
       if (isAdmin) {
@@ -43,7 +43,7 @@ function App(props) {
         type: c.SET_USER,
         admin: false,
         user: false,
-        completedLessons: []
+        completedLessons: [],
       });
     }
   });
@@ -93,7 +93,7 @@ function App(props) {
 
 const mapStateToProps = state => {
   return {
-    admin: state.users.admin
+    admin: state.users.admin,
   };
 };
 

@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import DoneOutlineIcon from "@material-ui/icons/DoneOutline";
+import React from 'react';
+import styled from 'styled-components';
+import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
 
 const CheckDiv = styled.div`
   color: lightgreen;
