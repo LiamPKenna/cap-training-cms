@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { auth } from "../firebase";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import { useHistory } from "react-router-dom";
-import { addUser } from "../actions";
-import { useDispatch } from "react-redux";
+import React, { useState } from 'react';
+import { auth } from '../firebase';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import { useHistory } from 'react-router-dom';
+import { addUser } from '../actions';
+import { useDispatch } from 'react-redux';
 
 const SignIn = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const history = useHistory();
   const handleSignIn = e => {
@@ -19,7 +19,7 @@ const SignIn = () => {
       var errorMessage = error.message;
       console.log(errorCode, errorMessage);
     });
-    history.push("/");
+    history.push('/');
   };
 
   const handleSignUp = () => {

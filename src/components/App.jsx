@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from "react";
-import Lesson from "./lessons/Lesson";
-import Courses from "./courses/Courses";
-import Course from "./courses/Course";
-import NavBar from "./nav/NavBar";
-import Home from "./Home";
-import AdminDashboard from "./AdminDashboard";
-import Container from "@material-ui/core/Container";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import Lesson from './lessons/Lesson';
+import Courses from './courses/Courses';
+import Course from './courses/Course';
+import NavBar from './nav/NavBar';
+import Home from './Home';
+import AdminDashboard from './AdminDashboard';
+import Container from '@material-ui/core/Container';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import {
   watchFirebaseLessonsRef,
   watchFirebaseCoursesRef,
   getCompletedLessons,
   getAllUsers
-} from "../actions";
-import { useDispatch, connect } from "react-redux";
-import SignIn from "./SignIn";
-import { auth } from "../firebase";
-import constants from "../constants";
+} from '../actions';
+import { useDispatch, connect } from 'react-redux';
+import SignIn from './SignIn';
+import { auth } from '../firebase';
+import constants from '../constants';
 const { c, adminEmails } = constants;
 
 function App(props) {
@@ -24,7 +24,7 @@ function App(props) {
   const [currentUser, setCurrentUser] = useState(null);
 
   auth.onAuthStateChanged(function(user) {
-    const isAdmin = adminEmails.includes(user.email);
+    const isAdmin = user ? adminEmails.includes(user.email) : false;
     if (user) {
       setCurrentUser(user);
       dispatch({
@@ -33,7 +33,7 @@ function App(props) {
         user,
         completedLessons: []
       });
-      dispatch(getCompletedLessons(user.email.split(".").join("")));
+      dispatch(getCompletedLessons(user.email.split('.').join('')));
       if (isAdmin) {
         dispatch(getAllUsers());
       }

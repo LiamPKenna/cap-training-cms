@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import styled from "styled-components";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import Typography from "@material-ui/core/Typography";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import styled from 'styled-components';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 export const StyledListItem = styled.li`
   margin: 1rem 3rem 0.5rem;
@@ -37,11 +37,11 @@ const AdminDashboard = props => {
   const makeCompletedLessons = completedLessons => {
     return completedLessons
       ? Object.keys(completedLessons)
-          .filter(l => l !== "default")
+          .filter(l => l !== 'default')
           .map((l, i) => (
             <StyledListItem key={i}>{props.lessons[l].title}</StyledListItem>
           ))
-      : "";
+      : '';
   };
 
   const makeUser = (user, index) => {
@@ -73,7 +73,7 @@ const AdminDashboard = props => {
       <TitleText>Admin Dashboard</TitleText>
       {allUsers
         ? Object.keys(allUsers).map((u, i) => makeUser(allUsers[u], i) || u)
-        : ""}
+        : ''}
     </div>
   );
 };
@@ -81,7 +81,7 @@ const AdminDashboard = props => {
 const mapStateToProps = state => {
   return {
     allUsers: state.users.allUsers,
-    lessons: state.lessons
+    lessons: state.lessons,
   };
 };
 

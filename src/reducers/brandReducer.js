@@ -4,17 +4,17 @@ const initialState = mockBrand;
 const brandReducer = (state = initialState, action) => {
   const { type } = action;
   switch (type) {
-    case 'UPDATE':
-      console.log(action);
+  case 'UPDATE':
+    console.log(action);
 
 
-      break;
+    break;
 
-    default:
-      break;
+  default:
+    break;
   }
 
   return state;
-}
+};
 
 export default brandReducer;
