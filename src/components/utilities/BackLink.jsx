@@ -7,8 +7,6 @@ const StyledBackLink = styled.h3`
 `;
 
 const BackLink = props => {
-  console.log(props.text);
-
   return (
     <div>
       <StyledBackLink>{props.text}</StyledBackLink>
