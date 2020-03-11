@@ -11,7 +11,8 @@ import {
   PageWrapDiv,
   NewItemDiv,
   StyledListItem,
-  CourseTitleHeader
+  CourseTitleHeader,
+  BackLink
 } from "./StyledCourseComponents";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
@@ -179,6 +180,9 @@ const Course = props => {
             ""
           )}
         </div>
+        <Link to="/courses">
+          <BackLink>Back to Courses</BackLink>
+        </Link>
       </PageWrapDiv>
     );
   }

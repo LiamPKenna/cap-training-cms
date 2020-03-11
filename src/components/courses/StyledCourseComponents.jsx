@@ -17,3 +17,8 @@ export const CourseTitleHeader = styled.h1`
   text-align: center;
   margin-bottom: 2rem;
 `;
+
+export const BackLink = styled.h3`
+  text-align: center;
+  margin-top: 2rem;
+`;
