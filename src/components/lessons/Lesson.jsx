@@ -74,11 +74,12 @@ const Lesson = props => {
         ''
       )}
       {makePage(lesson.content, lessonId)}
-      {props.admin ? (
-        <NewElementSelector handleNewElement={addNewElement} />
-      ) : (
-        ''
-      )}
+
+      <NewElementSelector
+        handleNewElement={addNewElement}
+        admin={props.admin}
+      />
+
       {props.completedLessons && props.completedLessons[lessonId] ? (
         ''
       ) : (

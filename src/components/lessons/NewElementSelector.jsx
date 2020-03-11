@@ -40,6 +40,7 @@ const NewElementPaper = styled(Paper)`
 
 const NewElementSelector = props => {
   const [value, setValue] = useState('text');
+  if (!props.admin) return '';
 
   const handleChange = event => {
     setValue(event.target.value);
