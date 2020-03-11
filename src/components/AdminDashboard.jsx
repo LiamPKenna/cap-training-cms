@@ -11,6 +11,21 @@ export const StyledListItem = styled.li`
   margin: 1rem 3rem 0.5rem;
 `;
 
+const TitleText = styled.h1`
+  font-size: 3rem;
+  text-align: center;
+  margin: 2rem 0;
+`;
+
+const SecondaryText = styled(Typography)`
+  color: darkgrey;
+`;
+
+const SecondaryDiv = styled.div`
+  text-align: right;
+  width: 100%;
+`;
+
 const AdminDashboard = props => {
   const { allUsers } = props;
   const [expanded, setExpanded] = useState(false);
@@ -42,6 +57,9 @@ const AdminDashboard = props => {
           id={`panel${index}`}
         >
           <Typography>{user.email}</Typography>
+          <SecondaryDiv>
+            <SecondaryText>Completed Lessons</SecondaryText>
+          </SecondaryDiv>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <ul>{makeCompletedLessons(user.completedLessons)}</ul>
@@ -52,7 +70,7 @@ const AdminDashboard = props => {
 
   return (
     <div>
-      <h1>Admin Dashboard</h1>
+      <TitleText>Admin Dashboard</TitleText>
       {allUsers
         ? Object.keys(allUsers).map((u, i) => makeUser(allUsers[u], i) || u)
         : ""}
