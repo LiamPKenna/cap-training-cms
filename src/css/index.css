@@ -16,10 +16,6 @@ body {
   box-shadow: 1px 1px 3px rgb(175, 174, 174);
 }
 
-.course-links {
-  color: rgb(11, 55, 65);
-}
-
 @media (min-width: 500px) {
   html {
     font-size: 14px;
