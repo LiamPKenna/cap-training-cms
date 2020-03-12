@@ -1,4 +1,4 @@
-import constants from "../constants";
+import constants from '../constants';
 const c = constants.c;
 
 const initialState = {};
@@ -10,10 +10,6 @@ const coursesReducer = (state = initialState, action) => {
   let newSegment;
   let newLessons;
   switch (type) {
-    case "UPDATE":
-      console.log(action);
-
-      break;
     case c.RECEIVE_COURSE:
       newState[action.course.id] = action.course;
       return newState;
@@ -22,7 +18,7 @@ const coursesReducer = (state = initialState, action) => {
       newSegments = { ...newCourse.segments };
       newSegments[action.segmentId] = {
         title: action.title,
-        lessons: action.lessons
+        lessons: action.lessons,
       };
       newCourse.segments = newSegments;
       newState[action.courseId] = newCourse;
@@ -33,7 +29,7 @@ const coursesReducer = (state = initialState, action) => {
       newSegment = newSegments[action.segmentId];
       newLessons = [
         ...newSegment.lessons,
-        { title: action.title, lessonId: action.lessonId }
+        { title: action.title, lessonId: action.lessonId },
       ];
       newSegment.lessons = newLessons;
       newSegments[action.segmentId] = newSegment;
