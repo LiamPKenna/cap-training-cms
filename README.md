@@ -38,5 +38,3 @@ _React, Redux, Material UI, HTML, CSS, Draft.js, Firebase_
 _MIT_
 
 Copyright (c) 2020 **_Liam Kenna_**
-
-# _Project Planning_
