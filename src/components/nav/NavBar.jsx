@@ -32,7 +32,7 @@ const NavBar = props => {
   return (
     <>
       <NavDiv className="nav-bar">
-        <Link to="/" style={{ 'text-decoration': 'none' }}>
+        <Link to="/" style={{ textDecoration: 'none' }}>
           <BrandHero name={props.brand.name} logo={props.brand.logo} />
         </Link>
         <Button onClick={toggleDrawer('right', true)}>
