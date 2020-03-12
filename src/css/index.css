@@ -16,6 +16,10 @@ body {
   box-shadow: 1px 1px 3px rgb(175, 174, 174);
 }
 
+a {
+  color: rgb(187, 42, 42);
+}
+
 @media (min-width: 500px) {
   html {
     font-size: 14px;
