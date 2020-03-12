@@ -50,10 +50,8 @@ const coursesReducer = (state = initialState, action) => {
       newState[action.courseId] = newCourse;
       return newState;
     default:
-      break;
+      return state;
   }
-
-  return state;
 };
 
 export default coursesReducer;
