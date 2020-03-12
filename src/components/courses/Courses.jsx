@@ -5,11 +5,8 @@ import { addCourse } from '../../actions';
 import NewItemButton from './NewItemButton';
 import NewItemInput from './NewItemInput';
 import CourseLink from './CourseLink';
-import {
-  StyledListItem,
-  PageWrapDiv,
-  NewItemDiv
-} from './StyledCourseComponents';
+import NewItemDiv from './NewItemDiv';
+import { StyledListItem, PageWrapDiv } from './StyledCourseComponents';
 
 const Courses = props => {
   const [showForm, setShowForm] = useState(false);
@@ -44,43 +41,18 @@ const Courses = props => {
     }
   };
 
-  const makeAdminDiv = () => {
-    return (
-      <>
-        {props.admin ? (
-          <NewItemDiv>
-            {!showForm ? (
-              <NewItemButton
-                clickHandler={showNewCourseForm}
-                title={'New Course'}
-              />
-            ) : (
-              ''
-            )}
-            {showForm ? (
-              <NewItemInput
-                value={newCourseText}
-                handleChange={e => setNewCourseText(e.target.value)}
-                handleSubmit={handleNewCourse}
-                inputName="Course Name"
-                handleCancel={cancelInput}
-              />
-            ) : (
-              ''
-            )}
-          </NewItemDiv>
-        ) : (
-          ''
-        )}
-      </>
-    );
-  };
-
   return (
     <PageWrapDiv>
       <h1>All Courses:</h1>
       <ul>{makeCourses()}</ul>
-      {true ? makeAdminDiv() : ''}
+      <NewItemDiv
+        showForm={showForm}
+        showNewCourseForm={showNewCourseForm}
+        newCourseText={newCourseText}
+        setNewCourseText={setNewCourseText}
+        handleNewCourse={handleNewCourse}
+        cancelInput={cancelInput}
+      />
     </PageWrapDiv>
   );
 };
@@ -88,7 +60,7 @@ const Courses = props => {
 const mapStateToProps = state => {
   return {
     courses: state.courses,
-    admin: state.users.admin
+    admin: state.users.admin,
   };
 };
 
