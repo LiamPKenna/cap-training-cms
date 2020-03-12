@@ -2,23 +2,22 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Loading from '../utilities/Loading';
-import CheckMark from '../utilities/CheckMark';
-import BackLink from '../utilities/BackLink';
-import { addSegment, newLesson } from '../../actions';
-import NewItemButton from './NewItemButton';
-import NewItemInput from './NewItemInput';
+import Loading from '../../utilities/Loading';
+import BackLink from '../../utilities/BackLink';
+import { addSegment, newLesson } from '../../../actions';
+import NewSegmentInputs from './NewSegmentInputs';
 import {
   PageWrapDiv,
-  NewItemDiv,
   StyledListItem,
   CourseTitleHeader,
-} from './StyledCourseComponents';
+} from '../StyledCourseComponents';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import LessonListItems from './LessonListItems';
+import NewLessonListItem from './NewLessonListItem';
 
 const Course = props => {
   const { courseId } = useParams();
@@ -32,26 +31,6 @@ const Course = props => {
 
   const handleChange = panel => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
-  };
-
-  const makeLessons = lessons => {
-    if (lessons && Object.keys(lessons).length > 1) {
-      return lessons
-        .filter(l => l.title !== 'default')
-        .map(lesson => (
-          <StyledListItem key={lesson.lessonId}>
-            <Link to={`/lessons/${lesson.lessonId}`}>{lesson.title}</Link>
-            {props.completedLessons &&
-            props.completedLessons[lesson.lessonId] ? (
-              <CheckMark />
-            ) : (
-              ''
-            )}
-          </StyledListItem>
-        ));
-    } else {
-      return <StyledListItem>No lessons yet</StyledListItem>;
-    }
   };
 
   const showThisSegmentLessonInput = segmentId => {
@@ -77,36 +56,25 @@ const Course = props => {
               <Typography>{segments[segmentId].title}</Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
-              <ul>{makeLessons(segments[segmentId].lessons)}</ul>
+              <ul>
+                <LessonListItems
+                  lessons={segments[segmentId].lessons}
+                  completedLessons={props.completedLessons}
+                />
+              </ul>
             </ExpansionPanelDetails>
-            {props.admin ? (
-              <NewItemDiv>
-                {!showLessonForm || segmentFocus !== segmentId ? (
-                  <NewItemButton
-                    text="NEW LESSON"
-                    clickHandler={() => showThisSegmentLessonInput(segmentId)}
-                    title="New Lesson"
-                  />
-                ) : (
-                  ''
-                )}
-                {showLessonForm && segmentFocus === segmentId ? (
-                  <NewItemInput
-                    value={newLessonText}
-                    handleChange={e => setNewLessonText(e.target.value)}
-                    handleSubmit={() =>
-                      handleNewLesson(segmentId, segments[segmentId].lessons)
-                    }
-                    inputName="Lesson Name"
-                    handleCancel={cancelLessonInput}
-                  />
-                ) : (
-                  ''
-                )}
-              </NewItemDiv>
-            ) : (
-              ''
-            )}
+            <NewLessonListItem
+              admin={props.admin}
+              showLessonForm={showLessonForm}
+              segmentFocus={segmentFocus}
+              segmentId={segmentId}
+              showThisSegmentLessonInput={showThisSegmentLessonInput}
+              newLessonText={newLessonText}
+              setNewLessonText={setNewLessonText}
+              handleNewLesson={handleNewLesson}
+              segments={segments}
+              cancelLessonInput={cancelLessonInput}
+            />
           </ExpansionPanel>
         ));
     } else {
@@ -153,32 +121,15 @@ const Course = props => {
         <CourseTitleHeader>{course.title}</CourseTitleHeader>
         <div>
           <ul>{makeSegments(course.segments)}</ul>
-          {props.admin ? (
-            <NewItemDiv>
-              {!showSegmentForm ? (
-                <NewItemButton
-                  text="NEW SEGMENT"
-                  clickHandler={() => setShowSegmentForm(true)}
-                  title="New Segment"
-                />
-              ) : (
-                ''
-              )}
-              {showSegmentForm ? (
-                <NewItemInput
-                  value={newSegmentText}
-                  handleChange={e => setNewSegmentText(e.target.value)}
-                  handleSubmit={handleNewSegment}
-                  inputName="Segment Name"
-                  handleCancel={cancelSegmentInput}
-                />
-              ) : (
-                ''
-              )}
-            </NewItemDiv>
-          ) : (
-            ''
-          )}
+          <NewSegmentInputs
+            showSegmentForm={showSegmentForm}
+            newSegmentText={newSegmentText}
+            handleNewSegment={handleNewSegment}
+            cancelSegmentInput={cancelSegmentInput}
+            setNewSegmentText={setNewSegmentText}
+            setShowSegmentForm={setShowSegmentForm}
+            admin={props.admin}
+          />
         </div>
         <Link to="/courses">
           <BackLink text="Back to Courses" />
