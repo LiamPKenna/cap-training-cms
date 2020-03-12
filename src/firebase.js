@@ -12,12 +12,12 @@ export const db = firebase.database();
 export const auth = firebase.auth();
 
 export const uiConfig = {
-  signInFlow: "popup",
-  signInSuccessUrl: "/courses",
+  signInFlow: 'popup',
+  signInSuccessUrl: '/courses',
   signInOptions: [{
     provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
     requireDisplayName: false
   }]
 };
 
-export const storage = firebase.storage()
+export const storage = firebase.storage();

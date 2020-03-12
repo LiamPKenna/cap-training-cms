@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import Button from "@material-ui/core/Button";
-import { storage } from "../../../firebase";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import Button from '@material-ui/core/Button';
+import { storage } from '../../../firebase';
 
 const VideoInputDiv = styled.div`
   display: flex;
@@ -24,7 +24,7 @@ const VideoUpload = () => {
     console.log(uploadTask);
 
     uploadTask.on(
-      "state_changed",
+      'state_changed',
       snap => {
         console.log(
           `${Math.floor((snap.bytesTransferred / snap.totalBytes) * 100)}%`
@@ -33,7 +33,7 @@ const VideoUpload = () => {
       error => console.log(error),
       () => {
         storage
-          .ref("videos")
+          .ref('videos')
           .child(video.name)
           .getDownloadURL()
           .then(url => console.log(url));

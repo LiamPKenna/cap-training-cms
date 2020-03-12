@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import Paper from "@material-ui/core/Paper";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-import styled from "styled-components";
+import React, { useState, useEffect } from 'react';
+import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import styled from 'styled-components';
 
 const MainGridDiv = styled.div`
   display: grid;
@@ -13,8 +13,8 @@ const MainGridDiv = styled.div`
 `;
 
 const NewVideoForm = props => {
-  const [url, setUrl] = useState("");
-  const [title, setTitle] = useState("");
+  const [url, setUrl] = useState('');
+  const [title, setTitle] = useState('');
 
   const submitHandler = e => {
     e.preventDefault();
