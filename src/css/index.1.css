@@ -13,8 +13,8 @@ body {
 }
 
 .nav-bar {
-  background-color: rgb(248, 247, 247);
-  box-shadow: 1px 1px 3px rgb(175, 174, 174);
+  background-color: rgb(114, 136, 132);
+  box-shadow: 1px 1px 3px rgb(48, 48, 48);
 }
 
 @media (min-width: 500px) {
