@@ -20,6 +20,11 @@ a {
   color: rgb(187, 42, 42);
 }
 
+.MuiPaper-root {
+  background-color: rgb(255, 255, 255) !important;
+  color: rgb(28, 27, 27) !important;
+}
+
 @media (min-width: 500px) {
   html {
     font-size: 14px;
