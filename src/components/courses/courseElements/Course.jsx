@@ -10,6 +10,9 @@ import {
   PageWrapDiv,
   StyledListItem,
   CourseTitleHeader,
+  SecondaryDiv,
+  SecondaryText,
+  ExpansionSummaryDiv,
 } from '../StyledCourseComponents';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
@@ -53,7 +56,12 @@ const Course = props => {
               aria-controls={`panel${segmentId}`}
               id={`panel${segmentId}`}
             >
-              <Typography>{segments[segmentId].title}</Typography>
+              <ExpansionSummaryDiv>
+                <Typography>{segments[segmentId].title}</Typography>
+                <SecondaryDiv>
+                  <SecondaryText>Lessons</SecondaryText>
+                </SecondaryDiv>
+              </ExpansionSummaryDiv>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
               <ul>

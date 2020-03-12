@@ -26,6 +26,12 @@ const SecondaryDiv = styled.div`
   width: 100%;
 `;
 
+export const ExpansionSummaryDiv = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+`;
+
 const AdminDashboard = props => {
   const { allUsers } = props;
   const [expanded, setExpanded] = useState(false);
@@ -37,10 +43,10 @@ const AdminDashboard = props => {
   const makeCompletedLessons = completedLessons => {
     return completedLessons
       ? Object.keys(completedLessons)
-        .filter(l => l !== 'default')
-        .map((l, i) => (
-          <StyledListItem key={i}>{props.lessons[l].title}</StyledListItem>
-        ))
+          .filter(l => l !== 'default')
+          .map((l, i) => (
+            <StyledListItem key={i}>{props.lessons[l].title}</StyledListItem>
+          ))
       : '';
   };
 
@@ -56,10 +62,12 @@ const AdminDashboard = props => {
           aria-controls={`panel${index}`}
           id={`panel${index}`}
         >
-          <Typography>{user.email}</Typography>
-          <SecondaryDiv>
-            <SecondaryText>Completed Lessons</SecondaryText>
-          </SecondaryDiv>
+          <ExpansionSummaryDiv>
+            <Typography>{user.email}</Typography>
+            <SecondaryDiv>
+              <SecondaryText>Completed Lessons</SecondaryText>
+            </SecondaryDiv>
+          </ExpansionSummaryDiv>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <ul>{makeCompletedLessons(user.completedLessons)}</ul>
