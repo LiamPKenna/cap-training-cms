@@ -1,6 +1,6 @@
 import React from 'react';
 import NewItemButton from '../NewItemButton';
-import NewSegmentInputs from './NewSegmentInputs';
+import NewItemInput from '../NewItemInput';
 import styled from 'styled-components';
 
 export const NewItemDiv = styled.div`
@@ -25,7 +25,7 @@ const NewLessonListItem = props => {
   if (showLessonForm && segmentFocus === segmentId) {
     return (
       <NewItemDiv>
-        <NewSegmentInputs
+        <NewItemInput
           value={newLessonText}
           handleChange={e => setNewLessonText(e.target.value)}
           handleSubmit={() =>
