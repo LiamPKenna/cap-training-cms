@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Lesson from './lessons/Lesson';
 import Courses from './courses/Courses';
-import Course from './courses/Course';
+import Course from './courses/courseElements/Course';
 import NavBar from './nav/NavBar';
 import Home from './Home';
 import AdminDashboard from './AdminDashboard';

@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const TextP = styled.p`
   margin: 0.75rem 0;
@@ -13,11 +13,11 @@ const RichTextDiv = styled.div`
 
 const LessonText = params => {
   const formatText = text => {
-    return text.split("\n");
+    return text.split('\n');
   };
 
   const checkTypeAndFormat = content => {
-    if (content === "string" && content[0] !== "<") {
+    if (content === 'string' && content[0] !== '<') {
       return (
         <>
           {formatText(content).map((c, i) => (

@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import ImageUpload from "../ImageUpload";
+import React from 'react';
+import styled from 'styled-components';
+import ImageUpload from '../ImageUpload';
 
 const MultiPicDiv = styled.div`
   display: block;

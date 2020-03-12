@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import NewVideoForm from "./NewVideoForm";
-import { updateVideo, deleteVideo } from "../../../actions";
-import { useDispatch } from "react-redux";
-import EditButton from "../../utilities/EditButton";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import NewVideoForm from './NewVideoForm';
+import { updateVideo, deleteVideo } from '../../../actions';
+import { useDispatch } from 'react-redux';
+import EditButton from '../../utilities/EditButton';
 
 const VideoDiv = styled.div`
   padding: 3%;
@@ -51,7 +51,7 @@ const VideoBlock = props => {
     <VideoDiv>
       {src && !showForm ? (
         <>
-          {props.admin ? <EditButton handleClick={toggleEdit} /> : ""}
+          {props.admin ? <EditButton handleClick={toggleEdit} /> : ''}
           <VideoWrapDiv>
             <VideoFrame
               src={src}

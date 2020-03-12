@@ -6,46 +6,48 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { Link } from 'react-router-dom';
 import links from '../../constants/links';
 import { signOut } from '../../actions';
+import styled from 'styled-components';
+
+const StyledDrawer = styled(Drawer)`
+  position: fixed;
+  right: 0;
+  left: auto;
+  width: 150px;
+  box-sizing: inherit;
+  background: rgba(0, 0, 0, 0);
+  display: block;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: white;
+`;
+
+const StyledList = styled(List)`
+  background: #545454;
+  color: white;
+  height: 100vh;
+`;
 
 const NavDrawer = props => {
-  const drawerStyle = {
-    position: 'fixed',
-    right: '0',
-    left: 'auto',
-    width: '150px',
-    boxSizing: 'inherit',
-    background: 'rgba(0,0,0,0)',
-    display: 'block'
-  };
-  const drawerListStyle = {
-    background: '#545454',
-    color: 'white',
-    height: '100vh'
-  };
-  const linkStyle = {
-    textDecoration: 'none',
-    color: 'white'
-  };
-
   return (
     <div>
-      <Drawer
-        style={drawerStyle}
+      <StyledDrawer
         anchor="right"
         open={props.drawer}
         onClose={() => props.setDrawer(false)}
         onClick={() => props.setDrawer(false)}
       >
-        <List style={drawerListStyle}>
+        <StyledList>
           {props.user ? (
             <>
               <ListItem button key="userEmail">
                 <ListItemText primary={props.user.email} />
               </ListItem>
               <ListItem button key="signout" onClick={signOut}>
-                <Link to="/signin" style={linkStyle}>
+                <StyledLink to="/signin">
                   <ListItemText primary="Sign Out" />
-                </Link>
+                </StyledLink>
               </ListItem>
             </>
           ) : (
@@ -53,22 +55,22 @@ const NavDrawer = props => {
           )}
           {links.map((link, index) => (
             <ListItem button key={index}>
-              <Link to={link.path} style={linkStyle}>
+              <StyledLink to={link.path}>
                 <ListItemText primary={link.text} />
-              </Link>
+              </StyledLink>
             </ListItem>
           ))}
           {props.admin ? (
             <ListItem button key="adminDashboard">
-              <Link to="/admin" style={linkStyle}>
+              <StyledLink to="/admin">
                 <ListItemText primary="Admin Dashboard" />
-              </Link>
+              </StyledLink>
             </ListItem>
           ) : (
             ''
           )}
-        </List>
-      </Drawer>
+        </StyledList>
+      </StyledDrawer>
     </div>
   );
 };
