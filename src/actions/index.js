@@ -4,13 +4,10 @@ const { c } = constants;
 
 export function watchFirebaseLessonsRef() {
   return dispatch => {
-    db.ref('/' + constants.brandFolder + '/lessons').on(
-      'child_added',
-      params => {
-        const newLesson = Object.assign({}, params.val());
-        dispatch(receiveLesson(newLesson));
-      }
-    );
+    db.ref(constants.brandFolder + '/lessons').on('child_added', params => {
+      const newLesson = Object.assign({}, params.val());
+      dispatch(receiveLesson(newLesson));
+    });
   };
 }
 
@@ -23,13 +20,10 @@ export const receiveLesson = lessonFromFirebase => {
 
 export function watchFirebaseCoursesRef() {
   return dispatch => {
-    db.ref('/' + constants.brandFolder + '/courses').on(
-      'child_added',
-      params => {
-        const newCourse = Object.assign({}, params.val());
-        dispatch(receiveCourse(newCourse));
-      }
-    );
+    db.ref(constants.brandFolder + '/courses').on('child_added', params => {
+      const newCourse = Object.assign({}, params.val());
+      dispatch(receiveCourse(newCourse));
+    });
   };
 }
 
@@ -46,7 +40,7 @@ export const addUser = email => {
     email,
     completedLessons: { default: true },
   };
-  db.ref('/' + constants.brandFolder + '').update(updates);
+  db.ref(constants.brandFolder + '').update(updates);
   return {
     type: c.ADD_USER,
     completedLessons: { default: true },
@@ -67,7 +61,7 @@ export const updateText = params => {
       params.elementIndex +
       '/content'
   ] = params.content;
-  db.ref('/' + constants.brandFolder + '').update(updates);
+  db.ref(constants.brandFolder + '').update(updates);
   return {
     type: c.UPDATE_TEXT,
     elementIndex: params.elementIndex,
@@ -78,7 +72,7 @@ export const updateText = params => {
 
 export const addCourse = (courseTitle = 'New Course') => {
   const newCourseKey = db
-    .ref('/' + constants.brandFolder + '/')
+    .ref(constants.brandFolder + '/')
     .child('courses')
     .push().key;
   var updates = {};
@@ -92,7 +86,7 @@ export const addCourse = (courseTitle = 'New Course') => {
     title: courseTitle,
     id: newCourseKey,
   };
-  db.ref('/' + constants.brandFolder + '').update(updates);
+  db.ref(constants.brandFolder + '').update(updates);
   return {
     type: c.ADD_COURSE,
     title: courseTitle,
@@ -104,7 +98,7 @@ export const updateCourseName = params => {
   const { courseId, name } = params;
   const updates = {};
   updates['/courses/' + courseId + '/title'] = name;
-  db.ref('/' + constants.brandFolder + '').update(updates);
+  db.ref(constants.brandFolder + '').update(updates);
   return { type: c.UPDATE_COURSE_TITLE, courseId, name };
 };
 
@@ -119,7 +113,7 @@ export const deleteCourse = params => {
     updates['/lessons/' + l.lessonId] = {};
   });
   updates['/courses/' + courseId] = {};
-  db.ref('/' + constants.brandFolder + '').update(updates);
+  db.ref(constants.brandFolder + '').update(updates);
   const lessonsToDelete = lessons.map(l => ({
     type: c.REMOVE_LESSON,
     lessonId: l.lessonId,
@@ -129,7 +123,7 @@ export const deleteCourse = params => {
 
 export const addSegment = (segmentTitle = 'New segment', courseId) => {
   const newSegmentKey = db
-    .ref('/' + constants.brandFolder + '/courses/' + courseId)
+    .ref(constants.brandFolder + '/courses/' + courseId)
     .child('segments')
     .push().key;
   var updates = {};
@@ -137,7 +131,7 @@ export const addSegment = (segmentTitle = 'New segment', courseId) => {
     lessons: [{ lessonId: 0, title: 'default' }],
     title: segmentTitle,
   };
-  db.ref('/' + constants.brandFolder + '').update(updates);
+  db.ref(constants.brandFolder + '').update(updates);
   return {
     type: c.ADD_SEGMENT,
     title: segmentTitle,
@@ -154,7 +148,7 @@ export const newLesson = (
   oldLessons
 ) => {
   const newLessonKey = db
-    .ref('/' + constants.brandFolder + '')
+    .ref(constants.brandFolder + '')
     .child('lessons')
     .push().key;
   var updates = {};
@@ -172,7 +166,7 @@ export const newLesson = (
       lessonId: newLessonKey,
     },
   ];
-  db.ref('/' + constants.brandFolder + '').update(updates);
+  db.ref(constants.brandFolder + '').update(updates);
   return [
     {
       type: c.ADD_LESSON,
@@ -204,7 +198,7 @@ export const createElement = (type, oldContent, lessonId) => {
         };
   var updates = {};
   updates['/lessons/' + lessonId + '/content'] = [...oldContent, newElement];
-  db.ref('/' + constants.brandFolder + '').update(updates);
+  db.ref(constants.brandFolder + '').update(updates);
   return {
     type: c.ADD_ELEMENT,
     lessonId,
@@ -218,7 +212,7 @@ export const addVideo = lessonId => {
     src: false,
     title: false,
   };
-  db.ref('/' + constants.brandFolder + '').update(updates);
+  db.ref(constants.brandFolder + '').update(updates);
   return {
     type: c.ADD_VIDEO,
     lessonId,
@@ -232,14 +226,14 @@ export const updateVideo = params => {
     src: url,
     title,
   };
-  db.ref('/' + constants.brandFolder + '').update(updates);
+  db.ref(constants.brandFolder + '').update(updates);
   return { type: c.UPDATE_VIDEO, src: url, title, lessonId };
 };
 
 export const deleteVideo = lessonId => {
   var updates = {};
   updates['/lessons/' + lessonId + '/video'] = {};
-  db.ref('/' + constants.brandFolder + '').update(updates);
+  db.ref(constants.brandFolder + '').update(updates);
   return {
     type: c.REMOVE_VIDEO,
     lessonId,
@@ -256,7 +250,7 @@ export const addPicture = params => {
   const newLessonContent = [...allContent, newPicture];
   var updates = {};
   updates['/lessons/' + lessonId + '/content'] = newLessonContent;
-  db.ref('/' + constants.brandFolder + '').update(updates);
+  db.ref(constants.brandFolder + '').update(updates);
   return { type: c.ADD_PICTURE, lessonId, newPicture };
 };
 
@@ -275,7 +269,7 @@ export const updatePicture = params => {
   };
   var updates = {};
   updates['/lessons/' + lessonId + '/content/' + elementIndex] = updatedPicture;
-  db.ref('/' + constants.brandFolder + '').update(updates);
+  db.ref(constants.brandFolder + '').update(updates);
   return { type: c.UPDATE_PICTURE, lessonId, elementIndex, updatedPicture };
 };
 
@@ -285,7 +279,7 @@ export const deleteText = params => {
   newLessonContent.splice(elementIndex, 1);
   var updates = {};
   updates['/lessons/' + lessonId + '/content'] = newLessonContent;
-  db.ref('/' + constants.brandFolder + '').update(updates);
+  db.ref(constants.brandFolder + '').update(updates);
   return {
     type: c.REMOVE_ELEMENT,
     lessonId,
@@ -309,7 +303,7 @@ export const moveElement = params => {
   }
   const updates = {};
   updates['/lessons/' + lessonId + '/content'] = newContent;
-  db.ref('/' + constants.brandFolder + '').update(updates);
+  db.ref(constants.brandFolder + '').update(updates);
   return {
     type: c.MOVE_ELEMENT,
     elementIndex: elementIndex,
@@ -323,14 +317,14 @@ export const lessonCompleted = params => {
   updates[
     '/users/' + params.currentUser + '/completedLessons/' + params.lessonId
   ] = true;
-  db.ref('/' + constants.brandFolder + '').update(updates);
+  db.ref(constants.brandFolder + '').update(updates);
   return getCompletedLessons(params.currentUser);
 };
 
 export const getCompletedLessons = currentUser => {
   return async dispatch => {
     return db
-      .ref('/' + constants.brandFolder + '/users/' + currentUser)
+      .ref(constants.brandFolder + '/users/' + currentUser)
       .once('value')
       .then(snap => {
         if (snap.val()) {
@@ -348,7 +342,7 @@ export const getCompletedLessons = currentUser => {
 export const getAllUsers = params => {
   return async dispatch => {
     return db
-      .ref('/' + constants.brandFolder + '/users')
+      .ref(constants.brandFolder + '/users')
       .once('value')
       .then(snap => {
         if (snap.val()) {
