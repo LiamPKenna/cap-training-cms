@@ -5,6 +5,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import NavDrawer from './NavDrawer';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import BrandHero from './BrandHero';
 
 const NavDiv = styled.div`
   height: 75px;
@@ -15,25 +16,8 @@ const NavDiv = styled.div`
   width: 100%;
 `;
 
-const BrandImg = styled.img`
-  height: 50px;
-  margin: 10px;
-`;
-
-const BrandNameHeading = styled.img`
-  margin: 25px 10px;
-`;
-
 const NavBar = props => {
   const [drawer, setDrawer] = useState(false);
-
-  const makeHero = () => {
-    return props.brand.logo ? (
-      <BrandImg src={props.brand.logo} alt={`${props.brand.name} logo`} />
-    ) : (
-      <BrandNameHeading>{props.brand.name}</BrandNameHeading>
-    );
-  };
 
   const toggleDrawer = () => event => {
     if (
@@ -48,7 +32,9 @@ const NavBar = props => {
   return (
     <>
       <NavDiv className="nav-bar">
-        <Link to="/">{makeHero()}</Link>
+        <Link to="/" style={{ 'text-decoration': 'none' }}>
+          <BrandHero name={props.brand.name} logo={props.brand.logo} />
+        </Link>
         <Button onClick={toggleDrawer('right', true)}>
           <MenuIcon />
         </Button>
