@@ -36,8 +36,6 @@ const Lesson = props => {
   };
 
   const markComplete = () => {
-    console.log(props.users);
-
     props.dispatch(
       lessonCompleted({ lessonId, currentUser: props.currentUser })
     );
