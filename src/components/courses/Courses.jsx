@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import Loading from '../utilities/Loading';
 import { addCourse } from '../../actions';
-import NewItemButton from './NewItemButton';
-import NewItemInput from './NewItemInput';
-import CourseLink from './CourseLink';
 import NewItemDiv from './NewItemDiv';
-import { StyledListItem, PageWrapDiv } from './StyledCourseComponents';
+import { PageWrapDiv } from './StyledCourseComponents';
+import CourseListItems from './CourseListItems';
 
 const Courses = props => {
   const [showForm, setShowForm] = useState(false);
@@ -26,25 +23,12 @@ const Courses = props => {
     setNewCourseText('');
   };
 
-  const makeCourses = () => {
-    if (!props.courses) {
-      return <Loading />;
-    } else {
-      return Object.keys(props.courses).map(courseId => (
-        <StyledListItem key={courseId}>
-          <CourseLink
-            courseId={courseId}
-            title={props.courses[courseId].title}
-          />
-        </StyledListItem>
-      ));
-    }
-  };
-
   return (
     <PageWrapDiv>
       <h1>All Courses:</h1>
-      <ul>{makeCourses()}</ul>
+      <ul>
+        <CourseListItems courses={props.courses} />
+      </ul>
       <NewItemDiv
         showForm={showForm}
         showNewCourseForm={showNewCourseForm}
