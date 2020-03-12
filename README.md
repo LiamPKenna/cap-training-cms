@@ -8,6 +8,8 @@
 
 _This application allows for simple and elegant building and maintenance of courses for a variety of industries with no knowledge of programming necessary. Weather you run a small retail chain or a large-scale online school, Cap Training can be a valuable tool to help meet your goals._
 
+_Contact liam@liamkenna.com to find out how we can make it part of your success_
+
 ## Setup/Installation Requirements
 
 ### _Running this application requires connection to a Firebase Realtime Database_
