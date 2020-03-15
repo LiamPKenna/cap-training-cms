@@ -18,7 +18,7 @@ import {
   RichUtils,
   convertToRaw,
   convertFromHTML,
-  ContentState
+  ContentState,
 } from 'draft-js';
 import styled from 'styled-components';
 import draftToHtml from 'draftjs-to-html';
@@ -36,7 +36,7 @@ const EditorWrap = styled.div`
 const InputGridDiv = styled.div`
   display: grid;
   grid-template-columns: 70px 1fr 60px 60px;
-  background-color: #f5f5f5;
+  color: black;
 `;
 
 const UpDownDiv = styled.div`
@@ -65,7 +65,7 @@ const LessonInput = props => {
     toggleEdit,
     handleChange,
     changeAlign,
-    align
+    align,
   } = props;
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
@@ -99,7 +99,7 @@ const LessonInput = props => {
         updateText({
           elementIndex: elementIndex,
           content: html,
-          lessonId: lessonId
+          lessonId: lessonId,
         })
       );
     } else if (element !== 'picture' && element !== 'break') {
@@ -107,7 +107,7 @@ const LessonInput = props => {
         updateText({
           elementIndex: elementIndex,
           content: value,
-          lessonId: lessonId
+          lessonId: lessonId,
         })
       );
     }
@@ -119,7 +119,7 @@ const LessonInput = props => {
       deleteText({
         elementIndex,
         lessonId,
-        fullLessonContent
+        fullLessonContent,
       })
     );
     toggleEdit();
@@ -131,7 +131,7 @@ const LessonInput = props => {
         elementIndex,
         lessonId,
         fullLessonContent,
-        direction
+        direction,
       })
     );
     toggleEdit();
@@ -140,7 +140,7 @@ const LessonInput = props => {
   return (
     <InputDiv>
       <Paper component="form" onSubmit={handleSubmit}>
-        <InputGridDiv>
+        <InputGridDiv className="CVsKh">
           <Button type="submit" color="primary">
             <CheckCircleIcon />
           </Button>
@@ -181,29 +181,29 @@ const LessonInput = props => {
               {element === 'break' ||
               element === 'picture' ||
               element === 'text' ? (
-                  ''
-                ) : (
-                  <>
-                    <Button
-                      disabled={align === 'left'}
-                      onClick={() => changeAlign('left')}
-                    >
-                      <FormatAlignLeftIcon />
-                    </Button>
-                    <Button
-                      disabled={align === 'center'}
-                      onClick={() => changeAlign('center')}
-                    >
-                      <FormatAlignCenterIcon />
-                    </Button>
-                    <Button
-                      disabled={align === 'right'}
-                      onClick={() => changeAlign('right')}
-                    >
-                      <FormatAlignRightIcon />
-                    </Button>
-                  </>
-                )}
+                ''
+              ) : (
+                <>
+                  <Button
+                    disabled={align === 'left'}
+                    onClick={() => changeAlign('left')}
+                  >
+                    <FormatAlignLeftIcon />
+                  </Button>
+                  <Button
+                    disabled={align === 'center'}
+                    onClick={() => changeAlign('center')}
+                  >
+                    <FormatAlignCenterIcon />
+                  </Button>
+                  <Button
+                    disabled={align === 'right'}
+                    onClick={() => changeAlign('right')}
+                  >
+                    <FormatAlignRightIcon />
+                  </Button>
+                </>
+              )}
             </UpDownDiv>
           </div>
           <Button color="primary" onClick={toggleEdit}>
