@@ -35,7 +35,7 @@ const CourseLink = styled.h3`
 const Home = () => {
   return (
     <>
-      <Paper>
+      <Paper className="hero-div">
         <HeroDiv>
           <br />
           <BrandName>CAP Training CMS</BrandName>
