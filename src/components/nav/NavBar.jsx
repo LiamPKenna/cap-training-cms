@@ -10,7 +10,6 @@ import BrandHero from './BrandHero';
 const NavDiv = styled.div`
   height: 75px;
   object-fit: contain;
-  border: 1px solid rgb(175, 174, 174);
   display: grid;
   grid-template-columns: 1fr 100px;
   width: 100%;
