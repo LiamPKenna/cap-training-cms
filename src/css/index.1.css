@@ -33,6 +33,10 @@ h1 {
   color: rgb(255, 255, 255) !important;
 }
 
+.hamburger {
+  color: rgb(255, 255, 255);
+}
+
 @media (min-width: 500px) {
   html {
     font-size: 14px;

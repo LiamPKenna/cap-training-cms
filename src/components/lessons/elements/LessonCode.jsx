@@ -7,6 +7,7 @@ const CodeDiv = styled.div`
   background-color: lightgray;
   white-space: pre;
   overflow: auto;
+  color: black;
 `;
 
 const LessonCode = params => {

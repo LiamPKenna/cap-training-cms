@@ -35,7 +35,7 @@ const NavBar = props => {
           <BrandHero name={props.brand.name} logo={props.brand.logo} />
         </Link>
         <Button onClick={toggleDrawer('right', true)}>
-          <MenuIcon />
+          <MenuIcon className="hamburger" />
         </Button>
       </NavDiv>
       <NavDrawer
