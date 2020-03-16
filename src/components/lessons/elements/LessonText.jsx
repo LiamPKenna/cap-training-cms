@@ -7,7 +7,7 @@ const TextP = styled.p`
 `;
 
 const RichTextDiv = styled.div`
-  margin: 0.75rem 0;
+  margin: 0.75rem 0 1rem;
   font-size: 1rem;
 `;
 

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const LessonHeadingElement = styled.h2`
-  margin: 1rem 0;
+  margin: 2rem 0 1rem;
   font-size: 1.8rem;
 `;
 
