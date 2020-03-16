@@ -4,20 +4,22 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import CancelIcon from '@material-ui/icons/Cancel';
+import styled from 'styled-components';
+
+const MainGridDiv = styled.div`
+  display: grid;
+  grid-template-columns: 70px 1fr 70px;
+  background-color: #f5f5f5;
+`;
 
 const NewItemInput = props => {
-  const mainGridStyle = {
-    display: 'grid',
-    gridTemplateColumns: '70px 1fr 70px',
-    backgroundColor: '#f5f5f5'
-  };
   const submitHandler = e => {
     e.preventDefault();
     props.handleSubmit();
   };
   return (
     <Paper component="form" onSubmit={submitHandler}>
-      <div style={mainGridStyle}>
+      <MainGridDiv>
         <Button type="submit" color="primary">
           <CheckCircleIcon />
         </Button>
@@ -42,7 +44,7 @@ const NewItemInput = props => {
         <Button onClick={props.handleCancel} color="primary">
           <CancelIcon />
         </Button>
-      </div>
+      </MainGridDiv>
     </Paper>
   );
 };
