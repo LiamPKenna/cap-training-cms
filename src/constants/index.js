@@ -5,5 +5,5 @@ export default {
   firebaseConfig: firebaseConfig,
   c: types,
   adminEmails: ['liam@liamkenna.com'],
-  brandFolder: '/epi',
+  brandFolder: '/',
 };
