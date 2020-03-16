@@ -23,7 +23,7 @@ const SignIn = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const handleSignIn = e => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     auth.signInWithEmailAndPassword(email, password).catch(function(error) {
       const errorMessage = error.message;
       handleError(errorMessage);
@@ -38,7 +38,8 @@ const SignIn = () => {
         const errorMessage = error.message;
         handleError(errorMessage);
       })
-      .then(dispatch(addUser(email)));
+      .then(dispatch(addUser(email)))
+      .then(handleSignIn());
   };
 
   const handleError = errorMessage => {
