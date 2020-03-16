@@ -50,6 +50,7 @@ const Course = props => {
             expanded={expanded === `panel${segmentId}`}
             onChange={handleChange(`panel${segmentId}`)}
             key={segmentId}
+            className="course-panels"
           >
             <ExpansionPanelSummary
               expandIcon={<ExpandMoreIcon />}

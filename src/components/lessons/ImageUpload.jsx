@@ -6,17 +6,23 @@ import { storage } from '../../firebase';
 import { useDispatch } from 'react-redux';
 import { updatePicture } from '../../actions';
 import { connect } from 'react-redux';
+import { Paper } from '@material-ui/core';
 
 const ImageInputDiv = styled.div`
   align-items: center;
-  max-width: 25rem;
   background: linear-gradient(
     90deg,
     rgba(40, 40, 40, 1) ${props => props.uploadProgress - 1}%,
     rgba(0, 0, 0, 0) ${props => props.uploadProgress}%,
     rgba(113, 113, 113, 0) 100%
   );
+`;
+
+const PaperWrap = styled(Paper)`
   margin: 1rem auto;
+  max-width: 27rem;
+  border-radius: 5px;
+  padding: 1rem;
 `;
 
 const StyledInput = styled.input`
@@ -71,7 +77,7 @@ const ImageUpload = props => {
                 url: url,
                 alt: altText,
                 lessonId,
-                elementIndex
+                elementIndex,
               })
             );
           });
@@ -82,42 +88,49 @@ const ImageUpload = props => {
   return (
     <>
       {props.admin ? (
-        <ImageInputDiv uploadProgress={uploadProgress}>
-          <form onSubmit={handleUpload}>
-            <StyledInput
-              type="file"
-              onChange={handleChange}
-              id="upload"
-              accept="image/*"
-            />
-            <label htmlFor="upload">
+        <PaperWrap>
+          <ImageInputDiv uploadProgress={uploadProgress}>
+            <form onSubmit={handleUpload}>
+              <StyledInput
+                type="file"
+                onChange={handleChange}
+                id="upload"
+                accept="image/*"
+              />
+              <label htmlFor="upload">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  component="span"
+                  fullWidth
+                >
+                  Select Image
+                </Button>
+              </label>
+              {image ? (
+                <SelectedDiv>{`Image selected: ${image.name}`}</SelectedDiv>
+              ) : (
+                ''
+              )}
+              <TextField
+                required
+                label="Alt Text"
+                value={altText}
+                onChange={e => setAltText(e.target.value)}
+                fullWidth
+                variant="filled"
+              />
               <Button
                 variant="contained"
                 color="primary"
-                component="span"
                 fullWidth
+                type="submit"
               >
-                Select Image
+                Upload
               </Button>
-            </label>
-            {image ? (
-              <SelectedDiv>{`Image selected: ${image.name}`}</SelectedDiv>
-            ) : (
-              ''
-            )}
-            <TextField
-              required
-              label="Alt Text"
-              value={altText}
-              onChange={e => setAltText(e.target.value)}
-              fullWidth
-              variant="filled"
-            />
-            <Button variant="contained" color="primary" fullWidth type="submit">
-              Upload
-            </Button>
-          </form>
-        </ImageInputDiv>
+            </form>
+          </ImageInputDiv>
+        </PaperWrap>
       ) : (
         ''
       )}
@@ -127,7 +140,7 @@ const ImageUpload = props => {
 
 const mapStateToProps = state => {
   return {
-    admin: state.users.admin
+    admin: state.users.admin,
   };
 };
 
