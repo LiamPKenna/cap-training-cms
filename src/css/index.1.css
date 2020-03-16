@@ -13,8 +13,24 @@ body {
 }
 
 .nav-bar {
-  background-color: rgb(114, 136, 132);
-  box-shadow: 1px 1px 3px rgb(48, 48, 48);
+  background-color: rgb(23, 94, 78);
+  border: none;
+  box-shadow: 1px 1px 3px rgb(15, 15, 15);
+  color: white;
+}
+
+a {
+  color: rgb(173, 225, 255);
+}
+
+h1 {
+  font-family: amita;
+}
+
+.hero-div,
+.course-panels {
+  background-color: rgb(46, 46, 46) !important;
+  color: rgb(255, 255, 255) !important;
 }
 
 @media (min-width: 500px) {
