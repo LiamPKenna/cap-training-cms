@@ -56,10 +56,10 @@ export const updateText = params => {
   var updates = {};
   updates[
     '/lessons/' +
-      params.lessonId +
-      '/content/' +
-      params.elementIndex +
-      '/content'
+    params.lessonId +
+    '/content/' +
+    params.elementIndex +
+    '/content'
   ] = params.content;
   db.ref(constants.brandFolder + '').update(updates);
   return {
@@ -190,12 +190,12 @@ export const createElement = (type, oldContent, lessonId) => {
     type === 'break'
       ? { type }
       : {
-          type,
-          content: `This is a new ${type.toUpperCase()} element`,
-          format: {
-            align: 'left',
-          },
-        };
+        type,
+        content: `This is a new ${type.toUpperCase()} element`,
+        format: {
+          align: 'left',
+        },
+      };
   var updates = {};
   updates['/lessons/' + lessonId + '/content'] = [...oldContent, newElement];
   db.ref(constants.brandFolder + '').update(updates);
