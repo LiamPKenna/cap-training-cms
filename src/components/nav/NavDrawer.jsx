@@ -5,7 +5,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Link } from 'react-router-dom';
 import links from '../../constants/links';
-import { signOut } from '../../actions';
+import { userActions } from '../../actions';
 import styled from 'styled-components';
 
 const StyledDrawer = styled(Drawer)`
@@ -29,7 +29,7 @@ const StyledList = styled(List)`
   height: 100vh;
 `;
 
-const NavDrawer = props => {
+const NavDrawer = (props) => {
   return (
     <div>
       <StyledDrawer
@@ -44,7 +44,7 @@ const NavDrawer = props => {
               <ListItem button key="userEmail">
                 <ListItemText primary={props.user.email} />
               </ListItem>
-              <ListItem button key="signout" onClick={signOut}>
+              <ListItem button key="signout" onClick={userActions.signOut}>
                 <StyledLink to="/signin">
                   <ListItemText primary="Sign Out" />
                 </StyledLink>

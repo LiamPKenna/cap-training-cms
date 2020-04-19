@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { storage } from '../../firebase';
 import { useDispatch } from 'react-redux';
-import { updatePicture } from '../../actions';
+import { lessonActions } from '../../actions';
 import { connect } from 'react-redux';
 import { Paper } from '@material-ui/core';
 
@@ -12,8 +12,8 @@ const ImageInputDiv = styled.div`
   align-items: center;
   background: linear-gradient(
     90deg,
-    rgba(40, 40, 40, 1) ${props => props.uploadProgress - 1}%,
-    rgba(0, 0, 0, 0) ${props => props.uploadProgress}%,
+    rgba(40, 40, 40, 1) ${(props) => props.uploadProgress - 1}%,
+    rgba(0, 0, 0, 0) ${(props) => props.uploadProgress}%,
     rgba(113, 113, 113, 0) 100%
   );
 `;
@@ -35,7 +35,7 @@ const SelectedDiv = styled.div`
   width: 100%;
 `;
 
-const ImageUpload = props => {
+const ImageUpload = (props) => {
   const [image, setImage] = useState(null);
   const [altText, setAltText] = useState('');
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -43,7 +43,7 @@ const ImageUpload = props => {
 
   const { lessonId, elementIndex } = props;
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     if (e.target.files[0]) {
       setImage(e.target.files[0]);
       setTimeout(() => {
@@ -53,27 +53,27 @@ const ImageUpload = props => {
     }
   };
 
-  const handleUpload = e => {
+  const handleUpload = (e) => {
     e.preventDefault();
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
     uploadTask.on(
       'state_changed',
-      snap => {
+      (snap) => {
         setUploadProgress(
           Math.floor((snap.bytesTransferred / snap.totalBytes) * 100)
         );
       },
-      error => console.log(error),
+      (error) => console.log(error),
       () => {
         storage
           .ref('images')
           .child(image.name)
           .getDownloadURL()
-          .then(url => {
+          .then((url) => {
             console.log(url);
             setUploadProgress(0);
             dispatch(
-              updatePicture({
+              lessonActions.updatePicture({
                 url: url,
                 alt: altText,
                 lessonId,
@@ -116,7 +116,7 @@ const ImageUpload = props => {
                 required
                 label="Alt Text"
                 value={altText}
-                onChange={e => setAltText(e.target.value)}
+                onChange={(e) => setAltText(e.target.value)}
                 fullWidth
                 variant="filled"
               />
@@ -138,7 +138,7 @@ const ImageUpload = props => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     admin: state.users.admin,
   };

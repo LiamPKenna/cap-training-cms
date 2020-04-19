@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { addCourse } from '../../actions';
+import { courseActions } from '../../actions';
 import NewItemDiv from './NewItemDiv';
 import { PageWrapDiv } from './StyledCourseComponents';
 import CourseListItems from './CourseListItems';
 
-const Courses = props => {
+const Courses = (props) => {
   const [showForm, setShowForm] = useState(false);
   const [newCourseText, setNewCourseText] = useState('');
 
@@ -15,7 +15,7 @@ const Courses = props => {
 
   const handleNewCourse = () => {
     setShowForm(false);
-    props.dispatch(addCourse(newCourseText));
+    props.dispatch(courseActions.addCourse(newCourseText));
   };
 
   const cancelInput = () => {
@@ -41,7 +41,7 @@ const Courses = props => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     courses: state.courses,
     admin: state.users.admin,

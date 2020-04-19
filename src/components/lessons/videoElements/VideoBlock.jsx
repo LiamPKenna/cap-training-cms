@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import NewVideoForm from './NewVideoForm';
-import { updateVideo, deleteVideo } from '../../../actions';
+import { lessonActions } from '../../../actions';
 import { useDispatch } from 'react-redux';
 import EditButton from '../../utilities/EditButton';
 
@@ -27,20 +27,20 @@ const VideoFrame = styled.iframe`
   height: 100%;
 `;
 
-const VideoBlock = props => {
+const VideoBlock = (props) => {
   const dispatch = useDispatch();
   const { lessonId, src, title } = props;
   const [showForm, setShowForm] = useState(false);
 
-  const addUrlAndTitle = input => {
+  const addUrlAndTitle = (input) => {
     toggleEdit();
     const { url, title } = input;
-    dispatch(updateVideo({ url, title, lessonId }));
+    dispatch(lessonActions.updateVideo({ url, title, lessonId }));
   };
 
   const removeVideo = () => {
     toggleEdit();
-    dispatch(deleteVideo(lessonId));
+    dispatch(lessonActions.deleteVideo(lessonId));
   };
 
   const toggleEdit = () => {
