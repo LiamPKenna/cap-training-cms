@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Loading from '../../utilities/Loading';
 import BackLink from '../../utilities/BackLink';
-import { addSegment, newLesson } from '../../../actions';
+import { courseActions } from '../../../actions';
 import NewSegmentInputs from './NewSegmentInputs';
 import {
   PageWrapDiv,
@@ -22,7 +22,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import LessonListItems from './LessonListItems';
 import NewLessonListItem from './NewLessonListItem';
 
-const Course = props => {
+const Course = (props) => {
   const { courseId } = useParams();
   const course = props.courses[courseId];
   const [showSegmentForm, setShowSegmentForm] = useState(false);
@@ -32,20 +32,20 @@ const Course = props => {
   const [segmentFocus, setSegmentFocus] = useState(null);
   const [expanded, setExpanded] = useState(false);
 
-  const handleChange = panel => (event, isExpanded) => {
+  const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const showThisSegmentLessonInput = segmentId => {
+  const showThisSegmentLessonInput = (segmentId) => {
     setSegmentFocus(segmentId);
     setShowLessonForm(true);
   };
 
-  const makeSegments = segments => {
+  const makeSegments = (segments) => {
     if (segments && Object.keys(segments).length > 1) {
       return Object.keys(segments)
-        .filter(segmentId => segmentId !== 'default')
-        .map(segmentId => (
+        .filter((segmentId) => segmentId !== 'default')
+        .map((segmentId) => (
           <ExpansionPanel
             expanded={expanded === `panel${segmentId}`}
             onChange={handleChange(`panel${segmentId}`)}
@@ -93,14 +93,14 @@ const Course = props => {
 
   const handleNewSegment = async () => {
     setShowSegmentForm(false);
-    const action = await addSegment(newSegmentText, courseId);
+    const action = await courseActions.addSegment(newSegmentText, courseId);
     setNewSegmentText('');
     props.dispatch(action);
   };
 
   const handleNewLesson = async (segmentId, oldLessons) => {
     setSegmentFocus(null);
-    const lessonAction = await newLesson(
+    const lessonAction = await courseActions.newLesson(
       newLessonText,
       courseId,
       segmentId,
@@ -148,7 +148,7 @@ const Course = props => {
   }
 };
 
-const mapPropsToState = state => {
+const mapPropsToState = (state) => {
   return {
     courses: state.courses,
     admin: state.users.admin,

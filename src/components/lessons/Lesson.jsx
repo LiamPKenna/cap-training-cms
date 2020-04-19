@@ -5,39 +5,44 @@ import Loading from '../utilities/Loading';
 import BackLink from '../utilities/BackLink';
 import NewElementSelector from './NewElementSelector';
 import { Link } from 'react-router-dom';
-import {
-  createElement,
-  addVideo,
-  addPicture,
-  lessonCompleted,
-} from '../../actions';
+import { lessonActions } from '../../actions';
 import VideoBlock from './videoElements/VideoBlock';
 import MainLessonTitle from './elements/MainLessonTitle';
 import LessonElement from './LessonElement';
 import Button from '@material-ui/core/Button';
 import LessonCompleted from './elements/LessonCompleted';
 
-const Lesson = props => {
+const Lesson = (props) => {
   const { lessonId } = useParams();
   const lesson = props.lessons[lessonId];
 
-  const addNewElement = newElementType => {
+  const addNewElement = (newElementType) => {
     if (newElementType === 'video') {
-      props.dispatch(addVideo(lesson.lessonId));
+      props.dispatch(lessonActions.addVideo(lesson.lessonId));
     } else if (newElementType === 'picture') {
       props.dispatch(
-        addPicture({ lessonId: lesson.lessonId, allContent: lesson.content })
+        lessonActions.addPicture({
+          lessonId: lesson.lessonId,
+          allContent: lesson.content,
+        })
       );
     } else {
       props.dispatch(
-        createElement(newElementType, lesson.content, lesson.lessonId)
+        lessonActions.createElement(
+          newElementType,
+          lesson.content,
+          lesson.lessonId
+        )
       );
     }
   };
 
   const markComplete = () => {
     props.dispatch(
-      lessonCompleted({ lessonId, currentUser: props.currentUser })
+      lessonActions.lessonCompleted({
+        lessonId,
+        currentUser: props.currentUser,
+      })
     );
   };
 
@@ -103,7 +108,7 @@ const Lesson = props => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     lessons: state.lessons,
     admin: state.users.admin,

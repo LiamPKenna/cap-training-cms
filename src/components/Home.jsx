@@ -39,7 +39,7 @@ const Home = () => {
         <HeroDiv>
           <br />
           <BrandName>CAP Training CMS</BrandName>
-          <SubHeading>Continuous | Accessable | Productive</SubHeading>
+          <SubHeading>Continuous | Accessible | Productive</SubHeading>
           <SubHeading>A training platform built for YOUR team!</SubHeading>
           <br />
         </HeroDiv>

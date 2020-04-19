@@ -6,7 +6,7 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
-import { updateSegmentName, deleteSegment } from '../../actions';
+import { courseActions } from '../../actions';
 import styled from 'styled-components';
 
 const InputDiv = styled.div`
@@ -25,13 +25,13 @@ const InputLabelHeader = styled.h6`
   padding: 1rem 1.25rem;
 `;
 
-const SegmentInput = props => {
+const SegmentInput = (props) => {
   const { courseId, dispatch, toggleEdit, value, handleChange } = props;
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(
-      updateSegmentName({
+      courseActions.updateSegmentName({
         name: value,
         courseId,
       })
@@ -40,11 +40,11 @@ const SegmentInput = props => {
   };
 
   const handleDelete = () => {
-    const thingsToDelete = deleteSegment({
+    const thingsToDelete = courseActions.deleteSegment({
       courseId,
       course: props.courses[courseId],
     });
-    thingsToDelete.forEach(obj => dispatch(obj));
+    thingsToDelete.forEach((obj) => dispatch(obj));
     toggleEdit();
   };
 
@@ -81,7 +81,7 @@ const SegmentInput = props => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     courses: state.courses,
   };

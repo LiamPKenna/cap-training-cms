@@ -7,12 +7,7 @@ import Home from './Home';
 import AdminDashboard from './AdminDashboard';
 import Container from '@material-ui/core/Container';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import {
-  watchFirebaseLessonsRef,
-  watchFirebaseCoursesRef,
-  getCompletedLessons,
-  getAllUsers,
-} from '../actions';
+import { courseActions, userActions, lessonActions } from '../actions';
 import { useDispatch, connect } from 'react-redux';
 import SignIn from './SignIn';
 import { auth } from '../firebase';
@@ -23,7 +18,7 @@ function App(props) {
   const dispatch = useDispatch();
   const [currentUser, setCurrentUser] = useState(null);
 
-  auth.onAuthStateChanged(function(user) {
+  auth.onAuthStateChanged(function (user) {
     const isAdmin = user ? adminEmails.includes(user.email) : false;
     if (user) {
       setCurrentUser(user);
@@ -33,9 +28,11 @@ function App(props) {
         user,
         completedLessons: [],
       });
-      dispatch(getCompletedLessons(user.email.split('.').join('')));
+      dispatch(
+        lessonActions.getCompletedLessons(user.email.split('.').join(''))
+      );
       if (isAdmin) {
-        dispatch(getAllUsers());
+        dispatch(userActions.getAllUsers());
       }
     } else {
       setCurrentUser(null);
@@ -48,8 +45,8 @@ function App(props) {
     }
   });
   useEffect(() => {
-    dispatch(watchFirebaseLessonsRef());
-    dispatch(watchFirebaseCoursesRef());
+    dispatch(lessonActions.watchFirebaseLessonsRef());
+    dispatch(courseActions.watchFirebaseCoursesRef());
   });
 
   return (
@@ -91,7 +88,7 @@ function App(props) {
   );
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     admin: state.users.admin,
   };

@@ -11,7 +11,7 @@ import FormatAlignCenterIcon from '@material-ui/icons/FormatAlignCenter';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
-import { updateText, deleteText, moveElement } from '../../actions';
+import { lessonActions } from '../../actions';
 import {
   Editor,
   EditorState,
@@ -41,7 +41,7 @@ const InputGridDiv = styled.div`
 
 const UpDownDiv = styled.div`
   display: grid;
-  grid-template-columns: ${props =>
+  grid-template-columns: ${(props) =>
     props.element === 'break' || props.element === 'picture'
       ? '1fr 60px 60px 1fr'
       : '1fr 60px 60px 60px 60px 60px'};
@@ -54,7 +54,7 @@ const InputLabelHeader = styled.h6`
   font-size: 1rem;
 `;
 
-const LessonInput = props => {
+const LessonInput = (props) => {
   const {
     elementIndex,
     value,
@@ -90,13 +90,13 @@ const LessonInput = props => {
     return 'not-handled';
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (element === 'text') {
       const rawTextElement = convertToRaw(editorState.getCurrentContent());
       const html = draftToHtml(rawTextElement);
       dispatch(
-        updateText({
+        lessonActions.updateText({
           elementIndex: elementIndex,
           content: html,
           lessonId: lessonId,
@@ -104,7 +104,7 @@ const LessonInput = props => {
       );
     } else if (element !== 'picture' && element !== 'break') {
       dispatch(
-        updateText({
+        lessonActions.updateText({
           elementIndex: elementIndex,
           content: value,
           lessonId: lessonId,
@@ -116,7 +116,7 @@ const LessonInput = props => {
 
   const handleDelete = () => {
     dispatch(
-      deleteText({
+      lessonActions.deleteText({
         elementIndex,
         lessonId,
         fullLessonContent,
@@ -125,9 +125,9 @@ const LessonInput = props => {
     toggleEdit();
   };
 
-  const handleMove = direction => {
+  const handleMove = (direction) => {
     dispatch(
-      moveElement({
+      lessonActions.moveElement({
         elementIndex,
         lessonId,
         fullLessonContent,
