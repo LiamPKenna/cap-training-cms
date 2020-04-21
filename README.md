@@ -18,8 +18,8 @@ _Contact liam@liamkenna.com to find out how we can make it part of your success_
 - _Add an application to your project and get your configuration information_
 - _Replace each {YOUR...} field in the firebaseConfig file_
 - _Remove TEMPLATE from the name_
-- _Navigate to your root directory and run: "yarn install"_
-- _Run: "yarn start"_
+- _Navigate to your root directory and run: "npm i"_
+- _Run: "npm run start"_
 
 _To get this application set up and customized to your needs, please contact liam@liamkenna.com_
 
